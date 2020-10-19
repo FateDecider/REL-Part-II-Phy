@@ -6,12 +6,14 @@
 \usepackage{float}
 %% Sets page size and margins
 \usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
-\usepackage[caption=false]{subfig}
-\setcounter{section}{-1}
+
 %% Useful packages
+\usepackage{tensor}
+\usepackage{tikz}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \usepackage{amsmath}
+\usepackage{amstext}
 \usepackage{amsthm}
 \usepackage{enumitem}
 \usepackage{eqnarray}
@@ -23,51 +25,50 @@
 \usepackage{amssymb}
 \usepackage{array}
 \usepackage{tikz}
-\usetikzlibrary{arrows,decorations.markings}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
+
 \usepackage{graphicx}
 \usepackage{mathtools}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Auto}{Aut}
 \DeclareMathOperator{\lcm}{lcm}
-\DeclareMathOperator{\var}{Var}
-\DeclareMathOperator{\sech}{sech}
-\DeclareMathOperator{\cosech}{cosech}
-\DeclareMathOperator{\cov}{Cov}
-\DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\Span}{span}
-\DeclareMathOperator{\nullity}{nullity}
-\DeclareMathOperator{\rank}{rank}
-\DeclareMathOperator{\Ker}{Ker}
-\DeclareMathOperator{\R}{R}
 \DeclareMathOperator{\Tr}{Tr}
-\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\R}{Im}
+\DeclareMathOperator{\Ker}{Ker}
 \DeclareMathOperator{\diag}{diag}
-\newtheorem{defi}{Definition}[section]
-\newtheorem{remarks}{Remarks}[section]
-\newtheorem{note}{Note}[section]
-\newtheorem{law}{Law}[section]
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Mod}{mod}
+\DeclareMathOperator{\cl}{cl}
+\newcommand{\iso}{\xrightarrow{
+   \,\smash{\raisebox{-0.65ex}{\ensuremath{\scriptstyle\sim}}}\,}}
+\newtheorem{post}{Postulate}[section]
 \newtheorem{eg}{Example}[section]
+\newtheorem{remarks}{Remarks}[section]
 \newtheorem{notation}{Notation}[section]
+\newtheorem{Note}{Note}[section]
+\definecolor{darkblue}{RGB}{	0, 0, 139}
+\newtheoremstyle{new}% <name>
+{2pt}% <Space above>
+{2pt}% <Space below>
+{\color{darkblue}}% Body font
+{}% <Indent amount>
+{\bfseries\color{black}}% Theorem head font
+{:}% <Punctuation after theorem head>
+{.5em}% <Space after theorem headi>
+{}% <Theorem head spec (can be left empty, meaning `normal')>
+\theoremstyle{new}
+\newtheorem{law}{Law}[section]
+\newtheorem{defi}{Definition}[section]
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}{Proposition}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{cor}{Corollary}[section]
 
-\definecolor{darkblue}{RGB}{	0, 0, 139}
-\newtheoremstyle{new}% <name>
-{5pt}% <Space above>
-{5pt}% <Space below>
-{\color{black}}% Body font
-{}% <Indent amount>
-{\bfseries\color{darkblue}}% Theorem head font
-{:}% <Punctuation after theorem head>
-{.5em}% <Space after theorem headi>
-{}% <Theorem head spec (can be left empty, meaning `normal')>
-\theoremstyle{new}
-\newtheorem{Note}{Note}[section]
+
 \title{\textbf{Part II REL Summary Notes}}
 \author{Tai Yingzhe, Tommy (ytt26)}
 \date{}
@@ -76,6 +77,7 @@
 \maketitle
 \tableofcontents
 
+\newpage
 \section{Introduction}
 \subsection{Units}
 Traditionally, you may be familiar with the widespread usage of the SI units. In most textbooks, the natural units are adopted, where we set the constants of nature as 1. This unifies physical dimensions and may highlight possible breakdowns of classical (Newtonian) theories. 
@@ -88,7 +90,6 @@ In addition, we further set $G=1$. In that case, 1 s $=3\times10^8$ m (from earl
 \begin{eg}[Planck's Constant]
 While we do not need $\hbar$ in this course, we further demonstrate the idea of natural units by setting $\hbar=1$. In that case, $\frac{\hbar}{mc}\approx R$ regime requires Quantum Mechanics, where $\frac{\hbar}{mc}=\frac{1}{m}$ is the Comptom wavelength.
 \end{eg}
-\newpage
 \subsection{Newtonian Gravity}
 \begin{prop}
 For mutual collinear forces, the magnitude of the passive source is equal to that of the active source.
@@ -129,6 +130,15 @@ In particular, the SEP implies that a constant gravitational field is unobservab
 \begin{defi}[General Relativity]
 General relativity abandons the idea of gravity as a force defined on the fixed spacetime of special relativity, replacing it with a geometric theory in which the geometry of spacetime determines the trajectories of free-falling particles, the geometry itself being curved by the presence of matter.
 \end{defi}
+\begin{remarks}\leavevmode
+\begin{enumerate}
+\item The SEP implies the WEP, but not the other way round.
+\item In the SEP, we require the test body to be small, so that tidal effects are negligible. 
+\item The SEP is related to the equality of active and passive mass. 
+\item The SEP implies that Newton’s gravitational constant G is the same everywhere in the universe, and suggests that gravity is entirely of geometrical nature. Otherwise, the gravitational binding energy of an extended object would depend on its position.
+\item If the response of a body’s motion to gravitational forces is independent of the properties of the body, it suggests that the gravitational force is not a feature of the body but exclusively of the spacetime in which it moves. To be more precise, gravity is a feature of the spacetime’s geometry.
+\end{enumerate}
+\end{remarks}
 \subsection{Gravitational Waves}
 \begin{defi}[Gravitational Waves]
 Gravitational waves are wavelike disturbances in the geometry of spacetime, which can be detected by looking for their characteristic quadrupole distortion (i.e., a shortening in one direction and stretching in an orthogonal direction) of the two arms of a laser interferometer.\\[5pt]
@@ -523,11 +533,374 @@ As an example, light emitted from an object at rest at $x = 0$ in $S$ will only 
 \end{center}
 \newpage
 \section{Differential Geometry}
+The spacetime of special relativity – Minkowski spacetime – is an example of what mathematicians call a manifold. In general relativity, spacetime is described by a more complicated manifold that responds dynamically to the distribution of mass and energy.
 \subsection{Manifolds and Coordinates}
+\subsubsection{Manifolds and coordinate transformation}
+\begin{defi}[Manifold]
+An $n$-dimensional manifold $\mathcal{M}$ is a set of points with a bijective map to $\mathbb{R}^n$.
+$$\phi:~\mathcal{M}\rightarrow U\subset\mathbb{R}^n,\quad p\in\mathcal{M}\mapsto x^\alpha\in U\subset\mathbb{R}^n,\quad\alpha\in[0,n-1]$$
+where $U$ is an open subset of $\mathbb{R}^n$. $x^\alpha$ are the coordinates of point $p$ on $\mathcal{M}$.
+\end{defi}
+\begin{remarks}\leavevmode
+\begin{enumerate}
+\item Informally, an N-dimensional manifold is a set of objects that locally resembles N-dimensional Euclidean space $\mathbb{R}^N$.
+\item It is not strictly required that we have one map $\phi$ that globally covers the entire manifold $\mathcal{M}$. It is, however, sufficient to partition $\mathcal{M}$ and map each part separately to $\mathbb{R}^n$. Everything we will develop also holds for such subdivisions of $\mathcal{M}$. 
+\item The manifold is differentiable if these subdivisions join up smoothly so that we can define scalar fields on the manifold that are differentiable everywhere.
+\item Operations (taking derivatives) and objects (Curves, vectors etc). live on $\mathcal{M}$, not in the coordinate space $U$. But $\phi$ is one-to-one, so this distinction often blurred.
+\item We can generally think of manifolds as surfaces embedded in some higher-dimensional Euclidean space, and we shall often do so, but it is important to appreciate that a given manifold exists independent of any embedding.
+\item The coordinates are not unique: think of them as labels of points in the manifold that can change under a coordinate transformation (i.e., a change of map $\phi$) while the point itself does not.
+\end{enumerate}
+\end{remarks}
+\begin{eg}\leavevmode
+\begin{enumerate}
+    \item The Euclidean plane $\mathbb{R}^2$ is a 2D manifold that can be covered globally with the usual Cartesian coordinates. However, we could instead use plane-polar coordinates, $(\rho, \phi)$ with $0\leq\rho<\infty$ and $0\leq\phi<2\pi$. Plane-polar coordinates are degenerate at $\rho= 0$ since $\phi$ is indeterminate there.
+    \item The 2-sphere $\mathcal{S}^2$ is the set of points in $\mathbb{R}^3$ with $x^2+y^2+z^2 =1$. It is an example of a 2D manifold. The spherical polar coordinates $(\theta, \phi)$, with $0\leq\theta\leq\pi$ and $0\leq\phi < 2\pi$, are degenerate at the poles $\theta=0$ and $\theta = \pi$, where $\phi$ is indeterminate. For $\mathcal{S}^2$, there is no single coordinate system that covers the whole manifold without degeneracy: at least two coordinate patches are required.
+\end{enumerate}
+\end{eg}
+\begin{defi}[Curve]
+We define a curve to be a map $\lambda:I\subset\mathbb{R}\rightarrow\mathcal{M}$, where $I$ is an open interval. 
+\end{defi}
+\begin{remarks}
+$\lambda$ is smooth iff $\forall$ coordinate systems $x^\alpha$, the map $x^\alpha\circ\lambda:I\rightarrow\mathbb{R}^n$ is smooth.
+\end{remarks}
+\begin{defi}[Submanifold]
+A submanifold of $M<N$ dimensions is defined parametrically for some coordinate system
+$$x^a=x^a(\{u^i\}),\quad a=1,\dots,N,\quad i=1,\dots M$$
+\end{defi}
+\begin{defi}[Hypersurface]
+A hypersurface is a submanifold with $M=N-1$. Points in an $M$-dimensional submanifold can be specified by $N − M$ (independent) constraints.
+$$f_i(\{x^j\})=0,\quad i=1,\dots,N-M,\quad j=1,\dots,M$$
+\end{defi}
+\begin{defi}[Coordinate transformations]
+We can assign new coordinates $x'^a$ passively to a given point in terms of the original coordinates $x^a$. By chain rule,
+$$dx'^a=\sum_{b=1}^N\frac{\partial x'^a}{\partial x^b}dx^b$$
+This defines an $N\times N$ Jacobian matrix $\tensor*{J}{*_{}^{\alpha}_{\beta}}=\frac{\partial x'^\alpha}{\partial x^\beta}$, where the index $\alpha$ labels the rows and the index $\beta$ labels the columns.
+\end{defi}
+\begin{notation}[Einstein's summation convention]
+  Consider a sum $\mathbf{x}\cdot \mathbf{y} = \sum x_i y_i$. The summation convention says that we can drop the $\sum$ symbol and simply write $\mathbf{x}\cdot \mathbf{y} = x_i y_i$. If suffixes are repeated once, summation is understood. The rules of this convention are:
+  \begin{enumerate}
+    \item Suffix appears once in a term: free suffix
+    \item Suffix appears twice in a term: dummy suffix and is summed over
+    \item Suffixes cannot appear three times or more.
+  \end{enumerate}
+\end{notation}
+\begin{remarks}
+Extend index notation:
+\begin{itemize}
+    \item Distinguish upstairs and downstairs index (more later);
+    \item Summation only over one up and one downstairs index, i.e. $v^ju_j:=\sum_{j=1}^3v^ju_j$;
+    \item Latin indices $i,j,...=1,2,3,$, Greek indices $\alpha,\beta,...=0...3$
+\end{itemize}
+\end{remarks}
+\begin{defi}[Riemannian manifold]
+In a Riemannian manifold $\mathcal{M}$, the local geometry near a point $p\in\mathcal{M}$ is specified by giving the invariant interval (independent of coordinate systems) between the points, which takes the form
+$$ds^2=g_{ab}(x)dx^adx^b$$
+where $g_{ab}(x)$ contain information about the local geometry but also depend on the particular coordinate system. $g$ is called the metric (see later). Strictly, the geometry is Riemannian if $ds^2>0$ and pseudo-Riemannian otherwise (canbe positive, negative or zero).
+\end{defi}
+\begin{remarks}\leavevmode
+\begin{enumerate}
+    \item Without loss of generality, the metric $g_{ab}(x)$ is usually chosen to be symmetric. The antisymmetric contribution to $ds^2$ will vanish after relabelling the dummy indices $a\leftrightarrow b$.
+    \item It then follows that, in an $N$-dimensional Riemannian manifold, there are $0.5(N+1)N$ independent metric functions at each point.
+\end{enumerate}
+\end{remarks}
+\begin{defi}[Intrinsic geometry]
+The interval $ds^2$ characterizes the local geometry (or curvature), which is an intrinsic property of the manifold independent of any possible embedding in some higher-dimensional space. Intrinsic properties are those that can be determined by an observer confined to the manifold.
+\end{defi}
+\begin{defi}[Global geometry or topology]
+Topology is an intrinsic, but non-local, property of a manifold.
+\end{defi}
+\begin{eg}\leavevmode
+\begin{enumerate}
+\item Consider the surface of a cylinder of radius $a$ embedded in $\mathbb{R}^3$. In a cylindrical polar coordinate system $(z,\phi)$, the interval is $ds^2=dz^2+a^2d\phi^2$. The intrinsic geometry is locally identical to the 2D Euclidean plane $\mathbb{R}^2$ by identifying $x\rightarrow a\phi$. However, the extrinsic geometry as seen within the embedding space $\mathbb{R}^3$ is clearly curved (non-Euclidean). However, the cylinder and the plane $\mathbb{R}^2$ have different topology. 
+\item The intrinsic geometry of a 2-sphere $\mathcal{S}^2$, however, is curved. It is not possible to find a coordinate transformation such that the sphere is transformed to Euclidean form over the entire surface.
+\end{enumerate}
+\end{eg}
+\begin{eg}
+For a surface embedded in a higher-dimensional space,
+the induced line element in the surface is determined by the line element in the embedding space and the “shape” of the surface.
+\begin{enumerate}
+    \item Consider the 2-sphere $\mathcal{S}^2$ embedded in $\mathbb{R}^3$; the embedding space has the Euclidean line element $ds^2 = dx^2 + dy^2 +dz^2$ in Cartesian coordinates. If the sphere has radius $a$, points on its surface satisfy $x^2+y^2+z^2=a^2$, so that the constraint on $dz$ gives
+    $$0=2xdx+2ydy=2zdz\implies dz=-\frac{xdx+ydy}{\sqrt{a^2-x^2-y^2}}\implies ds^2=dx^2+dy^2+\frac{(xdx+ydy)^2}{a^2-x^2-y^2}$$
+    Near the north or south poles, where $x^2+y^2<<a^2$, the induced line element is approximately the Euclidean form, $ds^2=dx^2+dy^2$.
+    \item Now consider the 3-sphere $\mathcal{S}^3$ $x^2+y^2+z^2+w^2=a^2$ embedded in $\mathbb{R}^4$. Similarly, the induced line element in spherical polar coordinates will be
+    $$ds^2=\frac{a^2}{a^2-r^2}dr^2+r^2d\theta^2+r^2\sin^2\theta d\phi^2$$
+    This describes the spatial part of a cosmological model with compact spatial sections, i.e. closed universe (see later). In the limit $a\rightarrow\infty$, we recover 3D Euclidean space in spherical polar coordinates. For $r<<a$, we recover $\mathbb{R}^3$ locally.
+\end{enumerate}
+\end{eg}
+\subsubsection{Lengths and volumes}
+\begin{defi}[Lengths along curves]
+Consider a curve $x^a(\lambda)$ between points A and B on some manifold, the invariant length along the curve is given by the invariant distance:
+$$s=\int ds=\int_{\lambda_A}^{\lambda_B}\bigg|g_{ab}\frac{dx^a}{d\lambda}\frac{dx^b}{d\lambda}\bigg|^{1/2}d\lambda$$
+where $\lambda$ is a parameter along the curve.
+\end{defi}
+\begin{defi}[Volumes of regions]
+The invariant volume element of an $N$-dimensional manifold in an arbitrary coordinate system is
+$$dV=\sqrt{|g|}dx^1dx^2\dots dx^N$$
+\end{defi}
+\begin{prop}
+The volume element is indeed invariant.
+\end{prop}
+\begin{proof}
+Consider a coordinate transformation $x^a\rightarrow x'^a$, then
+$$dx'^1dx'^2\dots dx'^N=Jdx^1dx^2\dots dx^N$$
+where $J=\det(\partial x'^a/\partial x^b)$ is the Jacobian. Since the metric transforms as 
+$$g_{ab}'=\frac{\partial x^c}{\partial x'^a}\frac{\partial x^d}{\partial x'^b}g_{cd}$$
+then the determinant of the metric transforms as $g'=g/J^2$. It follows that
+$$\sqrt{|g'|}dx'^1dx'^2\dots dx'^N=\frac{\sqrt{|g|}}{J}Jdx^1 dx^2\dots dx^N$$
+and so $dV=\sqrt{|g|}dx^1dx^2\dots dx^N$ is indeed invariant.
+\end{proof}
+\begin{eg}
+Consider again $\mathcal{S}^2$ of radius $a$ embedded in $\mathbb{R}^3$. We write the induced line element of the 2-sphere as $ds^2=\frac{a^2d\rho^2}{(a^2-\rho^2)}+\rho^2d\phi^2$. Consider the circle $\rho=R<a$. the distance form the centre O to the perimeter along the curve $\phi=\text{const.}$ is given by
+$$D=\int_0^R\frac{a}{\sqrt{a^2-\rho^2}}d\rho=a\sin^{-1}\frac{R}{a}$$
+The circumference of the circle is $2\pi R=2\pi a\sin\frac{D}{a}$. The area enclosed is the 2-volume:
+$$A=\int_0^{2\pi}\int_0^R\frac{a}{\sqrt{a^2-\rho^2}}\rho d\rho d\phi=2\pi a^2\bigg[1-\sqrt{1-\frac{R^2}{a^2}}\bigg]=2\pi a^2\bigg[1-\cos\frac{D}{a}\bigg]$$
+For $D<<a$, we recover the Eulicdean results $C=2\pi D$ and $A=\pi D^2$. The coordinates $(\rho,\phi)$ are degenerate beyond the equator. However, if we switch to coordinates $(D,\phi)$, this system is well-defined beyond the equator and is only degenerate at $D=\pi a$ (the south pole).
+\end{eg}
+\subsubsection{Local coordinates and signature}
+\begin{prop}
+On a Riemannian manifold ($ds^2>0$) $\mathcal{M}$, it is not possible to choose coordinates such the line element takes the Euclidean form at every point. However, it is always possible to adopt coordinates such that in the neighbourhood of some point $p\in\mathcal{M}$, the line element takes the Euclidean form. More precisely, the local coordinates must satisfy
+$$g_{ab}(p)=\delta_{ab},\quad\frac{\partial g_{ab}}{\partial x^c}\bigg|_p=0$$
+\end{prop}
+\begin{proof}
+The first part follows since $g_{ab}(x)$ has $N(N + 1)/2$ independent functions, but there are only $N$ functions involved in coordinate transformations. Under the coordinate transformation, the metric and its derivatives transform as
+$$g_{ab}'=\frac{\partial x^c}{\partial x'^a}\frac{\partial x^d}{\partial x'^b}g_{cd}$$
+$$\frac{\partial g'_{ab}}{\partial x'^e}=\frac{\partial}{\partial x'^e}\bigg(\frac{\partial x^c}{\partial x'^a}\frac{\partial x^d}{\partial x'^b}\bigg)g_{cd}+\frac{\partial x^c}{\partial x'^a}\frac{\partial x^d}{\partial x'^b}\frac{\partial x^f}{\partial x'^e}\frac{\partial g_{cd}}{\partial x^f}$$
+$\frac{\partial x^c}{\partial x'^a}|_p$ and $\frac{\partial^2x^c}{\partial x'^e\partial x'^a}$ respectively have $N^2$ and $N^2(N+1)/2$ degrees of freedom. But, $g'_{ab}(p)$ and $\frac{\partial g_{ab}'}{\partial x'^c}|_p$ respectively have $N(N+1)/2$ and $N^2(N+1)/2$ degrees of freedom. The condition $g_{ab}'(p)=\delta_{ab}$ has $N(N+1)/2$ equations which have more equations than the $N^2$ degrees of freedom in $\frac{\partial x^c}{\partial x'^a}|_p$. On the other hand, the other condition $\frac{\partial g_{ab}'}{\partial x'^c}|_p=0$ has $N^2(N+1)/2$ equations, just sufficient.
+\end{proof}
+\begin{remarks}\leavevmode
+\begin{enumerate}
+    \item The remaining $-N(N+1)/2+N^2=(-N+N^2)/2$ equations for $N=4$ correspond to 3 Lorentz boost and 3 rotations (total 6).
+    \item We cannot set the second derivatives of the metric to be zero. The condition $\frac{\partial^2g'_{ab}}{\partial x'^c\partial x'd}=0$ has $N^2(N+1)^2/4$ equations, but $\frac{\partial^3x^a}{\partial x'^b\partial x'^c\partial x'^d}$ has $N^2(N+1)(N+2)/6$ degrees of freedom. There are thus $0.25N^2(N+1)^2-N^2(N+1)(N+2)(1/6)=N^2(N^2-1)/12$ independent degree of freedom that cannot be eliminated, and corresponds to the curvature of the manifold. For $N=4$, there are 20 of them, associated with gravity.
+\end{enumerate}
+\end{remarks}
+\begin{prop}
+In a pseudo-Riemannian manifold $\mathcal{M}$, one can always find coordinates such that at a point $p\in\mathcal{M}$,
+$$g_{ab}(p)=\diag(\pm1,\pm1,\dots,\pm1),\quad\frac{\partial g_{ab}}{\partial x^c}\bigg|_p=0$$
+\end{prop}
+\begin{thm}[Sylvester's Law]
+The number of $+1$ and $-1$ entries in the metric is independent of the basis.
+\end{thm}
+\begin{defi}[Signature]
+The signature $\sigma$ of a metric $g_{\alpha\beta}$ on an $n$-dimensional manifold $\mathcal{M}$, is the sum of $+1$ and $-1$ over all diagonal elements. The signature is usually convention dependent.
+\end{defi}
 \newpage
 \subsection{Vector and Tensor Algebra}
-\newpage
+\subsubsection{Vectors and tensors}
+\begin{defi}[Functions on Manifold]
+A function on manifold is a mapping $f:\mathcal{M}\rightarrow\mathbb{R}$. If $f$ is invariant under a change of coordinates, it is a scalar.
+\end{defi}
+\begin{remarks}
+$f$ is smooth iff $\forall $ coordinate systems $x^\alpha$, $f(x^\alpha)$ is a smooth function $f:\mathbb{R}^n\rightarrow\mathbb{R}$. 
+\end{remarks}
+\begin{defi}[Vectors]
+Let $C^\infty$ be the space of all smooth functions $f:\mathcal{M}\rightarrow\mathbb{R}$, $\lambda$ be a smooth curve and $p=\lambda(0)\in\mathcal{M}$. The tangent vector to the curve $\lambda$ at $p\in\mathcal{M}$ is the map
+$$V:~C^\infty\rightarrow\mathbb{R},\quad f\mapsto V(f)=\frac{d}{dt}f(\lambda(t))\bigg|_{t=0}$$
+\end{defi}
+\begin{remarks}
+In Euclidean space, displacement vectors connect two points in the space while local vectors are measured at a given observation point and refer solely to that point. Displacement vectors between infinitesimally separated points are really local vectors, as are derivatives of displacement vectors. On a general manifold, we can only define local vectors. Displacement vectors do make sense if we specify an embedding of $\mathcal{M}$ in some higher-dimensional Euclidean space, but we are interested only in intrinsic geometry here.
+\end{remarks}
+\begin{defi}[Tangent Space]
+$\mathcal{T}_p(\mathcal{M})$ is the tangent space of all vectors at $p\in\mathcal{M}$.
+\end{defi}
+Essentially, a vector is a derivative operator. It obeys
+\begin{itemize}
+    \item linearity: 
+    $$V(\alpha f+\beta g)=\alpha V(f)+\beta V(g),\quad\alpha,\beta\in\mathbb{R},\quad f,g\in C^\infty$$
+    \item Leibniz rule:
+    $$V(fg)=V(f)g+V(g)f,\quad f,g\in C^\infty$$
+\end{itemize}
+Consider coordinate system $x^\alpha$ on the manifold $\mathcal{M}$, 
+$$V(f)=\frac{d}{dt}f(x^\mu(\lambda(t)))=\frac{dx^\mu}{dt}\bigg|_\lambda\frac{\partial}{\partial x^\mu}f(x^\alpha)$$
+where the components are $V^\mu:=\frac{dx^\mu}{dt}|_\lambda$ and bases are $e_\mu:=\partial_\mu:=\frac{\partial }{\partial x^\mu}$, and are called coordinate basis.
+\begin{prop}
+$\mathcal{T}_p(\mathcal{M})$ has dimension $n$ and $\frac{\partial}{\partial x^\mu}$ form a basis of $\mathcal{T}_p(\mathcal{M})$.
+\end{prop}
+\begin{prop}
+Under a coordinate change $x^\mu\rightarrow\tilde{x}^\alpha$, the components and bases of a vector transform like
+$$e_\mu\mapsto\tilde{e}_\alpha=\frac{\partial}{\partial\tilde{x}^\alpha}=\frac{\partial x^\mu}{\partial\tilde{x}^\alpha}e_\mu$$
+$$V^\mu\mapsto\tilde{V}^\alpha=\frac{\partial\tilde{x}^\alpha}{\partial x^\mu}V^\mu$$
+so $V=V^\mu e_\mu=\tilde{V}^\alpha\tilde{e}_\alpha$ is invariant under this coordinate change.
+\end{prop}
+\begin{proof}
+Chain Rule.
+\end{proof}
+\begin{remarks}
+The components and the basis depend on the coordinates, but the vector is a geometric object, invariant under coordinate transformation. 
+\end{remarks}
+\begin{defi}[Covector]
+Covectors, also known as one-forms or dual vectors, are linear map 
+$$\eta:~\mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\quad V\mapsto\eta(V)$$
+\end{defi}
+\begin{defi}[Co-tangent Space]
+$\mathcal{T}_p^*(\mathcal{M})$ is the co-tangent space of all co-vectors at $p\in\mathcal{M}$.
+\end{defi}
+$\mathcal{T}_p^*(\mathcal{M})$ is also an $n$-dimensional vector space. Let $e_\mu$ be a basis of $\mathcal{T}_p(\mathcal{M})$. The components of a covector $\eta$ are $\eta_\mu:=\eta(e_\mu)$. They satisfy
+\begin{itemize}
+    \item Linearity: 
+    $$\eta(\alpha V+\beta W)=\alpha\eta(V)+\beta\eta(W),\quad\alpha,\beta\in\mathbb{R},\quad V,W\in\mathcal{T}_p(\mathcal{M})$$
+    \item Components:
+    $$\eta(V)=\eta(V^\mu e_\mu)=V^\mu\eta_\mu$$
+\end{itemize}
+Again, require co-vectors to be invariant under coordinate transformations, since they are scalars.
+\begin{prop}
+Under a coordinate change $x^\mu\rightarrow\tilde{x}^\alpha$, the components of a co-vector transform like
+$$\tilde{\eta}_\beta=\frac{\partial x^\mu}{\partial\tilde{x}^\beta}\eta_\mu$$
+\end{prop}
+\begin{proof}
+Since one-forms are scalars, result follow from chain rule.
+\end{proof}
+\begin{defi}[Gradient]
+Gradient $\mathbf{d}f$ of a smooth function $f$.
+$$\mathbf{d}f:~\mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\quad V=\frac{d}{dt}\mapsto\frac{df}{dt}=V(f),\quad V\in \mathcal{T}_p(\mathcal{M})$$
+\end{defi}
+\begin{notation}
+We bold $d$ for notational purposes, to differentiate $df$ and $\mathbf{d}f$.
+\end{notation}
+\begin{prop}
+The gradient form a basis for co-vectors, and are dual basis of the vector basis $\partial_\mu$. 
+\end{prop}
+\begin{proof}
+Let $f=x^\alpha$ with $\alpha$ fixed, then the gradient is
+$$\mathbf{d}x^\alpha(e_\beta)=\mathbf{d}x^\alpha\frac{\partial}{\partial x^\beta}=\tensor*{\delta}{*_{}^{\alpha}_{\beta}}$$
+then,
+$$\eta_\alpha\mathbf{d}x^\alpha(V^\beta\partial_\beta)=\eta_\alpha V^\beta\mathbf{d}x^\alpha(\partial_\beta)=\eta_\alpha V^\beta\tensor*{\delta}{*_{}^{\alpha}_{\beta}}=\eta_\alpha V^\alpha=\eta(V)$$
+\end{proof}
+
+\begin{defi}[Tensors]
+A tensor $T$ at $p\in\mathcal{M}$ of rank $(r,s)$ with $r,s\in\mathbb{N}\cup\{0\}$ is a multilinear map.
+$$T:(\mathcal{T}_p^*(\mathcal{M}))^r\times(\mathcal{T}_p(\mathcal{M}))^s\rightarrow\mathbb{R}$$
+where we take Cartesian product of $r$ number of co-tangent spaces and $s$ number of tangent spaces.
+\end{defi}
+\begin{eg}
+We first consider simple examples of tensors:
+\begin{itemize}
+    \item Covector $\eta$ is a tensor of rank (0,1). 
+    \item Vector is a tensor of rank (1,0) and can be viewed as $V:\mathcal{T}_p^*(\mathcal{M})\rightarrow\mathbb{R}$, $\eta\rightarrow\eta(V)$. The components of $V$ are
+    $$\eta(V)=\eta_\alpha\mathbf{d}x^\alpha(V)=n_\alpha V^\alpha\implies V^\alpha=\mathbf{d}x^\alpha(V)=V(\mathbf{d}x^\alpha)$$
+    \item Kronecker-Delta tensor
+    $$\delta:~\mathcal{T}_p^*(\mathcal{M})\times \mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\quad(\eta,V)\mapsto\eta(V)$$
+    $\forall\eta\in T_p^*(\mathcal{M})$, $V\in T_p(\mathcal{M})$ and is a tensor of rank (1,1) with components $$\delta(\mathbf{d}x^\alpha,\partial_\beta)=\mathbf{d}x^\alpha(\partial_\beta)=\frac{\partial x^\alpha}{\partial x^\beta}=\tensor*{\delta}{*_{}^{\alpha}_{\beta}}$$
+\end{itemize}
+In general, for all tensors:
+$$\tensor*{T}{*_{}^{\alpha_1...\alpha_r}_{\beta_1...\beta_s}}=T(\mathbf{d}x^{\alpha_1},...,\mathbf{d}x^{\alpha_r},e_{\beta_1},...,e_{\beta_s})$$
+\end{eg}
+\begin{prop}
+Tensors transform like
+$$\tensor*{\tilde{T}}{*_{}^{\alpha_1...\alpha_r}_{\beta_1...\beta_s}}=\frac{\partial\tilde{x}^{\alpha_1}}{\partial x^{\mu_1}}...\frac{\partial\tilde{x}^{\alpha_r}}{\partial x^{\mu_r}}\frac{\partial x^{\nu_1}}{\partial\tilde{x}^{\beta_1}}...\frac{\partial x^{\nu_s}}{\partial\tilde{x}^{\beta_s}}\tensor*{T}{*_{}^{\mu_1...\mu_r}_{\nu_1...\nu_s}}$$
+\end{prop}
+\begin{proof}
+Chain Rule for $r+s$ number of times.
+\end{proof}
+\begin{prop}
+The proper distance in this metric is $ds^2=g_{\alpha\beta}dx^\alpha dx^\beta$ and is invariant under a change of coordinates.
+\end{prop}
+\begin{proof}
+$$d\tilde{s}^2=\tilde{g}_{\mu\nu}d\tilde{x}^\mu d\tilde{x}^\nu=\frac{\partial x^\alpha}{\partial\tilde{x}^\mu}\frac{\partial x^\beta}{\partial\tilde{x}^\nu}g_{\alpha\beta}\frac{\partial\tilde{x}^\mu}{\partial x^\rho}\frac{\partial\tilde{x}^\nu}{\partial x^\sigma}dx^\rho dx^\sigma=ds^2$$
+\end{proof}
+Tensor operations:
+\begin{enumerate}
+    \item Addition and scalar multiplication: For instance,
+    $$c_1S+c_2T:\mathcal{T}_p^*(\mathcal{M})\times \mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\text{  }\eta,V\mapsto c_1S(\eta,V)+c_2T(\eta,V)$$
+    where $c_1,c_2\in\mathbb{R}$ and $S,T$ are (1,1) tensors.
+    \item Symmetrization/anti-symmetrization:
+    \begin{itemize}
+        \item Consider a (0,2) tensor $T$, the symmetric part and anti-symmetric part are respectively
+        $$S_{\alpha\beta}:=\frac{1}{2}(T_{\alpha\beta}+T_{\beta\alpha}),\quad A_{\alpha\beta}:=\frac{1}{2}(T_{\alpha\beta}-T_{\beta\alpha})$$
+        They can also be denoted as $T_{(\alpha\beta)}$ and $T_{[\alpha\beta]}$ respectively.
+        \item Index subsetting:
+        $$\tensor*{T}{*_{}^{(\alpha\beta)\gamma}_{\delta}}:=\frac{1}{2}(T^{\alpha\beta\gamma}_\delta+T^{\beta\alpha\gamma}_\delta)$$
+        \item Non-adjacent indices:
+        $$T_{(\alpha|\beta\gamma|\delta)}:=\frac{1}{2}(T_{\alpha\beta\gamma\delta}-T_{\delta\beta\gamma\alpha})$$
+        \item Anti-symmetrize two indices. For $n>2$ indices, we sum over all permutations, apply the sign of permutation for this anti-symmetrization operation and finally divided by $n!$. For instance,
+        $$\tensor*{T}{*_{}^{\alpha}_{[\beta\gamma\delta]}}=\frac{1}{3!}(\tensor*{T}{*_{}^{\alpha}_{\beta\gamma\delta}}+\tensor*{T}{*_{}^{\alpha}_{\delta\beta\gamma}}+\tensor*{T}{*_{}^{\alpha}_{\gamma\delta\beta}}-\tensor*{T}{*_{}^{\alpha}_{\delta\gamma\beta}}-\tensor*{T}{*_{}^{\alpha}_{\beta\delta\gamma}})$$
+    \end{itemize}
+    \item Contraction of $(r,s)$ tensor: summation over 1 upper and 1 lower index to give $(r-1,s-1)$ tensor. For instance, let $T$ be a (3,2) tensor $\tensor*{T}{*_{}^{\alpha\beta\gamma}_{\alpha\delta}}$ and we contract it to yield a (2,1) tensor $\tensor*{S}{*_{}^{\beta\gamma}_{\delta}}$  $S(\omega,\eta,V):=T(\mathbf{d}x^\mu,\omega,\eta,\partial_\mu,V)$. This is basis independent:
+    $$T(\mathbf{d}\tilde{x}^\mu,\omega,\eta\frac{\partial}{\partial\tilde{x}^\mu},V)=\frac{\partial\tilde{x}^\mu}{\partial x^\alpha}\frac{\partial x^\beta}{\partial\tilde{x}^\mu}T(\mathbf{d}x^\alpha,\omega,\eta,\partial_\beta,V)=\tensor*{\delta}{*_{}^{\beta}_{\alpha}}T(\mathbf{d}x^\alpha,\omega,\eta,\partial_\beta,V)=T(\mathbf{d}x^\alpha,\omega,\eta,\partial_\alpha,V)$$
+    \item Outer product: Let $S$ be a $(p,q)$ tensor and $T$ be a $(r,s)$ tensor, then $S\otimes T$ is a $(p+r,q+s)$ tensor. We have
+    $$(S\otimes T)(\omega_1,...,\omega_p,\eta_1,...,\eta_r,X_1,..,X_q,Y_1,...,Y_s):=S(\omega_1,...,\omega_p,X_1,...,X_q)T(\eta_1,...,\eta_r,Y_1,...,Y_s)$$
+    In another words,
+    $$\tensor*{(S\otimes T)}{*_{}^{\alpha_1...\alpha_p\beta_1...\beta_r}_{\mu_1...\mu_q\nu_1...\nu_s}}=\tensor*{S}{*_{}^{\alpha_1...\alpha_p}_{\mu_1...\mu_q}}\tensor*{T}{*_{}^{\beta_1...\beta_r}_{\mu_1...\mu_s}}$$
+    For instance, in  a coordinate basis, a (2,1) tensor can be written as
+        $$T=\tensor*{T}{*_{}^{\mu\nu}_{\rho}}e_\mu\otimes e_\nu\otimes\mathbf{d}x^\rho$$
+\end{enumerate}
+\begin{defi}[Tensor Fields]
+A tensor field of rank $(r,s)$ is a collection of $(r,s)$ tensors at each point $p\in\mathcal{M}$. Like a map $p\mapsto T_p$ of rank $(r,s)$.
+\end{defi}
+\begin{remarks}
+The tensor field is smooth iff its component functions in a coordinate basis are smooth functions.
+\end{remarks}
+Sometimes we write $X_p$ being a vector and $X$ being a field.
+\begin{eg}
+A vector field $X:\mathcal{M}\rightarrow\mathcal{T}_p(\mathcal{M}),p\mapsto X_p$. A function $f$ $X(f):\mathcal{M}\rightarrow\mathbb{R},\text{  }p\mapsto X_p(f)$.
+\end{eg}
+Henceforth we assume all tensor fields to be smooth.
+\begin{defi}[Integral Curve]
+An integral curve $\lambda$ of a vector field $V$ through $p\in\mathcal{M}$ is a curve through $p$ and whose tangent at every point $q$ along the curve is $V_q$. 
+\end{defi}
+In coordinates, 
+$$\frac{d}{dt}\bigg|_\lambda=V\implies\frac{d}{dt}x^\mu(\lambda(t))=V^\mu(x^\alpha)$$
+with $x^\mu(\lambda(t_0))=x^\mu(p)$ has a unique solution by ODE theory.
+\subsubsection{Metric Tensor}
+Now, let's properly discuss the metric tensor:
+\begin{defi}[Metric]
+A metric at $p\in\mathcal{M}$ is a (0,2) tensor that is
+\begin{itemize}
+    \item symmetric: $g(V,W)=g(W,V)$
+    $\forall V,W\in\mathcal{T}_p(\mathcal{M})$. Equivalently, $g_{\alpha\beta}=g_{\beta\alpha}$.
+    \item non-degenerate:
+    $g(V,W)=0$     $\forall W\in\mathcal{T}_p(\mathcal{M})$. Equivalently, $V=0$.
+\end{itemize}
+\end{defi}
+The components of a metric are $g=g_{\alpha\beta}\mathbf{d}x^\alpha\otimes\mathbf{d}x^\beta\implies g_{\mu\nu}=g(\partial_\mu,\partial_\nu)$.\\[10pt]
+A metric maps vectors to one-forms. $g:V\mapsto \underline{V}:=g(V,.)$ where $\underline{V}$ is a map
+$$\underline{V}:\mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\quad W\mapsto\underline{V}(W):=g(V,W)=\underline{V}_\mu W^\mu=g_{\mu\nu}V^\mu W^\nu$$
+The components are thus $V_\mu:=\underline{V}_\mu=g_{\mu\nu}V^\nu$.
+\begin{thm}
+If $g$ is non-degenerate, then $g$ is invertible.
+\end{thm}
+\begin{defi}[Inverse Metric]
+We define the inverse metric to be $g^{-1}$ such that it is a symmetric (2,0) tensor, i.e. $(g^{-1})^{\alpha\beta}g_{\beta\gamma}=\tensor*{\delta}{*_{}^{\alpha}_{\gamma}}$. Now,  $g^{-1}$ maps one-forms to vectors, i.e. $g^{-1}:\underline{V}\mapsto V$.
+\end{defi}
+\begin{remarks}
+From now on, we will drop the exponent $−1$ when we write the components of the inverse metric and merely distinguish it from the metric by the position of the indices.
+\end{remarks}
+\begin{eg}
+The line element on the unit sphere, $x^2+y^2+z^2=1$ in $\mathbb{R}^3$ is $ds^2=d\theta^2+\sin^2\theta d\phi^2$. The metric is
+$$g_{\alpha\beta}=\begin{bmatrix}1&0\\0&\sin^2\theta\\\end{bmatrix},\quad g^{\alpha\beta}=\begin{bmatrix}1&0\\0&\frac{1}{\sin^2\theta}\\\end{bmatrix}$$
+\end{eg}
+\begin{thm}
+$\exists$ a natural isomorphism between vectors and one-forms, i.e. $g^{-1}(g(V,.),.)=V$ and $g(g^{-1}(\eta,.),.)=\eta$.
+\end{thm}
+\begin{prop}
+The following statements on the metric tensor are true:
+\begin{itemize}
+    \item $\exists$ a basis where $g_{\mu\nu}$ is diagonal;
+    \item $\exists$ a non-unique orthonormal basis for $g$.
+\end{itemize}
+\end{prop}
+\begin{proof}
+By construction, $g$ symmetric and non-degenerate. It being symmetric $\implies$ components of $g$ at $p\in\mathcal{M}$ are a symemtric basis, hence there exists a basis where $g_{\mu\nu}$ is diagonal. It being non-degenerate $\implies$ all eigenvalues $\neq0$ $\implies$ all diagonal elements $\neq 0$. We can rescale such that the diagonal elements are $\pm1$, hence a non-unique orthonormal basis. 
+\end{proof}
+\begin{defi}[Timelike, Spacelike, Nulllike Vector]
+Let $(\mathcal{M},\mathbf{g})$ be a Lorentzian manifold, $V\in\mathcal{T}_p(\mathcal{M})$, $V\neq0$. $V$ is
+\begin{itemize}
+    \item time-like iff $g(V,V)<0$;
+    \item null-like iff $g(V,V)=0$;
+    \item space-like iff
+    $g(V,V)>0$.
+\end{itemize}
+\end{defi}
+\begin{defi}[Norm]
+The norm of a space-like vector $V\in\mathcal{T}_p(\mathcal{M})$ is $|V|:=\sqrt{g(V,V)}$.
+\end{defi}
+\begin{defi}[Angle]
+The angle between space-like vectors $V,W\in\mathcal{T}_p(\mathcal{M})$ is $\theta=\cos^{-1}\frac{g(V,W)}{|V||W|}$.
+\end{defi}
 \subsection{Vector and Tensor Calculus on Manifolds}
+\subsubsection{Covariant derivatives}
+\subsubsection{Connection}
+\subsubsection{Parallel transport}
+\subsubsection{Geodesics}
 \newpage
 \section{More on Special Relativity}
 \subsection{Minkowski Spacetime and Particle Dynamics}
