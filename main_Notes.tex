@@ -823,6 +823,9 @@ Tensor operations:
     For instance, in  a coordinate basis, a (2,1) tensor can be written as
         $$T=\tensor*{T}{*_{}^{\mu\nu}_{\rho}}e_\mu\otimes e_\nu\otimes\mathbf{d}x^\rho$$
 \end{enumerate}
+\begin{remarks}[Quotient theorem]
+If a set of quantities when contracted with an arbitrary tensor produces another tensor, the original set of quantities form the components of a tensor.
+\end{remarks}
 \begin{defi}[Tensor Fields]
 A tensor field of rank $(r,s)$ is a collection of $(r,s)$ tensors at each point $p\in\mathcal{M}$. Like a map $p\mapsto T_p$ of rank $(r,s)$.
 \end{defi}
@@ -834,12 +837,6 @@ Sometimes we write $X_p$ being a vector and $X$ being a field.
 A vector field $X:\mathcal{M}\rightarrow\mathcal{T}_p(\mathcal{M}),p\mapsto X_p$. A function $f$ $X(f):\mathcal{M}\rightarrow\mathbb{R},\text{  }p\mapsto X_p(f)$.
 \end{eg}
 Henceforth we assume all tensor fields to be smooth.
-\begin{defi}[Integral Curve]
-An integral curve $\lambda$ of a vector field $V$ through $p\in\mathcal{M}$ is a curve through $p$ and whose tangent at every point $q$ along the curve is $V_q$. 
-\end{defi}
-In coordinates, 
-$$\frac{d}{dt}\bigg|_\lambda=V\implies\frac{d}{dt}x^\mu(\lambda(t))=V^\mu(x^\alpha)$$
-with $x^\mu(\lambda(t_0))=x^\mu(p)$ has a unique solution by ODE theory.
 \subsubsection{Metric Tensor}
 Now, let's properly discuss the metric tensor:
 \begin{defi}[Metric]
@@ -903,6 +900,9 @@ Now, the issue is, we cannot take the difference between vectors at diferent poi
 $$\nabla  f:~\mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\quad V\mapsto\nabla_Vf:=V(f)=V^\alpha\partial_\alpha f$$
 $\nabla f$ is a (0,1) tensor with $\nabla_\alpha f:=\partial_\alpha f$
 \end{defi}
+\begin{remarks}[Gradient of scalar field]
+$\frac{\partial f}{\partial x^a}$ form components of a dual vector, which we call the gradient of a scalar field. We can always associate a vector to the gradient by $g^{ab}\partial_bf$. The covariant derivative is simply the gradient of the scalar field.
+\end{remarks}
 \begin{defi}[Covariant Derivative for Vector fields]
 $$\nabla  V:~T_p(\mathcal{M})\rightarrow\mathcal{T}_p(\mathcal{M}),\quad X\mapsto\nabla_XV$$
 which satisfies ($f,g$ are functions and $X,Y,V,W$ are vector fields):
@@ -925,13 +925,7 @@ $$\nabla_\nu e_\mu:=\nabla_{e_\nu}e_\mu=\Gamma_{\mu\nu}^\rho e_\rho$$
     \item Here we use the convention that the second downstairs index of the connection, i.e. $\nu$ in denotes the direction in which the derivative is taken. The first index denotes the basis vector we are considering. In general relativity, the connection turns out to be symmetric in its downstairs indices, so that this convention does not really matter.
 \end{enumerate}
 \end{remarks}
-\begin{defi}[Christoffel symbols]
-We define the Christoffel symbols to be short for
-$$\left \{ {\beta \atop
-\mu\ \nu}\right \}:=\frac{1}{2}g^{\beta\rho}(\partial_\mu g_{\nu\rho}+\partial_\nu g_{\rho\mu}-\partial_\rho g_{\mu\nu})$$
-\end{defi}
-The Christoffel symbols are actually a connection. The second downstairs index will be conventionally our derivative index.
-\begin{prop}
+\begin{prop}[Covariant derivative of a vector]
 $$\nabla_\nu W^\rho=\partial_\nu W^\rho+\Gamma_{\mu\nu}^\rho W^\mu$$
 \end{prop}
 We get for $V=V^\mu e_\mu$ and $W=W^\mu e_\mu$. We thus have
@@ -939,16 +933,25 @@ We get for $V=V^\mu e_\mu$ and $W=W^\mu e_\mu$. We thus have
 \nabla_VW&=&\nabla_V(W^\mu e_\mu)\nonumber\\&=&V(W^\mu)e_\mu+W^\mu\nabla_Ve_\mu\nonumber\\&=&V^\nu e_\nu(W^\mu)e_\mu+W^\mu\nabla_{V^\mu e_\nu}e_\mu\nonumber\\&=&V^\nu e_\nu(W^\mu)e_\mu+W^\mu V^\nu\nabla_{\nu}e_\mu\nonumber\\&=&V^\mu(\partial_\nu W^\rho+W^\mu\Gamma_{\mu\nu}^\rho)e_\rho\nonumber\\\implies(\nabla_VW)^\rho&=&V^\mu\partial_\nu W^\rho+V^\nu\Gamma_{\mu\nu}^\rho W^\mu\nonumber
 \end{eqnarray}
 but since $V$ is arbitrary, we take $\nabla_\nu W^\rho$, which is the desired result $\partial_\nu W^\rho+\Gamma_{\mu\nu}^\rho W^\mu$. We thus denote this as $\tensor*{W}{*_{}^{\rho}_{;\nu}}$. 
-\begin{prop}
+\begin{prop}[Transform connection]
 Under coordinate transformation $x^\mu\rightarrow\tilde{x}^\alpha$, the Connection coefficient transform as
 $$\tilde{\Gamma}^\sigma_{\mu\nu}=\frac{\partial\tilde{x}^\sigma}{\partial x^\rho}\frac{\partial x^\alpha}{\partial\tilde{x}^\nu}\frac{\partial x^\beta}{\partial\tilde{x}^\mu}\Gamma_{\beta\alpha}^\rho+\frac{\partial\tilde{x}^\sigma}{\partial x^\rho}\frac{\partial^2x^\rho}{\partial\tilde{x}^\nu\partial\tilde{x}^\mu}$$
 \end{prop}
+\begin{proof}
+With $\tilde{\Gamma}^\sigma_{\mu\nu}\tilde{\partial}_\sigma=\nabla_{\tilde{\partial}_\nu}\tilde{\partial}_\mu$ in mind, we compute
+\begin{align}
+    \tilde{\Gamma}^\sigma_{\mu\nu}\tilde{\partial}_\sigma&=\frac{\partial x^\alpha}{\partial\tilde{x}^\nu}\nabla_{\partial_\alpha}\bigg(\frac{\partial x^\beta}{\partial\tilde{x}^\mu}\partial_\beta\bigg)\nonumber\\&=\frac{\partial x^\alpha}{\partial\tilde{x}^\nu}\frac{\partial^2x^\beta}{\partial x^\alpha\partial\tilde{x}^\mu}\partial_\beta+\frac{\partial x^\alpha}{\partial\tilde{x}^\nu}\frac{\partial x^\beta}{\partial\tilde{x}^\nu}\nabla_{\partial_\alpha}(\partial_\beta)\nonumber\\&=\frac{\partial^2x^\beta}{\partial\tilde{x}^\nu\partial\tilde{x}^\mu}\partial_\beta+\frac{\partial x^\alpha}{\partial\tilde{x}^\nu}\frac{\partial x^\beta}{\partial\tilde{x}^\mu}\Gamma_{\beta\alpha}^\rho\partial_\rho\nonumber\\&=\bigg[\frac{\partial^2x^\beta}{\partial\tilde{x}^\nu\partial\tilde{x}^\mu}+\frac{\partial x^\alpha}{\partial\tilde{x}^\nu}\frac{\partial x^\beta}{\partial\tilde{x}^\mu}\Gamma_{\beta\alpha}^\rho\bigg]\frac{\partial\tilde{x}^\sigma}{\partial x^\rho}\tilde{\partial}_\sigma\nonumber
+\end{align}
+where $\partial_\rho=\frac{\partial\tilde{x}^\sigma}{\partial x^\rho}\tilde{\partial}_\sigma$.
+\end{proof}
+\begin{remarks}
 So, $\Gamma_{\mu\nu}^\sigma$ is not a tensor, but the difference of two connections is, i.e. Torsion tensor. Another example of what looks like a tensor, but actually isn't: $\partial_\nu W^\mu$. 
+\end{remarks}
 \begin{defi}[Torsion Tensor]
 $$\tensor*{T}{*^{}_{\mu\nu}^{\lambda}}:=:=\Gamma_{\mu\nu}^\lambda-\Gamma_{\nu\mu}^\lambda$$
 \end{defi}
 \begin{defi}[Torsion Free]
-The connection $\Gamma$ is called torsion free iff $T_{\mu\nu}^{\text{  }\lambda}=0$.
+The connection $\Gamma$ is called torsion free iff $\tensor*{T}{*^{}_{\mu\nu}^{\lambda}}=0$.
 \end{defi}
 \begin{prop}[Covariant Derivative of Tensor]
 For a $(r,s)$ tensor, its covariant derivative is
@@ -957,8 +960,7 @@ For a $(r,s)$ tensor, its covariant derivative is
 \end{eqnarray}
 \end{prop}
 This can be obtained from Leibniz rule, where for $(r,s)$ tensor $T$, $\nabla T$ is of rank $(r,s+1)$.
-\begin{eg}
-What is the covariant derivative of a one-form?
+\begin{eg}[Covariant derivative of a one-form]
 $$\nabla_V(\eta(W)):=(\nabla_V\eta)(W)+\eta(\nabla_VW)\implies (\nabla_V\eta)(W)=\nabla_V(\eta(W))-\eta(\nabla_VW)$$
 So, $\nabla\eta$ is a (0,2) tensor since
 \begin{eqnarray}
@@ -966,15 +968,37 @@ So, $\nabla\eta$ is a (0,2) tensor since
 \end{eqnarray}
 So the components of $\nabla_\rho\eta_\mu:=(\nabla\eta)_{\rho\mu}$ (also written as $\eta_{\mu;\rho}$ is $\partial_\rho\eta_\mu-\Gamma_{\mu\rho}^\nu\eta_\nu$).
 \end{eg}
-\newpage
+\begin{eg}[Covariant derivative of rank-two tensor]
+$$\nabla_cT^{ab}=\partial_cT^{ab}+\Gamma^a_{cd}T^{db}+\Gamma^b_{cd}T^{ad}$$
+\end{eg}
+\begin{cor}
+The covariant derivative of a vector field should be a tensor.
+\end{cor}
+By construction of covariant derivative, this must be true. Let's verify.
+\begin{proof}
+Starting from the definition of a covariant derivative, and taking the result of Proposition 3.12 and the tensor transformation laws:
+\begin{align}
+    \tilde{\nabla}_\nu\tilde{W}^\rho&=\tilde{\partial}_\nu\tilde{W}^\rho+\tilde{\Gamma}^\rho_{\mu\nu}\tilde{W}^\mu\nonumber\\&=\frac{\partial x^\alpha}{\partial\tilde{x}^\nu}\frac{\partial}{\partial x^\alpha}\bigg(\frac{\partial\tilde{x}^\rho}{\partial x^\beta}W^\beta\bigg)+\frac{\partial x^\alpha}{\partial\tilde{x}^\mu}\frac{\partial x^\beta}{\partial\tilde{x}^\nu}\frac{\partial\tilde{x}^\rho}{\partial x^\gamma}\Gamma^\gamma_{\alpha\beta}\frac{\partial\tilde{x}^\mu}{\partial x^\delta}W^\delta+\frac{\partial\tilde{x}^\rho}{\partial x^\lambda}\tilde{\partial}_\nu\bigg(\frac{\partial x^\lambda}{\partial\tilde{x}^\mu}\bigg)\frac{\partial\tilde{x}^\mu}{\partial x^\beta}W^\beta\nonumber\\&=\frac{\partial x^\alpha}{\partial\tilde{x}^\nu}\frac{\partial\tilde{x}^\rho}{\partial x^\beta}\partial_\alpha W^\beta+W^\beta\tilde{\partial}_\nu\bigg(\frac{\partial\tilde{x}^\rho}{\partial x^\beta}\bigg)+\frac{\partial x^\beta}{\partial\tilde{x}^\nu}\frac{\partial\tilde{x}^\rho}{\partial x^\gamma}\Gamma_{\alpha\beta}^\gamma W^\alpha+W^\beta\frac{\partial\tilde{x}^\rho}{\partial x^\lambda}\frac{\partial\tilde{x}^\mu}{\partial x^\beta}\tilde{\partial}_\nu\bigg(\frac{\partial x^\lambda}{\partial\tilde{x}^\mu}\bigg)\nonumber
+\end{align}
+but $\frac{\partial\tilde{x}^\mu}{\partial x^\beta}\frac{\partial x^\lambda}{\partial\tilde{x}^\mu}=\tensor*{\delta}{*_{}^{\lambda}_{\beta}}$, which means
+$$\frac{\partial\tilde{x}^\mu}{\partial x^\beta}\tilde{\partial}_\nu\bigg(\frac{\partial x^\lambda}{\partial\tilde{x}^\mu}\bigg)=-\frac{\partial x^\lambda}{\partial\tilde{x}^\mu}\tilde{\partial}_\nu\bigg(\frac{\partial\tilde{x}^\mu}{\partial x^\beta}\bigg)\implies W^\beta\frac{\partial\tilde{x}^\rho}{\partial x^\lambda}\frac{\partial\tilde{x}^\mu}{\partial x^\beta}\tilde{\partial}_\nu\bigg(\frac{\partial x^\lambda}{\partial\tilde{x}^\mu}\bigg)=-W^\beta\tensor*{\delta}{*_{}^{\rho}_{\mu}}\tilde{\partial}_\nu\bigg(\frac{\partial\tilde{x}^\mu}{\partial x^\beta}\bigg)=-W^\beta\tilde{\partial}_\nu\bigg(\frac{\partial\tilde{x}^\rho}{\partial x^\beta}\bigg)$$
+Hence, by definition of covariant derivative again
+$$\tilde{\nabla}_\nu\tilde{W}^\rho=\frac{\partial x^\alpha}{\partial\tilde{x}^\nu}\frac{\partial\tilde{x}^\rho}{\partial x^\beta}\partial_\alpha W^\beta+\frac{\partial x^\beta}{\partial\tilde{x}^\nu}\frac{\partial\tilde{x}^\rho}{\partial x^\gamma}\Gamma_{\alpha\beta}^\gamma W^\alpha=\frac{\partial x^\alpha}{\partial\tilde{x}^\nu}\frac{\partial\tilde{x}^\rho}{\partial x^\beta}\nabla_\alpha W^\beta$$
+\end{proof}
 \subsubsection{The Levi-Civita Connection}
 In general manifolds, there is no more fundamental structure on the manifold that determines the connection, so it is part of defining the geometry to equip it with a connection of your choice. Note that it is not even necessary to have a metric on the manifold. Although we need no metric for the connection, a metric singles out a special connection (due to the fundamental theorem of Riemannian geometry). We will see later that this metric is the Riemann metric. The Levi-Civita Connection is used to find the connection coefficients.
+\begin{defi}[Christoffel symbols]
+We define the Christoffel symbols to be short for
+$$\left \{ {\beta \atop
+\mu\ \nu}\right \}:=\frac{1}{2}g^{\beta\rho}(\partial_\mu g_{\nu\rho}+\partial_\nu g_{\rho\mu}-\partial_\rho g_{\mu\nu})$$
+\end{defi}
+As we will see, the Christoffel symbols are actually a connection. The second downstairs index will be conventionally our derivative index.
 \begin{thm}
 On a manifold $\mathcal{M}$ with metric $g$, $\exists$ a unique connection with
 \begin{itemize}
     \item $\Gamma_{\mu\nu}^\alpha=\Gamma_{\nu\mu}^\alpha=\left \{ {\alpha \atop
 \mu\ \nu}\right \}$, i.e. Christoffel symbols are torsion free;
-    \item $\nabla g=0$, i.e. 'metric compatible'.
+    \item $\nabla g=0$, i.e. `metric compatible'.
 \end{itemize}
 This connection is the Levi-Civita connection.
 \end{thm}
@@ -992,13 +1016,167 @@ From the definition of the Christoffel symbols,
     \nabla_\alpha g_{\beta\gamma}&=\partial_\alpha g_{\beta\gamma}-\Gamma_{\beta\alpha}^\rho g_{\rho\gamma}-\Gamma_{\gamma\alpha}^\rho g_{\beta\rho}\nonumber\\&=\partial_\alpha g_{\beta\gamma}-\frac{1}{2}g^{\rho\sigma}[(\partial_\beta g_{\alpha\sigma}+\partial_\alpha g_{\sigma\beta}-\partial_\sigma g_{\beta\alpha})g_{\rho\gamma}+(\partial_\gamma g_{\alpha\sigma}+\partial_\alpha g_{\sigma\gamma}-\partial_\sigma g_{\gamma\alpha})g_{\rho\beta}]\nonumber\\&=\partial_\alpha g_{\beta\gamma}-\frac{1}{2}[(\partial_\beta g_{\alpha\sigma}+\partial_\alpha g_{\sigma\beta}-\partial_\sigma g_{\beta\alpha})+(\partial_\gamma g_{\alpha\sigma}+\partial_\alpha g_{\sigma\gamma}-\partial_\sigma g_{\gamma\alpha})]\nonumber\\&=\partial_\alpha g_{\beta\gamma}-\frac{1}{2}(\partial_\alpha g_{\gamma\beta}+\partial_\alpha g_{\beta\gamma})=0\nonumber
 \end{align}
 \end{proof}
-In GR, we generally assume the connection $\Gamma_{\beta\gamma}^\alpha$ to be the Levi-Civita one.
-
+\begin{remarks}\leavevmode
+\begin{enumerate}
+\item In GR, we generally assume the connection $\Gamma_{\beta\gamma}^\alpha$ to be the Levi-Civita one.
+\item Torsion free connection would also mean commutative action on scalar fields.
+\item When the metric compatibility is satisfied, we can interchange the order of raising/lowering indices and covariant differentiation. For instance,
+$$\nabla_cT^{ab}=\nabla_c(g^{bd}\tensor*{T}{*_{}^{a}_{d}}=(\nabla_cg^{bd})\tensor*{T}{*_{}^{a}_{d}}+g^{bd}(\nabla_c\tensor*{T}{*_{}^{a}_{d}})=g^{bd}(\nabla_c\tensor*{T}{*_{}^{a}_{d}})$$
+Hence, the index associated with a covariant derivative is a genuine tensor index.
+\item We sometimes require the connection coefficients summed over the upper and a lower index. Since $\nabla_cg_{ab}=0$, we have
+$$\partial_cg_{ab}=\Gamma^d_{ca}g_{db}+\Gamma^d_{cb}g_{ad}\implies g^{ab}\partial_cg_{ab}=g^{ab}(\Gamma^d_{ca}g_{db}+\Gamma^d_{cb}g_{ad})=2g^{ab}g_{db}\Gamma^d_{ca})=2\Gamma^a_{ac}$$
+This follows from $(\det M)^{-1}\partial_c\det M=\Tr(M^{-1}\partial_cM)$ for some invertible matrix $M$. We then have $\Gamma_{ac}^a=\frac{1}{\sqrt{|g|}}\partial_c\sqrt{|g|}$. 
+\item The covariant derivative constructed with the metric connection has the nice property that it reduces to partial differentiation in local Cartesian coordinate. This follows from the vanishing derivative of the metric at $p\in\mathcal{M}$, $\frac{\partial g_{ab}}{\partial x^c}|_p=0$. This is very important for enforcing the equivalence principle as it is straightforward to check that some law of physics, written as a tensor equation, reduces to its usual special-relativistic form in local Cartesian coordinates. Conversely, we can easy formulate physical theories in general spacetime by promoting derivatives in Euclidean space to covariant derivatives.
+\item Divergence, curl and Laplacian with Levi-Civita connection:
+\end{enumerate}
+\end{remarks}
 \newpage
 \subsubsection{Parallel transport}
-
+A connection gives us the notion of a tensor that does not change along a curve.
+\begin{defi}[Integral Curve]
+An integral curve $\lambda$ of a vector field $V$ through $p\in\mathcal{M}$ is a curve through $p$ and whose tangent at every point $q$ along the curve is $V_q$. 
+\end{defi}
+In coordinates, 
+$$\frac{d}{dt}\bigg|_\lambda=V\implies\frac{d}{dt}x^\mu(\lambda(t))=V^\mu(x^\alpha)$$
+with $x^\mu(\lambda(t_0))=x^\mu(p)$ has a unique solution by ODE theory.
+\begin{defi}[Parallel Transport]
+Let $V$ be a vector field and $\mathcal{C}$ be an integral curve. A tensor $T$ is parallel transported along $\mathcal{C}$ if $\nabla_VT=0$ along $\mathcal{C}$.
+\end{defi}
+\begin{prop}
+The tangent of an affinely parametrized geodesic is parallel transported along itself.
+\end{prop}
+\begin{proof}
+$$U^\mu\nabla_\mu U^\alpha=U^\mu\partial_\mu U^\alpha+U^\mu\Gamma_{\nu\mu}^\alpha U^\nu=\frac{dx^\mu}{d\lambda}\frac{\partial}{\partial x^\mu}\frac{dx^\alpha}{d\lambda}+\frac{dx^\mu}{d\lambda}\Gamma_{\nu\mu}^\alpha\frac{dx^\nu}{d\lambda}=0$$
+This leads to $\frac{d^2x^\alpha}{d\lambda^2}+\Gamma_{\nu\mu}^\alpha\frac{dx^\nu}{d\lambda}\frac{dx^\mu}{d\lambda}=0$ with non-affine parameter $\nabla_UU=fU$.
+\end{proof}
+\begin{prop}
+$\nabla_VT=0$ determines $T$ uniquely along the curve of transport.
+\end{prop}
+\begin{proof}
+In coordinates $x^\mu$, the curve is $x^\mu(\lambda)$, then
+$$V^\sigma\nabla_\sigma \tensor*{\delta}{*_{}^{\mu}_{\nu}}=V^\sigma\partial_\sigma \tensor*{\delta}{*_{}^{\mu}_{\nu}}+\Gamma_{\rho\sigma}^\mu \tensor*{T}{*_{}^{\rho}_{\nu}}V^\sigma-\Gamma_{\nu\sigma}^\rho \tensor*{T}{*_{}^{\mu}_{\rho}}V^\sigma=\frac{d}{d\lambda}\tensor*{T}{*_{}^{\mu}_{\nu}}+\Gamma_{\rho\sigma}^\mu\tensor*{T}{*_{}^{\rho}_{\mu}}V^\sigma-\Gamma_{\nu\sigma}^\rho \tensor*{\delta}{*_{}^{\mu}_{\rho}}V^\sigma=0$$
+ODE theory thus guarantees a solution $\forall$ components of $T$.
+\end{proof}
+\begin{prop}
+Parallel transport $T$ along a curve from $p$ to $q$ provides an isomorphism between tensors at $p$ and $q$.
+\end{prop}
+Unlike Special Relativity, this is path dependent in General Relativity.
+\begin{prop}
+Parallel transport preserves the length of vectors.
+\end{prop}
+\begin{proof}
+$$\frac{d}{d\lambda}(W_\alpha W^\alpha)=V^\mu\nabla_\mu(W_\alpha W^\alpha)=2W_\alpha V^\mu\nabla_\mu W^\alpha$$
+but $V^\mu\nabla W^\alpha=0$.
+\end{proof}
+As such, geodesics do not change their timelike, spacelike or null character.
+\begin{defi}[Acceleration Along Timelike Curve]
+We define the acceleration $a^\mu$ along a time-like curve by $a^\mu:=U^\rho\nabla_\rho U^\alpha$.
+\end{defi}
+\begin{prop}
+This curve is a geodesic if $a^\mu=0$ or $a^\mu=fU^\mu$ such that $f$ is a function.
+\end{prop}
+We can also define $\frac{D}{D\lambda}:=\frac{d x^\rho}{d\lambda}\nabla_\rho$ such that the parallel transport of a tensor is $\frac{DT}{D\lambda}=0$.
 \newpage
 \subsubsection{Geodesics}
+\begin{defi}[Timelike, Spacelike, Nulllike Curve]
+A curve $\mathcal{C}$ is time-like (null,spacelike) at a point $p\in\mathcal{M}$ iff its tangent vector at that point is time-like (null, spacelike).
+\end{defi}
+This property can change along the curve parametrized by $\lambda(t)$.
+\begin{defi}[Proper Length, Time]
+The proper length along a space-like curve is $\lambda_{space}(t)$
+$$s:=\int_{t_0}^{t_1}\sqrt{g(V,V)|_{\lambda_{space}(t)}}dt=\int_{t_0}^{t_1}\sqrt{g_{\alpha\beta}\frac{dx^\alpha}{dt}\frac{dx^\beta}{dt}}dt$$
+The proper time along a time-like curve is $\lambda_{time}(t)$
+$$\tau(t_1):=\int_{t_0}^{t_1}\sqrt{-g(V,V)|_{\lambda_{space}(t)}}dt=\int_{t_0}^{t_1}\sqrt{-g_{\alpha\beta}\frac{dx^\alpha}{dt}\frac{dx^\beta}{dt}}dt$$
+\end{defi}
+\begin{defi}[Four-Velocity]
+The four-velocity along time-like curves $u^\mu:=\frac{dx^\mu}{dt}|_{\lambda(\tau)}$.
+\end{defi}
+\begin{prop}
+$g_{\mu\nu}u^\mu u^\nu=-1$
+\end{prop}
+\begin{thm}[Noether's Theorem]
+The action $\mathcal{S}=\int\mathcal{L}(q_k,\dot{q}_k,\lambda)d\lambda$ is extremized by the curve satisfying the Euler-Lagrange equations
+$$\frac{d}{d\lambda}\bigg(\frac{\partial\mathcal{L}}{\partial\dot{q}_k}\bigg)=\frac{\partial\mathcal{L}}{\partial q_k}$$
+\end{thm}
+\begin{cor}
+Noether's theorem have a few simplifications:
+\begin{itemize}
+    \item If $\mathcal{L}$ not explicitly dependent on $q_k$ $\implies$ $p_k:=\frac{\partial\mathcal{L}}{\partial\dot{q}_k}$ is conserved along the curve that extremizes $\mathcal{S}$;
+    \item If $\mathcal{L}$ is not explicitly dependent on the parameter $\lambda$ $\implies$ $I:=\dot{q}_k\frac{\partial\mathcal{L}}{\partial\dot{q}_k}-\mathcal{L}$ is conserved along the curve. 
+\end{itemize}
+\end{cor}
+\begin{proof}
+Review IB Variational Principles for the above Theorem and Corollary.
+\end{proof}
+\begin{defi}[Christoffel symbols]
+We define the Christoffel symbols to be short for
+$$\left \{ {\beta \atop
+\mu\ \nu}\right \}:=\frac{1}{2}g^{\beta\rho}(\partial_\mu g_{\nu\rho}+\partial_\nu g_{\rho\mu}-\partial_\rho g_{\mu\nu})$$
+\end{defi}
+\begin{prop}[Geodesic Equation - Version 1]
+Consider time-like curves from  A $(\lambda=0)$ and B $(\lambda=1)$. The action is $\mathcal{S}=\int_0^1\mathcal{L}d\lambda$ with $\mathcal{L}=\sqrt{-g_{\mu\nu}\dot{x}^\mu\dot{x}^\nu}$, then after extremizing the action, we will obtain one possible version of the Geodesic Equation:
+\begin{equation}
+    \frac{d^2x^\beta}{d\tau^2}+\left \{ {\beta \atop \mu\ \nu}\right \}\frac{dx^\mu}{d\tau}\frac{dx^\nu}{d\tau}=0\tag{\dag}
+\end{equation}
+\end{prop}
+Here, $\mathcal{S}$ is invariant under the reparametrization $\kappa(\lambda)$, where $\frac{d\kappa}{d\lambda}>0$, i.e. 
+$$\mathcal{S}=\int_0^1\sqrt{-g_{\mu\nu}\frac{dx^\mu}{d\lambda}\frac{dx^\nu}{d\lambda}d\lambda}=\int_{\kappa(0)}^{\kappa(1)}\sqrt{-g_{\mu\nu}\frac{dx^\mu}{d\kappa}\frac{dx^\nu}{d\kappa}d\kappa}$$
+\begin{proof}
+The corresponding Euler-Lagrange equations for $\mathcal{S}$ will be 
+$$\frac{d}{d\lambda}\bigg(\frac{1}{2\mathcal{L}}(-g_{\mu\nu}\delta^\mu_{\text{ }\alpha}\dot{x}^\nu-g_{\mu\nu}\dot{x}^\mu\delta^\nu_{\text{  }\alpha}\bigg)-\frac{1}{2\mathcal{L}}(-\dot{x}^\mu\dot{x}^\nu\partial_\alpha g_{\mu\nu})=\frac{d}{d\lambda}\bigg(-\frac{g_{\mu\alpha}\dot{x}^\mu}{\mathcal{L}}\bigg)+\frac{\dot{x}^\mu\dot{x}^\nu\partial_\alpha g_{\mu\nu}}{2\mathcal{L}}=0$$
+We change the parameter from $\lambda$ to $\tau(\lambda)=\int_0^\lambda\sqrt{-g_{\mu\nu}\frac{dx^\mu}{d\tilde{\lambda}}\frac{dx^\nu}{d\tilde{\lambda}}}d\tilde{\lambda}$ (proper-time) where $\frac{d\tau}{d\lambda}=\mathcal{L}$, then
+$$-\mathcal{L}\frac{d}{d\tau}\bigg(g_{\mu\alpha}\frac{dx^\mu}{d\tau}\bigg)+\frac{\mathcal{L}}{2}\frac{dx^\mu}{d\tau}\frac{dx^\mu}{d\tau}\partial_\alpha g_{\mu\nu}=0$$
+Take dot product with $g^{\beta\alpha}$ gives
+$$\frac{d^2x^\mu}{d\tau^2}g_{\mu\alpha}+\partial_\nu g_{\mu\alpha}\frac{dx^\nu}{d\tau}\frac{dx^\mu}{d\tau}-\frac{1}{2}\partial_\alpha g_{\mu\nu}\frac{dx^\mu}{d\tau}\frac{dx^\nu}{d\tau}=0$$
+which gives us the desired Geodesic Equation. 
+\end{proof}
+
+For space-like geodesics, we take $\tilde{\mathcal{L}}=\sqrt{g_{\mu\nu}\dot{x}^\mu\dot{x}^\nu}$ such that $\frac{ds}{d\lambda}=\tilde{\mathcal{L}}$. In that case, the Geodesic Equation will have $s$ as the parameter instead.
+\begin{prop}[Geodesic Equation - Version 2]
+Consider a different variation, where we do not restrict ourselves to time-like geodesics. The action is now $\hat{\mathcal{S}}=\int_A^B\hat{\mathcal{L}}d\lambda$ with the new Lagrangian $\hat{\mathcal{L}}=g_{\alpha\beta}\frac{dx^\alpha}{d\lambda}\frac{dx^\beta}{d\lambda}$. Then after extremizing the action, we will obtain another version of the Geodesic Equation:
+\begin{equation}
+    \ddot{x}^\alpha+ \left \{ {\alpha \atop
+\nu\ \beta}\right\} \dot{x}^\nu\dot{x}^\beta=0\tag{*}
+\end{equation}
+where $\dot{ }$ represents $\frac{d}{d\lambda}$ such that $\lambda$ parametrizes the curve. 
+\end{prop}
+While it is great that we do not need to restrict ourselves to time-like curves, it is however not invariant under reparametrization. 
+\begin{proof}
+Working with the Euler-Lagrange equations gives us our desired Geodesic Equation. 
+\end{proof}
+
+So far so good. But now take (\dag) and let $\tau=\tau(\lambda)$ such that $\frac{d\tau}{d\lambda}>0$. We have $\frac{d}{d\tau}=\frac{d\lambda}{d\tau}\frac{d}{d\lambda}$ and so $\frac{d^2}{d\tau^2}=\frac{d^2\lambda}{d\tau^2}\frac{d}{d\lambda}+(\frac{d\lambda}{d\tau})^2\frac{d^2}{d\lambda^2}$. We thus obtained
+\begin{equation}
+\frac{d^2x^\alpha}{d\lambda^2}+\left \{ {\alpha \atop
+\nu\ \beta}\right\}\frac{dx^\nu}{d\lambda}\frac{dx^\beta}{d\lambda}=-\bigg(\frac{d\lambda}{d\tau}\bigg)^{-2}\frac{d^2\lambda}{d\tau^2}\frac{dx^\alpha}{d\lambda}\tag{**}
+\end{equation}
+The form of the geodesic equation is no longer the same. We thus demonstrate that $\hat{\mathcal{S}}$ is not invariant under a change of parametrization. Different variation gives different curves! Both equations (*) and (\dag) only agree if $\frac{d^2\lambda}{d\tau^2}=0$. Equivalently, $\lambda$ is linear in $\tau$. 
+\begin{defi}[Affine Parameter]
+The parameter $\lambda$ along a timelike (spacelike) curve is affine iff it is linearly related to the proper time $\tau$ (proper distance $s$). For a non-affine parameter, the corresponding Geodesic Equation is (**)
+\end{defi}
+In summary,
+\begin{prop}
+If a curve $\mathcal{C}:I\subset\mathbb{R}\rightarrow\mathcal{M},\text{  }\lambda\mapsto x^\alpha(\lambda)$, then if it
+\begin{itemize}
+    \item satisfies (*) $\implies$ $\mathcal{C}$ is a geodesic and $\lambda$ is affine;
+    \item satisfies (**) with non-zero right hand side $\implies$ $\mathcal{C}$ is a geodesic but $\lambda$ is not affine;
+    \item satisfies neither (*) nor (**) $\implies$ $\mathcal{C}$ is not a geodesic.
+\end{itemize}
+From ODE theory, the solutions to (*) and (**) are unique if $x^\alpha$ and $\dot{x}^\alpha$ fixed at $\lambda=\lambda_0$.
+\end{prop}
+\begin{post}[Geodesic Postulate]
+Test particles with positive (zero) rest mass move on time-like (null) geodesics.
+\end{post}
+$\hat{\mathcal{L}}$ gives an easy way to calculate the Christoffel symbols.
+\begin{eg}[Christoffel Symbols for Schwarzschild Metric]
+The Schwarzschild metric (as we will see later) in Schwarzschild coordinates is
+$$ds^2=-fdt^2+f^{-1}dr^2+r^2d\theta^2+r^2\sin^2\theta d\phi^2$$
+with $f=1-\frac{2M}{r}$ where $M$ is a constant. We have
+$$\hat{\mathcal{L}}=f\dot{t}^2-f^{-1}\dot{r}^2-r^2\dot{\theta}^2-r^2\sin^2\theta\dot{\phi}^2$$
+The Euler-Lagrange for $t(\tau)$ is $\frac{d}{d\tau}(2f\dot{t})=0\implies\frac{d^2\tau}{d\tau^2}+f^{-1}\frac{df}{dr}\dot{t}\dot{r}=0$ and so 
+$$\left \{ {t \atop t\ r}\right\}=\left \{ {t \atop r\ t}\right\}=\frac{df/dr}{2f}=\frac{1}{1-(2M/r)}\frac{M}{r^2}$$
+and $\left \{ {t \atop \nu\ \mu}\right\}=0$ otherwise for $\mu,\nu=\theta,\phi$.
+\end{eg}
 \newpage
 \section{More on Special Relativity}
 \subsection{Minkowski Spacetime and Particle Dynamics}
