@@ -800,7 +800,7 @@ $$d\tilde{s}^2=\tilde{g}_{\mu\nu}d\tilde{x}^\mu d\tilde{x}^\nu=\frac{\partial x^
 Tensor operations:
 \begin{enumerate}
     \item Addition and scalar multiplication: For instance,
-    $$c_1S+c_2T:\mathcal{T}_p^*(\mathcal{M})\times \mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\text{  }\eta,V\mapsto c_1S(\eta,V)+c_2T(\eta,V)$$
+    $$c_1S+c_2T:\mathcal{T}_p^*(\mathcal{M})\times \mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\quad\eta,V\mapsto c_1S(\eta,V)+c_2T(\eta,V)$$
     where $c_1,c_2\in\mathbb{R}$ and $S,T$ are (1,1) tensors.
     \item Symmetrization/anti-symmetrization:
     \begin{itemize}
@@ -897,9 +897,107 @@ The norm of a space-like vector $V\in\mathcal{T}_p(\mathcal{M})$ is $|V|:=\sqrt{
 The angle between space-like vectors $V,W\in\mathcal{T}_p(\mathcal{M})$ is $\theta=\cos^{-1}\frac{g(V,W)}{|V||W|}$.
 \end{defi}
 \subsection{Vector and Tensor Calculus on Manifolds}
-\subsubsection{Covariant derivatives}
-\subsubsection{Connection}
+\subsubsection{Covariant derivatives and connection}
+Now, the issue is, we cannot take the difference between vectors at diferent points. To be specific, $U\in T_p(M)$ and $V\in T_q(M)$ are two vectors that live in two different vector spaces. We thus need to define what we call - covariant derivative, on manifolds $\mathcal{M}$.
+\begin{defi}[Covariant Derivative for Functions]
+$$\nabla  f:~\mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\quad V\mapsto\nabla_Vf:=V(f)=V^\alpha\partial_\alpha f$$
+$\nabla f$ is a (0,1) tensor with $\nabla_\alpha f:=\partial_\alpha f$
+\end{defi}
+\begin{defi}[Covariant Derivative for Vector fields]
+$$\nabla  V:~T_p(\mathcal{M})\rightarrow\mathcal{T}_p(\mathcal{M}),\quad X\mapsto\nabla_XV$$
+which satisfies ($f,g$ are functions and $X,Y,V,W$ are vector fields):
+\begin{itemize}
+    \item $\nabla_{fX+gY}V=f\nabla_XV+g\nabla_YV$
+    \item $\nabla_X(V+W)=\nabla_XV+\nabla_XW$
+    \item $\nabla_X(fV)=f\nabla_XV+(\nabla_Xf)V$ (Leibnitz Rule)
+\end{itemize}
+Equivalently, $\nabla V:~\mathcal{T}_p^*(\mathcal{M})\times \mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\quad (\eta,X)\mapsto\eta(\nabla_XV)$. $\nabla V$ is a (1,1) tensor with $$\tensor*{V}{*_{}^{\alpha}_{;\beta}}=\nabla_\beta V^\alpha:=\tensor*{\nabla V}{*_{}^{\alpha}_{\beta}}$$ 
+\end{defi}
+\begin{defi}[Connection Coefficients]
+Let $\{e^\mu\}$ be a basis of $\mathcal{T}_p(\mathcal{M})$, then we define the connection coefficients $\Gamma^\rho_{\mu\nu}$ to be
+$$\nabla_\nu e_\mu:=\nabla_{e_\nu}e_\mu=\Gamma_{\mu\nu}^\rho e_\rho$$
+\end{defi}
+\begin{remarks}\leavevmode
+\begin{enumerate}
+    \item In these notes, we only consider coordinate basis vectors $e_\mu = \partial_\mu$. This definition of the connection coefficients, however, is general and also holds for non-coordinate bases.
+    \item $\Gamma_{\mu\nu}^\rho$ are the expansion coefficients of $\nabla_\nu e_\mu$ in the basis $\{e_\rho\}$.
+    \item The word connection arises from the fact that we `connect' the tangent spaces at different points $p,q\in\mathcal{M}$. Specifically, the connection coefficients give us the rate of change of the basis vector $e_\mu$ in the direction of the basis vector $e_\nu$.
+    \item Here we use the convention that the second downstairs index of the connection, i.e. $\nu$ in denotes the direction in which the derivative is taken. The first index denotes the basis vector we are considering. In general relativity, the connection turns out to be symmetric in its downstairs indices, so that this convention does not really matter.
+\end{enumerate}
+\end{remarks}
+\begin{defi}[Christoffel symbols]
+We define the Christoffel symbols to be short for
+$$\left \{ {\beta \atop
+\mu\ \nu}\right \}:=\frac{1}{2}g^{\beta\rho}(\partial_\mu g_{\nu\rho}+\partial_\nu g_{\rho\mu}-\partial_\rho g_{\mu\nu})$$
+\end{defi}
+The Christoffel symbols are actually a connection. The second downstairs index will be conventionally our derivative index.
+\begin{prop}
+$$\nabla_\nu W^\rho=\partial_\nu W^\rho+\Gamma_{\mu\nu}^\rho W^\mu$$
+\end{prop}
+We get for $V=V^\mu e_\mu$ and $W=W^\mu e_\mu$. We thus have
+\begin{eqnarray}
+\nabla_VW&=&\nabla_V(W^\mu e_\mu)\nonumber\\&=&V(W^\mu)e_\mu+W^\mu\nabla_Ve_\mu\nonumber\\&=&V^\nu e_\nu(W^\mu)e_\mu+W^\mu\nabla_{V^\mu e_\nu}e_\mu\nonumber\\&=&V^\nu e_\nu(W^\mu)e_\mu+W^\mu V^\nu\nabla_{\nu}e_\mu\nonumber\\&=&V^\mu(\partial_\nu W^\rho+W^\mu\Gamma_{\mu\nu}^\rho)e_\rho\nonumber\\\implies(\nabla_VW)^\rho&=&V^\mu\partial_\nu W^\rho+V^\nu\Gamma_{\mu\nu}^\rho W^\mu\nonumber
+\end{eqnarray}
+but since $V$ is arbitrary, we take $\nabla_\nu W^\rho$, which is the desired result $\partial_\nu W^\rho+\Gamma_{\mu\nu}^\rho W^\mu$. We thus denote this as $\tensor*{W}{*_{}^{\rho}_{;\nu}}$. 
+\begin{prop}
+Under coordinate transformation $x^\mu\rightarrow\tilde{x}^\alpha$, the Connection coefficient transform as
+$$\tilde{\Gamma}^\sigma_{\mu\nu}=\frac{\partial\tilde{x}^\sigma}{\partial x^\rho}\frac{\partial x^\alpha}{\partial\tilde{x}^\nu}\frac{\partial x^\beta}{\partial\tilde{x}^\mu}\Gamma_{\beta\alpha}^\rho+\frac{\partial\tilde{x}^\sigma}{\partial x^\rho}\frac{\partial^2x^\rho}{\partial\tilde{x}^\nu\partial\tilde{x}^\mu}$$
+\end{prop}
+So, $\Gamma_{\mu\nu}^\sigma$ is not a tensor, but the difference of two connections is, i.e. Torsion tensor. Another example of what looks like a tensor, but actually isn't: $\partial_\nu W^\mu$. 
+\begin{defi}[Torsion Tensor]
+$$\tensor*{T}{*^{}_{\mu\nu}^{\lambda}}:=:=\Gamma_{\mu\nu}^\lambda-\Gamma_{\nu\mu}^\lambda$$
+\end{defi}
+\begin{defi}[Torsion Free]
+The connection $\Gamma$ is called torsion free iff $T_{\mu\nu}^{\text{  }\lambda}=0$.
+\end{defi}
+\begin{prop}[Covariant Derivative of Tensor]
+For a $(r,s)$ tensor, its covariant derivative is
+\begin{eqnarray}
+&&\nabla_\rho\tensor*{T}{*_{}^{\mu_1...\mu_r}_{\nu_1...\nu_s}}=\partial_\rho\tensor*{T}{*_{}^{\mu_1...\mu_r}_{\nu_1...\nu_s}}\nonumber\\&&+\Gamma^{\mu_1}_{\sigma\rho}\tensor*{T}{*_{}^{\sigma\mu_2...\mu_r}_{\nu_1...\nu_s}}+...+\Gamma_{\sigma\rho}^{\mu_r}\tensor*{T}{*_{}^{\mu_1...\mu_{r-1}\sigma}_{\nu_1...\nu_s}}\nonumber\\&&-\Gamma_{\nu_1\rho}^\sigma \tensor*{T}{*_{}^{\mu_1...\mu_r}_{\sigma\nu_2...\nu_s}}-...-\Gamma_{\nu_s\rho}^\sigma \tensor*{T}{*_{}^{\mu_1...\mu_r}_{\nu_1...\nu_{s-1}\sigma}}\nonumber
+\end{eqnarray}
+\end{prop}
+This can be obtained from Leibniz rule, where for $(r,s)$ tensor $T$, $\nabla T$ is of rank $(r,s+1)$.
+\begin{eg}
+What is the covariant derivative of a one-form?
+$$\nabla_V(\eta(W)):=(\nabla_V\eta)(W)+\eta(\nabla_VW)\implies (\nabla_V\eta)(W)=\nabla_V(\eta(W))-\eta(\nabla_VW)$$
+So, $\nabla\eta$ is a (0,2) tensor since
+\begin{eqnarray}
+(\nabla\eta)(V,W)=(\nabla_V\eta)(W)&=&\nabla_V(\eta_\mu W^\mu)-\eta_\mu(\nabla_VW)^\mu\nonumber\\&=&V^\rho\partial_\rho(\eta_\mu W^\mu)-\eta_\mu(V^\rho\partial_\rho W^\mu+V^\rho\Gamma_{\nu\rho}^\mu W^\nu)\nonumber\\&=&V^\rho W^\mu\partial_\rho\eta_\mu-\Gamma_{\nu\rho}^\mu\eta_\mu V^\rho W^\mu\nonumber\\&=&(\partial_\rho\eta_\mu-\Gamma_{\mu\rho}^\nu\eta_\nu)V^\rho W^\mu\nonumber
+\end{eqnarray}
+So the components of $\nabla_\rho\eta_\mu:=(\nabla\eta)_{\rho\mu}$ (also written as $\eta_{\mu;\rho}$ is $\partial_\rho\eta_\mu-\Gamma_{\mu\rho}^\nu\eta_\nu$).
+\end{eg}
+\newpage
+\subsubsection{The Levi-Civita Connection}
+In general manifolds, there is no more fundamental structure on the manifold that determines the connection, so it is part of defining the geometry to equip it with a connection of your choice. Note that it is not even necessary to have a metric on the manifold. Although we need no metric for the connection, a metric singles out a special connection (due to the fundamental theorem of Riemannian geometry). We will see later that this metric is the Riemann metric. The Levi-Civita Connection is used to find the connection coefficients.
+\begin{thm}
+On a manifold $\mathcal{M}$ with metric $g$, $\exists$ a unique connection with
+\begin{itemize}
+    \item $\Gamma_{\mu\nu}^\alpha=\Gamma_{\nu\mu}^\alpha=\left \{ {\alpha \atop
+\mu\ \nu}\right \}$, i.e. Christoffel symbols are torsion free;
+    \item $\nabla g=0$, i.e. 'metric compatible'.
+\end{itemize}
+This connection is the Levi-Civita connection.
+\end{thm}
+\begin{proof}
+($\rightarrow$) Let $\Gamma_{\beta\gamma}^\alpha$ be 'metric compatible', and symmetric. then
+$$\nabla_\alpha g_{\beta\gamma}=0\implies\partial_\alpha g_{\beta\gamma}=\Gamma_{\beta\alpha}^\rho g_{\rho\gamma}+\Gamma_{\gamma\alpha}^\rho g_{\beta\rho}$$
+From the definition of the Christoffel symbols,
+\begin{align}
+\left \{ {\mu \atop
+\beta\ \gamma}\right \}&=\frac{1}{2}g^{\mu\nu}(\partial_\beta g_{\gamma\nu}+\partial_\gamma g_{\nu\beta}-\partial_\nu g_{\beta\gamma})\nonumber\\&=\frac{1}{2}g^{\mu\nu}(\Gamma^\rho_{\gamma\beta}g_{\rho\nu}+\Gamma_{\nu\beta}^\rho g_{\gamma\rho}+\Gamma_{\nu\gamma}^\rho g_{\rho\beta}+\Gamma_{\beta\gamma}^\rho g_{\nu\rho}-\Gamma_{\beta\nu}^\rho g_{\rho\gamma}-\Gamma_{\gamma\nu}^\rho g_{\beta\rho})\nonumber\\&=\Gamma_{\beta\gamma}^\mu
+\end{align}
+($\leftarrow$) Likewise, $\Gamma_{\beta\gamma}^\alpha=\left \{ {\alpha \atop
+\mu\ \nu}\right \}$, then we can check that is symmetric in $\beta$ and $\gamma$ and so 
+\begin{align}
+    \nabla_\alpha g_{\beta\gamma}&=\partial_\alpha g_{\beta\gamma}-\Gamma_{\beta\alpha}^\rho g_{\rho\gamma}-\Gamma_{\gamma\alpha}^\rho g_{\beta\rho}\nonumber\\&=\partial_\alpha g_{\beta\gamma}-\frac{1}{2}g^{\rho\sigma}[(\partial_\beta g_{\alpha\sigma}+\partial_\alpha g_{\sigma\beta}-\partial_\sigma g_{\beta\alpha})g_{\rho\gamma}+(\partial_\gamma g_{\alpha\sigma}+\partial_\alpha g_{\sigma\gamma}-\partial_\sigma g_{\gamma\alpha})g_{\rho\beta}]\nonumber\\&=\partial_\alpha g_{\beta\gamma}-\frac{1}{2}[(\partial_\beta g_{\alpha\sigma}+\partial_\alpha g_{\sigma\beta}-\partial_\sigma g_{\beta\alpha})+(\partial_\gamma g_{\alpha\sigma}+\partial_\alpha g_{\sigma\gamma}-\partial_\sigma g_{\gamma\alpha})]\nonumber\\&=\partial_\alpha g_{\beta\gamma}-\frac{1}{2}(\partial_\alpha g_{\gamma\beta}+\partial_\alpha g_{\beta\gamma})=0\nonumber
+\end{align}
+\end{proof}
+In GR, we generally assume the connection $\Gamma_{\beta\gamma}^\alpha$ to be the Levi-Civita one.
+
+\newpage
 \subsubsection{Parallel transport}
+
+\newpage
 \subsubsection{Geodesics}
 \newpage
 \section{More on Special Relativity}

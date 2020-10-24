@@ -14,7 +14,9 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 %% Useful packages
-
+\usepackage{tensor}
+\usepackage{xcolor}
+\usepackage{color,soul}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{enumitem}
@@ -52,6 +54,9 @@
 \DeclareMathOperator{\Var}{Var}
 \newtheorem{ans}{Answer}[subsection]
 
+\newcommand{\highlight}[1]{%
+  \colorbox{red!50}{$\displaystyle#1$}}
+  
 \definecolor{darkblue}{RGB}{	0, 0, 139}
 \newtheoremstyle{new}% <name>
 {2pt}% <Space above>
@@ -84,7 +89,7 @@
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
 \item Without loss of generality, align axes of $S$ such that $\Delta y=\Delta z=0$. Perform standard Lorentz boost to another frame $S'$:
-$$\Delta y'=\Delta z'=0,\quad\Delta x'=\gamma(\Delta x-\frac{v}{c}\Delta t)$$
+$$\Delta y'=\Delta z'=0,\quad\Delta x'=\gamma(\Delta x-v\Delta t)$$
 To ensure they occur at the same spatial location in frame $S'$:
 $$\Delta x'=0\implies\frac{v}{c}=\frac{\Delta x}{c\Delta t}\implies|\Delta x|<c|\Delta t|$$
 The spacetime interval is
@@ -245,7 +250,7 @@ $$\tau=\frac{3.118}{9.81}\frac{3\times10^8}{24(3600)(365.25)}=3.02\text{ years}$
 \end{ans}
 \newpage
 \subsection*{Manifolds and Coordinates}
-\begin{qns}
+\begin{qns}[Metric tensor, volume coordinate]
 In 3D Euclidean space, coordinates $x'^a$ are related to Cartesian coordinates $x^a$ by
 $$x^1=x'^1+x'^2,\quad  x^2=x'^1-x'^2,\quad x^3=2x'^1x'^2+x'^3$$
 Describe the coordinate surfaces in the primed system. Obtain the metric functions $g_{ab}'$ in the primed system and hence show that these coordinates are not orthogonal. Calculate the volume element $dV$ in the primed coordinate system.
@@ -264,7 +269,7 @@ Since the metric tensor is not diagonal, it is not an orthogonal coordinate syst
     &\det g\nonumber\\&=2(1+2(x'^2)^2)[2(1+2(x'^1)^2-4(x'^1)^2]-4(x'^1)(x'^2)[4x'^1~x'^2-4x'^1~x'^2]+2x'^2[8(x'^1)^2(x'^2)-4(x'^2)(1+2(x'^1)^2)]\nonumber\\&=4\implies dV=\sqrt{\det g}dx'^1~dx'^2~dx'^3=2dx'^1~dx'^2~dx'^3\nonumber
 \end{align}
 \end{ans}
-\begin{qns}
+\begin{qns}[Line element, volume]
 Show that the line element of a 3-sphere of radius $a$ embedded in 4D Euclidean space can be written in the form
 $$ds^2=a^2[d\chi^2+\sin^2\chi(d\theta^2+\sin^2\theta d\phi^2)]$$
 Hence, in this 3D non-Euclidean space, calculate the area of the 2-sphere defined by $\chi=\chi_0$. Also find the total volume of the 3D space.
@@ -289,9 +294,9 @@ $$dV_{(2)}=a^2\sin^2\chi_0\sin\theta~d\theta~d\phi\implies V_{(2)}=4\pi a^2\sin^
 \newpage
 \section{Problem Sheet 2}
 \subsection*{Vector and Tensor Algebra}
-\begin{qns}
+\begin{qns}[Metric tensor, dual basis]
 In 3D Euclidean space, coordinates $x'^a$ are related to Cartesian coordinates $x^a$ by
-$$x^1=x'^1+x'^2,\quad  x^1=x'^1-x'^2,\quad x^3=2x'^1x'^2+x'^3$$
+$$x^1=x'^1+x'^2,\quad  x^2=x'^1-x'^2,\quad x^3=2x'^1x'^2+x'^3$$
 \begin{enumerate}[label=(\alph*)]
 \item Express the coordinate basis vectors $\mathbf{e_a'}=\frac{\partial}{\partial x'^a}$ for the primed coordinates in terms of those for the Cartesian coordinates. How are these related to the intersections of the coordinate surfaces that you sketched in Question 9 of Examples Sheet 1? By considering $\mathbf{g}(\mathbf{e_a'},\mathbf{e_b'})$ obtain the components of the metric $g'_{ab}$. (Hint: since the original coordinates are Cartesian, $\mathbf{g}(\mathbf{e_a},\mathbf{e_b})=\delta_{ab}$.) 
 \item Let the vector $\mathbf{v}=\mathbf{e_1}$. Write down the components $v^a$ and those of the associated dual vector $v_a$. Calculate the components of the same vector $\mathbf{v}$ and its associated dual vector in the primed coordinates. 
@@ -299,12 +304,27 @@ $$x^1=x'^1+x'^2,\quad  x^1=x'^1-x'^2,\quad x^3=2x'^1x'^2+x'^3$$
 \end{qns}
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
-\item
-
-\item 
+\item Using chain rule,
+$$e_1'=\frac{\partial x^1}{\partial x'^1}\frac{\partial}{\partial x^1}+\frac{\partial x^2}{\partial x'^1}\frac{\partial}{\partial x^2}+\frac{\partial x^3}{\partial x'^1}\frac{\partial}{\partial x^3}=\frac{\partial}{\partial x^1}+\frac{\partial}{\partial x^2}+2x'^2\frac{\partial}{\partial x^3}=e_1+e_2+(x^1-x^2)e_3$$
+$$e_2'=\frac{\partial x^1}{\partial x'^2}\frac{\partial}{\partial x^1}+\frac{\partial x^2}{\partial x'^2}\frac{\partial}{\partial x^2}+\frac{\partial x^3}{\partial x'^2}\frac{\partial}{\partial x^3}=\frac{\partial}{\partial x^1}-\frac{\partial}{\partial x^2}+2x'^1\frac{\partial}{\partial x^3}=e_1-e_2+(x^1+x^2)e_3$$
+$$e_3'=\frac{\partial x^1}{\partial x'^3}\frac{\partial}{\partial x^1}+\frac{\partial x^2}{\partial x'^3}\frac{\partial}{\partial x^2}+\frac{\partial x^3}{\partial x'^3}\frac{\partial}{\partial x^3}=e_3$$
+$e_3'=e_3$ is the derivative with respect to $x'^3$ at fixed $x'^1$ and $x'^2$, so along the directions of the line of intersection at constant $x'^1$ and $x'^2$. We have the metric tensor to be 
+$$g(e_a',e_b')=g_{ab}'=\frac{\partial x^c}{\partial x'^a}\frac{\partial x^d}{\partial x'^b}g_{cd}$$
+$$g_{11}'=g_{11}+g_{22}+g_{33}(2x'^2)^2=2+4(x'^2)^2,\quad g_{22}'=2+4(x'^2)^2$$
+$$g_{12}'=g_{11}\frac{\partial x^1}{\partial x'^1}\frac{\partial x^1}{\partial x'^2}+g_{22}\frac{\partial x^2}{\partial x'^1}\frac{\partial x^2}{\partial x'^2}+g_{33}\frac{\partial x^3}{\partial x'^1}\frac{\partial x^3}{\partial x'^2}=1-1+2x'^22x'^1=4x'^1x'^2=g_{21}'$$
+$$g_{13}'=g_{11}\frac{\partial x^1}{\partial x'^1}\frac{\partial x^1}{\partial x'^3}+g_{22}\frac{\partial x^2}{\partial x'^1}\frac{\partial x^2}{\partial x'^3}+g_{33}\frac{\partial x^3}{\partial x'^1}\frac{\partial x^3}{\partial x'^3}=2x'^2=g_{31}'$$
+$$g_{33}'=g_{11}\frac{\partial x^1}{\partial x'^3}\frac{\partial x^1}{\partial x'^3}+g_{22}\frac{\partial x^2}{\partial x'^3}\frac{\partial x^2}{\partial x'^3}+g_{33}\frac{\partial x^3}{\partial x'^3}\frac{\partial x^3}{\partial x'^3}=1$$
+where we get the same result as that in Q9 of the previous example sheet.
+\item The vector is $v=v^ae_a\implies v^a=\tensor*{\delta}{*_{}^{a}_{1}}=(1,0,0)^T$. The dual vector is
+$$v_b=g_{ab}v^a=\delta_{ab}\tensor*{\delta}{*_{}^{a}_{1}}=\delta_{b1}=(1,0,0)$$
+where $g_{ab}=\delta_{ab}$ in the coordinate basis and it is used to lower the index. Now in the primed coordinates,
+$$v'^a=\frac{\partial x'^a}{\partial x^b}v^b=\frac{\partial x'^a}{\partial x^1}=\begin{pmatrix}1/2\\1/2\\-(x'^1+x'^2)\\\end{pmatrix}$$
+where $x'^1=0.5(x^1+x^2)$, $x'^2=0.5(x^1-x^2)$ and $x'^3=x^3-2x'^1x'^2=x^3-0.5((x^1)^2+(x^2)^2)$. Similarly,
+$$v_a'=\frac{\partial x^b}{\partial x'^a}v_b=\frac{\partial x^1}{\partial x'^a}=(1,1,0)$$
 \end{enumerate}
 \end{ans}
-\begin{qns}\leavevmode
+\newpage
+\begin{qns}[Tensor]\leavevmode
 \begin{enumerate}[label=(\alph*)]
 \item If the tensor $A_{ab}$ is an antisymmetric tensor, $S_{ab}$ is a symmetric tensor and $T_{ab}$ is a general tensor, show that $A^{ab}T_{ab} = A^{ab}T_{[ab]}$ and $S^{ab}T_{ab}=S^{ab}T_{(ab)}$. 
 \item If $v_a$ are the components of a dual vector, show that in an arbitrary coordinate system $A_{ab} = \partial_bv_a−\partial_av_b$ are the components of a type-(0, 2) tensor. Show further, for a general antisymmetric tensor $A_{ab}$, that $B_{abc} = \partial_cA_{ab} + \partial_aA_{bc} + \partial_bA_{ca}$ are the components of a type-(0, 3) tensor. What are the symmetry properties of $B_{abc}$?
@@ -312,14 +332,30 @@ $$x^1=x'^1+x'^2,\quad  x^1=x'^1-x'^2,\quad x^3=2x'^1x'^2+x'^3$$
 \end{qns}
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
-\item
-
-\item 
+\item We are given $A_{ab}=-A_{ba}$ and $S_{ab}=S_{ba}$, so
+$$A^{ab}T_{[a,b]}=\frac{1}{2}A^{ab})(T_{ab}-T_{ba})=\frac{1}{2}(A^{ab}T_{ab}+A^{ab}T_{ab})=A^{ab}T_{ab}$$
+where $A^{ba}T_{ba}=A^{ab}T_{ab}$. Similarly,
+$$S^{ab}T_{(a,b)}=\frac{1}{2}S^{ab}(T_{ab}+T_{ba})=S^{ab}T_{ab}$$
+\item The covariant derivative of a dual vector is given as
+$$\nabla_bv_a=\partial_bv_a-\Gamma^c_{ba}v_c\implies\nabla_bv_a-\nabla_av_b=\partial_bv_a-\partial_av_b$$
+since in GR, the connection is torsion free, i.e. $\Gamma_{ba}^c=\Gamma^c_{ab}$. Hence, it follows that
+$$A_{ab}=\partial_bv_a-\partial_av_b=\nabla_bv_a-\nabla_av_b$$
+is a type (0,2) tensor. Now, the covariant derivative for a general antisymmetric tensor $A_{ab}$ is
+$$\nabla_cA_{ab}=\partial_cA_{ab}-\Gamma_{ca}^dA_{db}-\Gamma_{cb}^dA_{ad}$$
+Do permutations of the indices to get two other equations. Add all three up and we have
+$$\nabla_cA_{ab}+\nabla_aA_{bc}+\nabla_bA_{ca}=\partial_cA_{ab}+\partial_aA_{bc}+\partial_bA_{ca}+0=B_{abc}$$
+where the zero is as a result of terms like
+$$-\Gamma_{ab}^dA_{dc}-\Gamma_{ba}^dA_{cd}=+\Gamma_{ab}^d(-A_{dc}+A_{dc})$$
+since $A$ is anti-symmetric and that $\Gamma_{ab}^c$ is symmetric in the bottom indices $a,b$. Hence, $B_{abc}$ is a type (0,3) tensor. Now, anti-symmetrize:
+$$B_{[a,b,c]}=\frac{1}{6}(B_{abc}+B_{bca}+B_{cab}-B_{bac}-B_{acb}-B_{cba})=\frac{1}{2}(B_{abc}-B_{acb})$$
+where $B_{abc}$ is evidently symmetric for any even permutations of $a$, $b$ and $c$. Since $A$ is anti-symmetric, it follows that
+$$B_{acb}=\partial_bA_{ac}+\partial_aA_{cb}+\partial_cA_{ba}=-\partial_bA_{ca}-\partial_aA_{bc}-\partial_cA_{ab}=-B_{abc}$$
+i.e. $B_{abc}$ is anti-symmetric in the indices $c$ and $b$. Hence, we must have $B_{abc}$ to be totally anti-symmetric, i.e. $B_{[a,b,c]}=\frac{1}{2}(B_{abc}+B_{abc})=B_{abc}$.
 \end{enumerate}
 \end{ans}
 \newpage
 \subsection*{Vector and tensor calculus on manifolds}
-\begin{qns}\leavevmode
+\begin{qns}[Metric connection]\leavevmode
 \begin{enumerate}[label=(\alph*)]
 \item  If $g = \det(g_{ab})$ is the determinant of the metric, show that $\partial_cg = gg^{ab}(\partial_cg_{ab})$.
 \item Verify directly, in a general coordinate system, that $\nabla_cg_{ab} = 0$ for the covariant derivative constructed with the metric connection.
@@ -331,14 +367,27 @@ $$\Gamma_{bc}^a=0,\quad\Gamma_{aa}^b=-\frac{1}{2g_{bb}}\frac{\partial g_{aa}}{\p
 \end{qns}
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
-\item
-
-\item 
-
-\item 
+\item We have $g=\det g\implies\ln g=\Tr(\ln g)$, so
+$$\frac{1}{g}\partial_cg=\Tr(g^{-1}\partial_cg)\implies\frac{1}{g}\partial_cg=g^{ab}\partial_cg_{ab}$$
+where we used definition of trace.
+\item The covariant derivative of the metric tensor is
+$$\nabla_cg_{ab}=\partial_cg_[ab]-\Gamma_{ca}^dg_{db}-\Gamma_{cb}^dg_{ad}$$
+where the metric connection is
+$$\Gamma_{bc}^a=\frac{1}{2}g^{ad}(\partial_bg_{cd}+\partial_cg_{db}-\partial_dg_{bc})$$
+Hence,
+\begin{align}
+    \nabla_cg_{ab}&=\partial_cg_{ab}-\frac{1}{2}(\partial_cg_{ab}+\partial_ag_{bc}-\partial_bg_{ca})-\frac{1}{2}(\partial_cg_{ba}+\partial_bg_{ac}-\partial_ag_{cb})\nonumber\\&=0\nonumber
+\end{align}
+\item Now, $g_{ab}$ is diagonal.
+$$\Gamma_{bc}^a=\frac{1}{2}g^{ad}(\partial_bg_{cd}+\partial_cg_{db}-\partial_dg_{bc})=0$$
+if $a\neq b\neq c$, all the $\partial g$ terms are zero since $g$ is diagonal tensor. If two indices are the same, we contract:
+$$\Gamma_{bb}^a=\frac{1}{2}g^{ad}(\partial_bg_{bd}+\partial_bg_{db}-\partial_dg_{bb})=-\frac{1}{2}g^{aa}\partial_ag_{bb}=-\frac{1}{2g_{aa}}\frac{\partial g_{bb}}{\partial x^a}$$
+$$\Gamma_{ba}^a=\frac{1}{2}g^{ad}(\partial_bg_{ad}+\partial_ag_{db}-\partial_dg_{ba})=\frac{1}{2}g^{aa}(\partial_bg_{aa})=\frac{1}{2g_{aa}}\frac{\partial g_{aa}}{\partial x_b}=\frac{\partial}{\partial x^b}\ln\sqrt{|g_{aa}|}$$
+where we bear in mind $g$ is diagonal.
 \end{enumerate}
 \end{ans}
-\begin{qns}
+\newpage
+\begin{qns}[Connection]
 In 2D Euclidean space, the line element in plane-polar coordinates is
 $$ds^2=d\rho^2+\rho^2d\phi^2$$
 \begin{enumerate}[label=(\alph*)]
@@ -349,20 +398,28 @@ $$\nabla_av^a=\frac{1}{\rho}\frac{\partial}{\partial\rho}(\rho v^\rho)+\frac{\pa
 What would be the equivalent result in terms of the components of $\mathbf{v}$ in an orthonormal basis aligned with the coordinate directions?
 \item Show that the Laplacian of a scalar field $f$ is
 $$\nabla^2f=\frac{1}{\rho}\frac{\partial}{\partial\rho}\bigg(\rho\frac{\partial f}{\partial\rho}\bigg)+\frac{1}{\rho^2}\frac{\partial^2f}{\partial\phi^2}$$
-
 \end{enumerate}
 \end{qns}
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
-\item
-
-\item 
-\item 
+\item From the line element, we have $g_{\rho\rho}=1$ and $g_{\phi\phi}=\rho^2$. From Q3, 
+$$\Gamma_{\rho\phi}^\phi=\frac{\partial}{\partial\rho}\ln\sqrt{|g_{\phi\phi}|}=\frac{\partial\ln\rho}{\partial\rho}=\frac{1}{\rho},\quad\Gamma_{\phi\phi}^\rho=-\frac{1}{2g_{\rho\rho}}\frac{\partial g_{\phi\phi}}{\partial\rho}=-\frac{2\rho}{2}=-\rho$$
+\item The covariant derivative is
+\begin{align}
+    \nabla_av^a&=\partial_av^a+\Gamma_{ab}^av^b\nonumber\\&=\partial_\rho v^\rho+\partial_\phi v^\phi+\Gamma_{a\rho}^av^\rho+\Gamma_{a\phi}^\phi v^\phi\nonumber\\&=\partial_\rho v^\rho+\partial_\phi v^\phi+(\Gamma_{\rho\rho}^\rho+\Gamma_{\phi\phi}^\phi)v^\rho+(\Gamma_{\rho\phi}^\rho+\Gamma_{\phi\phi}^\phi) v^\phi\nonumber\\&=\partial_\rho v^\rho+\partial_\phi v^\phi+\frac{1}{\rho}v^\rho\nonumber\\&=\frac{1}{\rho}\partial_\rho(\rho v^\rho)+\partial_\phi v^\phi\nonumber
+\end{align}
+Set $\boldsymbol{e_\rho}=\frac{\partial}{\partial\rho}$, $\boldsymbol{e_\phi}=\frac{\partial}{\partial\phi}$, it follows that the unit vectors are
+$$\boldsymbol{\hat{e}_a}=\frac{1}{g_{aa}}\boldsymbol{\hat{e}_a}\implies\boldsymbol{\hat{e}_\rho}=\boldsymbol{\hat{e}_\rho},~\boldsymbol{\hat{e}_\phi}=\frac{1}{\rho}\boldsymbol{\hat{e}_\phi}$$
+So written in terms of the unit vectors
+$$\mathbf{v}=v^\rho\boldsymbol{e_\rho}+v^\phi\boldsymbol{e_\phi}=v^{\hat{\rho}}\boldsymbol{\hat{e}_\rho}+\frac{v^{\hat{\phi}}}{\rho}\boldsymbol{\hat{e}_\phi}\implies v^{\hat{\rho}}=v^\rho,~\frac{v^{\hat{\phi}}}{\rho}=v^\phi$$
+Hence, the divergence is given as
+$$\nabla_av^a=\frac{1}{\rho}\partial_\rho(\rho v^{\hat{\rho}})+\frac{1}{\rho}\partial_\phi(v^{\hat{\phi}})$$
+\item The Laplacian is $\nabla^2f=\nabla_a\nabla^af$ but $\nabla^af=g^{ab}\partial_bf$, and we have $\boldsymbol{\nabla}f=(\partial_\rho f,\rho^{-2}\partial_\phi f)$, and so
+$$\nabla^2f=\rho^{-1}\partial_\rho(\rho\partial_\rho f)+\rho^{-2}\partial_\phi(\partial_\phi f)$$
 \end{enumerate}
 \end{ans}
-
 \newpage
-\begin{qns}
+\begin{qns}[Geodesic]
 On the surface of a unit sphere $ds^2 = d\theta^2 + \sin^2\theta d\phi^2$.
 \begin{enumerate}[label=(\alph*)]
 \item  Calculate the connection coefficients in the $(\theta,\phi)$ coordinate system directly from the metric.
@@ -379,12 +436,13 @@ On the surface of a unit sphere $ds^2 = d\theta^2 + \sin^2\theta d\phi^2$.
 \item 
 \end{enumerate}
 \end{ans}
-\begin{qns}
+\begin{qns}[Geodesic]
 A hypersurface $\mathcal{H}$ within a manifold $\mathcal{M}$ contains a non-null curve $\mathcal{C}$. Give a geometric argument showing that if $\mathcal{C}$ is a geodesic in $\mathcal{M}$, it is also a geodesic in $\mathcal{H}$. Give an example to show that the converse is not necessarily true.
 \end{qns}
 \begin{ans}
 
 \end{ans}
+\newpage
 \begin{qns}[Optional]\leavevmode
 \begin{enumerate}[label=(\alph*)]
 \item 
@@ -417,6 +475,7 @@ where $\mathbf{p}$ is the photon 4-momentum.
 \item 
 \end{enumerate}
 \end{ans}
+\newpage
 \begin{qns}
 Suppose an observer $\mathcal{O}$ begins to accelerate in Minkowski spacetime such that, at some instant, his 3-velocity and 3-acceleration in an inertial frame $S$ are $\vec{u}$ and $\vec{a}$, respectively. Show that the (proper) acceleration $\alpha$ measured by $\mathcal{O}$ at this instant is given by
 $$\alpha^2=\frac{\gamma_u^6(\vec{u}\cdot\vec{a})^2}{c^2}+\gamma_u^4\vec{a}\cdot\vec{a}$$
