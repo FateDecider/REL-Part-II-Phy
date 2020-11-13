@@ -90,15 +90,15 @@
 \begin{enumerate}[label=(\alph*)]
 \item Without loss of generality, align axes of $S$ such that $\Delta y=\Delta z=0$. Perform standard Lorentz boost to another frame $S'$:
 $$\Delta y'=\Delta z'=0,\quad\Delta x'=\gamma(\Delta x-v\Delta t)$$
-To ensure they occur at the same spatial location in frame $S'$:
+where we assumed frame $S'$ have velocity $0<|v/c|<1$. To ensure they occur at the same spatial location in frame $S'$:
 $$\Delta x'=0\implies\frac{v}{c}=\frac{\Delta x}{c\Delta t}\implies|\Delta x|<c|\Delta t|$$
 The spacetime interval is
 $$\Delta s^2=(c\Delta t)^2-(\Delta x)^2-(\Delta y)^2-(\Delta z)^2=(c\Delta t)^2-(\Delta x)^2-0>0$$
 and hence the events are time-like separated.
-\item Again without loss of generality, $\Delta y=\Delta z=0$. Perform a standard Lorentz boost, i.e. $c\Delta t'=\gamma(c\Delta t-\beta\Delta x)$. For two events to be simultaneous in frame $S'$, $\Delta t'=0$, we have $$\beta=\frac{c\Delta t}{\Delta x}\implies\frac{\Delta t}{\Delta x}=\frac{\beta}{c}<1\implies c\Delta t<\Delta x$$
-The spacetime interval is
+\item Again without loss of generality, $\Delta y=\Delta z=0$. Perform a standard Lorentz boost, i.e. $c\Delta t'=\gamma(c\Delta t-(v/c)\Delta x)$. For two events to be simultaneous in frame $S'$, $\Delta t'=0$, we have $$\frac{v}{c}=\frac{c\Delta t}{\Delta x}\implies\frac{\Delta t}{\Delta x}=\frac{v}{c^2}<1\implies c\Delta t<\Delta x$$
+Again, assumed $0<|v/c|<1$ for frame $S'$. The spacetime interval is
 $$\Delta s^2=(c\Delta t)^2-(\Delta x)^2-(\Delta y)^2-(\Delta z)^2=(c\Delta t)^2-(\Delta x)^2-0<0$$
-and hence the events are space-like separated.
+and hence for such a frame $S'$, the events are space-like separated.
 \end{enumerate}
 \end{ans}
 \begin{qns}[Spacetime interval]\leavevmode
@@ -112,8 +112,8 @@ and hence the events are space-like separated.
 \item In frame $S$, if two events occur at the same spatial location $\Delta\mathbf{r}=\boldsymbol{0}$, then $\Delta t=t_B-t_A>0$, i.e. event A precedes event B. Under standard Lorentz boost,
 $$c\Delta t'=\gamma(c\Delta t)>0$$
 Hence $\Delta t'>0$ $\forall\gamma$, i.e. for all frames related to $S$ by a Lorentz boost.
-\item If A causes B, time is needed for a signal to propagate between them, i.e. $c\Delta t>\Delta r\implies\Delta s^2=(c\Delta t)^2-(\Delta\mathbf{r})^2>0$. By invariance of the spacetime interval, we must have $|c\Delta t'|>|\Delta\mathbf{r'}|$ in any frame. Choose axes in $S$ and $S'$ so in standard configuration,
-$$\Delta x\leq\Delta r,~c\Delta t>\Delta r\implies c\Delta t'=\gamma(c\Delta t-\beta\Delta x)>0\implies c\Delta t'>|\Delta\mathbf{r}|$$
+\item If A causes B, time is needed for a signal to propagate between them, i.e. $c|\Delta t|>|\Delta r|\implies\Delta s^2=(c\Delta t)^2-(\Delta\mathbf{r})^2>0$. By invariance of the spacetime interval, we must have $|c\Delta t'|>|\Delta\mathbf{r'}|$ in any frame. Choose axes in $S$ and $S'$ so in standard configuration,
+$$\Delta x\leq\Delta r,~c\Delta t>\Delta r\implies c\Delta t'=\gamma(c\Delta t-v\Delta x)>0\implies c|\Delta t'|>|\Delta\mathbf{r}|$$
 Hence, the two events are causally related in all frames.
 \end{enumerate}
 \end{ans}
@@ -182,7 +182,7 @@ relative to the other?
 \end{qns}
 \begin{ans}
 Let particle A and B have velocities $v(0,1,0)$ and $v(1,0,0)$ respectively. In the frame of particle B (Lorentz boost by $v(1,0,0)$), particle B observes particle A to have $u_x=0$, $u_y=v$, $u_z=0$ and so by usual velocity transformation,
-$$u_x'=-v,\quad u_y'=v/\gamma_v,u_z'=0$$
+$$u_x'=-v,\quad u_y'=v/\gamma_v,\quad u_z'=0$$
 The relative speed is then $v(1+\gamma_v^{-2})^{1/2}=v(2-(v/c)^2)^{-1/2}$.
 \end{ans}
 \newpage
@@ -199,7 +199,7 @@ $$\begin{pmatrix}\gamma ct'\\\gamma\beta ct'\\0\\0\\\end{pmatrix}=\begin{pmatrix
 The back and the front both moves at speed $v$, as expected. Hence, we must have
 $$\tan\theta=\frac{\ell_0\sin\theta'}{\ell_0\cos\theta'/\gamma}=\gamma\tan\theta'$$
 \item Inverse transform the velocity components for $u'$:
-$$u_x=\frac{u'\cos\theta'+v}{1+(u'v/c^2)\cos\theta'},\quad ,u_y=\frac{u'\sin\theta'}{\gamma_v(1+(u'v/c^2)\cos\theta')},\quad u_z=0$$
+$$u_x=\frac{u'\cos\theta'+v}{1+(u'v/c^2)\cos\theta'},\quad u_y=\frac{u'\sin\theta'}{\gamma_v(1+(u'v/c^2)\cos\theta')},\quad u_z=0$$
 The angle $\theta$ in $S$ satisfies
 $$\tan\theta=\frac{u'\sin\theta'}{\gamma_v(u'\cos\theta'+v)}$$
 If the object was a photon, then $u=c$ and we recover the light aberration relation $\tan\theta=\frac{\sin\theta'}{\gamma_v(\cos\theta'+\beta)}$.
@@ -212,8 +212,10 @@ $$P(\theta)d\theta=\frac{\sin\theta d\theta}{2\gamma^2(1-\beta\cos\theta)^2}$$
 \begin{ans}
 From Q6, we have 
 $$\cos\theta'=\frac{\cos\theta-\beta}{1-\beta\cos\theta}\implies\frac{d\cos\theta'}{d\cos\theta}=\frac{1-\beta\cos\theta-(\cos\theta-\beta)(-\beta)}{(1-\beta\cos\theta)^2}=\frac{1}{\gamma^2(1-\beta\cos\theta)^2}$$
-Photons are emitted isotropically in a solid angle $2\pi~ d(\cos\theta')$ in $S'$ are emitted in a solid angle $2\pi~d(\cos\theta)$ in $S$. The number of photons emitted in either frame is the same:
-$$P(\theta)d\theta=P(\theta')d\theta'=\frac{1}{4\pi}2\pi~d\cos\theta'\implies P(\theta)d\theta=\frac{1}{2}\frac{d(\cos\theta')}{d(\cos\theta)}\sin\theta d\theta=\frac{\sin\theta d\theta}{2\gamma^2(1-\beta\cos\theta)^2}$$
+Since photons are emitted isotropically in $S'$, we have $P(\theta',\phi')=\frac{1}{4\pi}$. Then integrate over $\phi$:
+$$P(\theta')d\theta'=\int_0^{2\pi}P(\theta',\phi')\sin\theta'd\theta'd\phi'=\frac{1}{2}\sin\theta'd\theta'$$
+The number of photons emitted in either frame is the same:
+$$P(\theta)d\theta=P(\theta')d\theta'\implies P(\theta)=P(\theta')\frac{d\theta'}{d\theta}=\frac{1}{2}\sin\theta'\frac{d\theta'}{d\theta}=-\frac{1}{2}\frac{d(\cos\theta')}{d\theta}=\frac{\sin\theta}{2\gamma^2(1-\beta\cos\theta)^2}$$
 i.e. the photons are strongly `breamed' in the $x$-direction due to aberration.
 \end{ans}
 \newpage
@@ -429,29 +431,67 @@ On the surface of a unit sphere $ds^2 = d\theta^2 + \sin^2\theta d\phi^2$.
 \end{qns}
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
-\item
-
-\item 
-
-\item 
+\item Reading off from $ds^2$, we have $g_{\theta\theta}=1$ and $g_{\phi\phi}=\sin^2\theta$, which is a diagonal metric. The connection coefficients are
+$$\Gamma_{\phi\phi}^\theta=-\frac{1}{2g_{\theta\theta}}\partial_\theta g_{\phi\phi}=-\sin\theta\cos\theta,\quad\Gamma_{\theta\phi}^\theta=\frac{1}{2g_{\theta\theta}}\partial_\phi g_{\theta\theta}=0$$
+$$\Gamma^{\phi}_{\theta\theta}=-\frac{1}{2g_{\phi\phi}}\partial_\phi g_{\theta\theta}=0,\quad\Gamma_{\phi\theta}^\phi=\frac{1}{2g_{\phi\phi}}\partial_\theta g_{\phi\phi}=\frac{2\sin\theta\cos\theta}{2\sin^2\theta}=2\cot\theta$$
+\item The Lagrangian is
+$$L=g_{ab}\dot{x}^a\dot{x}^b=g_{\theta\theta}\dot{x}^\theta\dot{x}^\theta+g_{\phi\phi}\dot{x}^\phi\dot{x}^\phi$$
+The Euler-Lagrange equations (and hence the equations of motion) are
+$$0=\frac{d}{d\lambda}\frac{\partial L}{\partial\dot{\theta}}-\frac{\partial L}{\partial\theta}=\frac{d}{d\lambda}2\dot{\theta}-2\sin\theta\cos\theta\dot{\phi}^2\implies\ddot{\theta}=\sin\theta\cos\theta\dot{\phi}^2$$
+$$0=\frac{d}{d\lambda}\frac{\partial L}{\partial\dot{\phi}}-\frac{\partial L}{\partial\phi}=\frac{d}{d\lambda}2\sin^2\theta\dot{\phi}-0=4\sin\theta\cos\theta\dot{\theta}\dot{\phi}+2\sin^2\theta\ddot{\phi}\implies\ddot{\phi}+2\cot\theta\dot{\theta}\dot{\phi}=0$$
+Compare to the geodesic equation $\ddot{x}^a+\Gamma^a_{bc}\dot{x}^b\dot{x}^c=0$:
+$$\ddot{\theta}+\Gamma_{\phi\phi}^\theta\dot{\phi}\dot{\phi}+\Gamma_{\theta\phi}^\theta\dot{\theta}\dot{\phi}=\ddot{\theta}-\sin\theta\cos\theta\dot{\phi}^2+0=0$$
+$$\ddot{\phi}+\gamma_{\theta\theta}^\phi\dot{\theta}\dot{\theta}+\Gamma_{\phi\theta}^\phi\dot{\theta}\dot{\phi}=\ddot{\phi}+2\cot\theta\dot{\theta}\dot{\phi}+0=0$$
+which recover the two equations of motion. The great circles of constant latitude have constant $\theta$. These great circles are geodesics and must satisfy the equation of motion:
+$$0=\ddot{\theta}=\sin\theta\cos\theta\dot{\phi}^2\implies\sin\theta\cos\theta=0\implies\theta=\pi/2$$
+which is the equator.
+\item Let the initial condition of the vector be $v(0)=A\frac{\partial}{\partial\theta}$ (since parallel to the circle of constant $\phi$). Since the norm is one (unit length), then we have
+$$1=g(v(0),v(0))=A^2g_{\theta\theta}=A^2\implies A=1$$
+So, $v^a(0)=(1,0)$ is an initial condition. For a vector to be parallel transported, it must satisfy
+$$\dot{v}^a+\Gamma_{bc}^av^b\dot{x}^c=0$$
+We then have
+$$\frac{dv^\theta}{d\lambda}+\Gamma_{\phi\phi}^\theta v^\phi\frac{d\phi}{d\lambda}=0\implies\frac{dv^\theta}{d\phi}=\sin\theta_0\cos\theta_0 v^\phi$$
+$$\frac{dv^\phi}{d\lambda}+\Gamma_{\theta\phi}^\phi v^\theta\frac{d\phi}{d\lambda}=0\implies\frac{dv^\phi}{d\phi}=\cot\theta_0 v^\theta$$
+Hence we must have
+$$\frac{d^2v^\theta}{d\phi^2}=\sin\theta_0\cos\theta_0(-\cot\theta_0)v^\theta=-\cos^2\theta_0v^\theta\implies v^\theta(\phi)=\cos(\phi\cos\theta_0)$$
+where $v^\theta(0)=1$. Then, $\frac{dv^\theta}{d\phi}=-\cos\theta_0\sin(\phi\cos\theta_0)$, but the LHS is $-\sin\theta_0\cos\theta_0v^\phi$, which gives us $v^\phi(\phi)=-\frac{1}{\sin\theta_0}\sin(\phi\cos\theta_0)$. We check that the length of $v$ is conserved:
+$$g_{ab}v^av^b=(v^\theta)^2+\sin^2\theta_0(v^\phi)^2=\cos^2(\phi\cos\theta_0)+\frac{\sin^2\theta_0}{\sin^2\theta_0}\sin^2(\phi\cos\theta_0)=1$$
+Returning to $\phi=2\pi$, then $v^\theta(2\pi)=\cos(2\pi\cos\theta_0)$ and $v^\phi(2\pi)=-\frac{1}{\sin\theta_0}\sin(2\pi\cos\theta_0)$.
 \end{enumerate}
 \end{ans}
 \begin{qns}[Geodesic]
 A hypersurface $\mathcal{H}$ within a manifold $\mathcal{M}$ contains a non-null curve $\mathcal{C}$. Give a geometric argument showing that if $\mathcal{C}$ is a geodesic in $\mathcal{M}$, it is also a geodesic in $\mathcal{H}$. Give an example to show that the converse is not necessarily true.
 \end{qns}
 \begin{ans}
-
+If $\mathcal{C}$ lies in $\mathcal{H}$, and it is extremal in $\mathcal{M}$, it must also be extremal for the subset of variations that lie in $\mathcal{H}$, hence it is a geodesic in $\mathcal{H}$. The converse is not true. The great circle connecting north and south poles on a 2-sphere is not a geodesic in $\mathbb{R}^3$.
 \end{ans}
-\newpage
-\begin{qns}[Optional]\leavevmode
+\begin{qns}[Optional]
+A surface $\mathcal{H}$ of $M$ dimensions is embedded in ND Euclidean space ($N > M$). The surface is specified in terms of coordinates $u^I$ ($I =1,\dots, M$) in the surface by the $N$ functions $x^a(u)$, where $x^a$ are Cartesian coordinates in the embedding space.
 \begin{enumerate}[label=(\alph*)]
-\item 
-
+\item Show, by considering $ds^2=\delta_{ab}dx^adx^b$, that the metric induced on $\mathcal{H}$ is given 
+$$g_{IJ}=\delta_{ab}\frac{\partial x^a}{\partial u^I}\frac{\partial x^b}{\partial u^J}$$
+where implicit summation over repeated indices should be assumed throughout.
+\item Show that the metric connection on $\mathcal{H}$ satisfies
+$$g_{IL}\Gamma^L_{JK}=\delta_{ab}\frac{\partial x^a}{\partial u^I}\frac{\partial^2x^b}{\partial u^J\partial u^K}$$
+\item A vector $\mathbf{A}$ lies in the tangent space to $\mathcal{H}$ at some point P. By considering the relation between coordinate basis vectors $\partial/\partial u^I$ in $\mathcal{H}$ and those in the embedding space, $\partial/\partial x^a$, show that the coordinate components $A^I$ and $A^a$ are related by
+$$A^a=A^I\frac{\partial x^a}{\partial u^I}\bigg|_P$$
+\item  A neighbouring point Q in $\mathcal{H}$ is displaced from P by infinitesimal coordinate differentials $\delta u^I$. A vector $\mathbf{A}_{\parallel}$ is defined in the tangent space to $\mathcal{H}$ at Q by displacing the vector $\mathbf{A}$ from P to Q in the embedding space, keeping its components $A^a$ fixed, and then taking the projection into the surface at $Q$. Show that
+$$A^I(P)\frac{\partial x^a}{\partial u^I}\bigg|_P=A_{\parallel}^I(Q)\frac{\partial x^a}{\partial u^I}\bigg|_Q+A^a_\perp(Q)$$
+where $A^a_\perp(Q)$ are the Cartesian components of the projection of the displaced vector normal to the surface at $Q$, so that
+$$\delta_{ab}A_\perp^a(Q)\frac{\partial x^b}{\partial u^I}\bigg|_Q=0$$
+By writing $A^I_\parallel(Q)=A^I(P)+\delta A^I$, and expanding the $(\partial x^a/\partial u^I)_Q$ about the point P, show that to first-order in small quantities
+$$g_{IK}(P)\delta A^K=-\delta_{ab}\frac{\partial x^a}{\partial u^I}\bigg|_P\frac{\partial^2x^b}{\partial u^J\partial u^K}\bigg|_PA^K(P)\delta u^J$$
+Hence show that the change $\delta A^K$ is the same as would be obtained by parallel transporting in the surface from P to Q: $\delta A^K=-\Gamma^K_{JL}(P)A^L(P)\delta u^J$. (This question shows that infinitesimal parallel transport in the curved surface is equivalent to parallel transport in the Euclidean embedding space followed by projection into the surface.)
 \end{enumerate}
 \end{qns}
+\newpage
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
 \item
+
+\item 
+
+\item 
 
 \item 
 \end{enumerate}
@@ -470,54 +510,45 @@ where $\mathbf{p}$ is the photon 4-momentum.
 \end{qns}
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
-\item
-
-\item 
+\item We evaluate the four-vectors in the rest frame of $\mathcal{E}$:
+$$U^a=(c,0,0,0),\quad V^a=\gamma_v(c,\mathbf{v})$$
+The inner product is an invariant
+$$U^AV_a=\eta_{ab}U^aV^b=\gamma_vc^2$$
+\item The observer $\mathcal{E}$ measures the energy of the photon
+$$E_\mathcal{E}=\hbar\mathbf{k}\cdot\mathbf{u}=\hbar 2\pi\nu_\mathcal{E}=h\nu_{\mathcal{E}}$$
+which is a Lorentz invariant quantity. Since photons travel on a null path (affine parameter $\lambda$), then $\frac{d\mathbf{p}}{d\lambda}=0$ and hence $\mathbf{k}$ is constant. We then have the ratio of $\mathbf{k}\cdot\mathbf{u}$ in both frames to be a constant, giving us our result.
 \end{enumerate}
 \end{ans}
-\newpage
 \begin{qns}
 Suppose an observer $\mathcal{O}$ begins to accelerate in Minkowski spacetime such that, at some instant, his 3-velocity and 3-acceleration in an inertial frame $S$ are $\vec{u}$ and $\vec{a}$, respectively. Show that the (proper) acceleration $\alpha$ measured by $\mathcal{O}$ at this instant is given by
 $$\alpha^2=\frac{\gamma_u^6(\vec{u}\cdot\vec{a})^2}{c^2}+\gamma_u^4\vec{a}\cdot\vec{a}$$
 Find an expression for $\alpha$ if the motion in $S$ is circular with radius $r$. 
 \end{qns}
 \begin{ans}
-
+The acceleration 4-vector is
+$$a^\mu=\gamma_u\bigg(\frac{\gamma_u^3}{c^2}\mathbf{u}\cdot\mathbf{a},\gamma_u\mathbf{a}+\frac{\gamma_u^3}{c^2}(\mathbf{u}\cdot\mathbf{a})\mathbf{u}\bigg)$$
+The proper acceleration is measured by $\mathcal{O}$'s instantaneous rest frame. But since the inner product is invariant, we have
+$$\alpha^2=-a^\mu a_\mu=-\bigg[\frac{\gamma_u^8}{c^2}(\mathbf{u}\cdot\mathbf{a})^2-\gamma_u^4|\mathbf{a}|^2-\frac{\gamma_u^8}{c^2}(\mathbf{u}\cdot\mathbf{a})^2|\mathbf{u}|^2-2\frac{\gamma_u^6}{c^2}(\mathbf{u}\cdot\mathbf{a})^2\bigg]=\frac{\gamma_u^6}{c^2}(\mathbf{u}\cdot\mathbf{a})^2+\gamma_u^4|\mathbf{a}|^2$$
+For motion in a circle of radius $r$ in $S$, $\mathbf{u}\cdot\mathbf{a}=0$ and $|\mathbf{a}|^2=|\mathbf{u}|^2/r$. Hence, $\alpha^2=\gamma_u^4|\mathbf{u}|^4/r$.
 \end{ans}
 \newpage
 \section{Problem Sheet 3}
 \begin{qns}\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item 
-
-\end{enumerate}
+A particle of rest mass $m$ with speed $u$ collides elastically with a stationary particle of equal mass. If, after the collision, the two particles travel in directions making angles $\theta$ and $\phi$, respectively, with the incident particle’s original direction, show that
+$$\tan\theta\tan\phi=\frac{2}{1+\gamma_u}$$
+Show that this result tends to the correct Newtonian limit as $u\rightarrow0$. (Hint: you may find it useful to transform to and from the zero-momentum frame, but take care in determining the relative velocity of this frame.)
 \end{qns}
-\begin{ans}\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item
-
-\item 
-\end{enumerate}
+\begin{ans}
 \end{ans}
-\begin{qns}\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item 
-
-\end{enumerate}
+\begin{qns}
+A mirror moves in the $x$-direction perpendicular to its plane with speed $−v$. A photon travelling in the ($x$, $y$)-plane hits the mirror with incident angle $\theta$ relative to the normal of the mirror plane. By considering the 4-momentum of the photon before and after the impact, find the angle relative to the normal at which the photon is reflected and the change in the photon’s frequency.
 \end{qns}
-\begin{ans}\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item
+\begin{ans}
 
-\item 
-\end{enumerate}
 \end{ans}
 \newpage
-\begin{qns}\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item 
-
-\end{enumerate}
+\begin{qns}
+Show that it is impossible for an isolated free electron to absorb or emit a single photon. Show also that it is impossible for an isolated free massive particle moving with any speed $u$ to decay into a single photon.
 \end{qns}
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
@@ -526,61 +557,51 @@ Find an expression for $\alpha$ if the motion in $S$ is circular with radius $r$
 \item 
 \end{enumerate}
 \end{ans}
-\begin{qns}\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item 
-
-\end{enumerate}
+\begin{qns}
+Two protons of mass $m_p$ are collided to produce a $\pi$-meson of mass $m_\pi$ via the reaction  $p+p\rightarrow p+p+\pi^0$. Derive an expression for the minimum required total kinetic energy of the incident protons if (a) the protons are travelling in opposite directions with equal speeds; and (b) one of the protons is stationary.
 \end{qns}
-\begin{ans}\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item
+\begin{ans}
 
-\item 
-\end{enumerate}
 \end{ans}
 \newpage
 \subsection*{Electromagnetism}
-\begin{qns}\leavevmode
+\begin{qns}
+In a Cartesian inertial coordinate system in Minkowski spacetime the field equations of electromagnetism can be written
+\begin{align}
+    \partial_\mu F^{\mu\nu}&=\mu_0j^\nu\nonumber\\
+    \partial_\sigma F_{\mu\nu}+\partial_\nu F_{\sigma\mu}+\partial_\mu F_{\nu\sigma}&=0\nonumber
+\end{align}
 \begin{enumerate}[label=(\alph*)]
-\item 
-
+\item  Show that the second field equation can be written as $\partial_{[\sigma}F_{\mu\nu]}=0$. 
+\item Show that the above equations are equivalent to the standard form of Maxwell’s equations.
+\item Two Cartesian inertial frames $S$ and $S'$ are in standard configuration. Using $F^{\mu\nu}$, calculate how the components of the electric and magnetic fields in the two frames are related. 
+\item  Show that $c^2|\vec{B}|^2-|\vec{E}|^2$ is Lorentz-invariant. How is this invariant related to $F_{\mu\nu}$?
 \end{enumerate}
 \end{qns}
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
 \item
+
+\item 
+
+\item 
 
 \item 
 \end{enumerate}
 \end{ans}
 \newpage
 \subsection*{Spacetime Curvature}
-\begin{qns}\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item 
-
-\end{enumerate}
+\begin{qns}
+A satellite is in circular polar orbit of radius $r$ around the Earth (radius $R$, mass $M$). A standard clock C on the satellite records the proper time taken to perform each orbit, $\Delta\tau_C$. An identical clock C$_0$ at rest at the North Pole on Earth records the time, $\Delta\tau_{C_0}$, between successive observations of the satellite being overhead. Show that, in the Newtonian limit of a weak gravitational field and slow-moving objects, the ratio of times is approximately
+$$\frac{\Delta\tau_C}{\Delta\tau_{C_0}}\approx 1-\frac{3GM}{2rc^2}+\frac{GM}{Rc^2}$$
 \end{qns}
-\begin{ans}\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item
-
-\item 
-\end{enumerate}
+\begin{ans}
 \end{ans}
-\begin{qns}\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item 
-
-\end{enumerate}
+\begin{qns} 
+Show that the line element $ds^2 = y^2 dx^2 + x^2 dy^2$ represents the Euclidean plane, but the line element $ds^2 = y dx^2 + x dy^2$ represents a curved 2D manifold.
 \end{qns}
-\begin{ans}\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item
+\begin{ans}
 
-\item 
-\end{enumerate}
 \end{ans}
 \newpage
 \begin{qns}\leavevmode

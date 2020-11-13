@@ -595,7 +595,7 @@ Extend index notation:
 \begin{defi}[Riemannian manifold]
 In a Riemannian manifold $\mathcal{M}$, the local geometry near a point $p\in\mathcal{M}$ is specified by giving the invariant interval (independent of coordinate systems) between the points, which takes the form
 $$ds^2=g_{ab}(x)dx^adx^b$$
-where $g_{ab}(x)$ contain information about the local geometry but also depend on the particular coordinate system. $g$ is called the metric (see later). Strictly, the geometry is Riemannian if $ds^2>0$ and pseudo-Riemannian otherwise (canbe positive, negative or zero).
+where $g_{ab}(x)$ contain information about the local geometry but also depend on the particular coordinate system. $g$ is called the metric (see later). Strictly, the geometry is Riemannian if $ds^2>0$ and pseudo-Riemannian otherwise (can be positive, negative or zero).
 \end{defi}
 \begin{remarks}\leavevmode
 \begin{enumerate}
@@ -677,6 +677,7 @@ $\frac{\partial x^c}{\partial x'^a}|_p$ and $\frac{\partial^2x^c}{\partial x'^e\
 In a pseudo-Riemannian manifold $\mathcal{M}$, one can always find coordinates such that at a point $p\in\mathcal{M}$,
 $$g_{ab}(p)=\diag(\pm1,\pm1,\dots,\pm1),\quad\frac{\partial g_{ab}}{\partial x^c}\bigg|_p=0$$
 \end{prop}
+We will come back to this assertion later.
 \begin{thm}[Sylvester's Law]
 The number of $+1$ and $-1$ entries in the metric is independent of the basis.
 \end{thm}
@@ -754,7 +755,7 @@ Gradient $\mathbf{d}f$ of a smooth function $f$.
 $$\mathbf{d}f:~\mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\quad V=\frac{d}{dt}\mapsto\frac{df}{dt}=V(f),\quad V\in \mathcal{T}_p(\mathcal{M})$$
 \end{defi}
 \begin{notation}
-We bold $d$ for notational purposes, to differentiate $df$ and $\mathbf{d}f$.
+We bold `$d$' for notational purposes, to differentiate $df$ and $\mathbf{d}f$.
 \end{notation}
 \begin{prop}
 The gradient form a basis for co-vectors, and are dual basis of the vector basis $\partial_\mu$. 
@@ -797,7 +798,18 @@ The proper distance in this metric is $ds^2=g_{\alpha\beta}dx^\alpha dx^\beta$ a
 \begin{proof}
 $$d\tilde{s}^2=\tilde{g}_{\mu\nu}d\tilde{x}^\mu d\tilde{x}^\nu=\frac{\partial x^\alpha}{\partial\tilde{x}^\mu}\frac{\partial x^\beta}{\partial\tilde{x}^\nu}g_{\alpha\beta}\frac{\partial\tilde{x}^\mu}{\partial x^\rho}\frac{\partial\tilde{x}^\nu}{\partial x^\sigma}dx^\rho dx^\sigma=ds^2$$
 \end{proof}
-Tensor operations:
+\begin{defi}[Tensor Fields]
+A tensor field of rank $(r,s)$ is a collection of $(r,s)$ tensors at each point $p\in\mathcal{M}$. Like a map $p\mapsto T_p$ of rank $(r,s)$.
+\end{defi}
+\begin{remarks}
+The tensor field is smooth iff its component functions in a coordinate basis are smooth functions.
+\end{remarks}
+Sometimes we write $X_p$ being a vector and $X$ being a field.
+\begin{eg}
+A vector field $X:\mathcal{M}\rightarrow\mathcal{T}_p(\mathcal{M}),p\mapsto X_p$. A function $f$ $X(f):\mathcal{M}\rightarrow\mathbb{R},\text{  }p\mapsto X_p(f)$.
+\end{eg}
+Henceforth we assume all tensor fields to be smooth.
+\subsubsection{Tensor operations}
 \begin{enumerate}
     \item Addition and scalar multiplication: For instance,
     $$c_1S+c_2T:\mathcal{T}_p^*(\mathcal{M})\times \mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\quad\eta,V\mapsto c_1S(\eta,V)+c_2T(\eta,V)$$
@@ -826,17 +838,7 @@ Tensor operations:
 \begin{remarks}[Quotient theorem]
 If a set of quantities when contracted with an arbitrary tensor produces another tensor, the original set of quantities form the components of a tensor.
 \end{remarks}
-\begin{defi}[Tensor Fields]
-A tensor field of rank $(r,s)$ is a collection of $(r,s)$ tensors at each point $p\in\mathcal{M}$. Like a map $p\mapsto T_p$ of rank $(r,s)$.
-\end{defi}
-\begin{remarks}
-The tensor field is smooth iff its component functions in a coordinate basis are smooth functions.
-\end{remarks}
-Sometimes we write $X_p$ being a vector and $X$ being a field.
-\begin{eg}
-A vector field $X:\mathcal{M}\rightarrow\mathcal{T}_p(\mathcal{M}),p\mapsto X_p$. A function $f$ $X(f):\mathcal{M}\rightarrow\mathbb{R},\text{  }p\mapsto X_p(f)$.
-\end{eg}
-Henceforth we assume all tensor fields to be smooth.
+
 \subsubsection{Metric Tensor}
 Now, let's properly discuss the metric tensor:
 \begin{defi}[Metric]
@@ -845,16 +847,23 @@ A metric at $p\in\mathcal{M}$ is a (0,2) tensor that is
     \item symmetric: $g(V,W)=g(W,V)$
     $\forall V,W\in\mathcal{T}_p(\mathcal{M})$. Equivalently, $g_{\alpha\beta}=g_{\beta\alpha}$.
     \item non-degenerate:
-    $g(V,W)=0$     $\forall W\in\mathcal{T}_p(\mathcal{M})$. Equivalently, $V=0$.
+    $g(V,W)=0$     $\forall W\in\mathcal{T}_p(\mathcal{M})$ iff $V=0$.
 \end{itemize}
 \end{defi}
-The components of a metric are $g=g_{\alpha\beta}\mathbf{d}x^\alpha\otimes\mathbf{d}x^\beta\implies g_{\mu\nu}=g(\partial_\mu,\partial_\nu)$.\\[10pt]
-A metric maps vectors to one-forms. $g:V\mapsto \underline{V}:=g(V,.)$ where $\underline{V}$ is a map
+\begin{remarks}\leavevmode
+\begin{enumerate}
+    \item The components of a metric are $g=g_{\alpha\beta}\mathbf{d}x^\alpha\otimes\mathbf{d}x^\beta\implies g_{\mu\nu}=g(\partial_\mu,\partial_\nu)$.
+    \item A metric maps vectors to one-forms. $g:V\mapsto \underline{V}:=g(V,.)$ where $\underline{V}$ is a map
 $$\underline{V}:\mathcal{T}_p(\mathcal{M})\rightarrow\mathbb{R},\quad W\mapsto\underline{V}(W):=g(V,W)=\underline{V}_\mu W^\mu=g_{\mu\nu}V^\mu W^\nu$$
-The components are thus $V_\mu:=\underline{V}_\mu=g_{\mu\nu}V^\nu$.
+    The components are thus $V_\mu:=\underline{V}_\mu=g_{\mu\nu}V^\nu$.
+    \end{enumerate}
+\end{remarks}
 \begin{thm}
-If $g$ is non-degenerate, then $g$ is invertible.
+$g$ is invertible.
 \end{thm}
+\begin{proof}
+Follows by construction, since $g$ is non-degenerate.
+\end{proof}
 \begin{defi}[Inverse Metric]
 We define the inverse metric to be $g^{-1}$ such that it is a symmetric (2,0) tensor, i.e. $(g^{-1})^{\alpha\beta}g_{\beta\gamma}=\tensor*{\delta}{*_{}^{\alpha}_{\gamma}}$. Now,  $g^{-1}$ maps one-forms to vectors, i.e. $g^{-1}:\underline{V}\mapsto V$.
 \end{defi}
@@ -904,7 +913,7 @@ $\nabla f$ is a (0,1) tensor with $\nabla_\alpha f:=\partial_\alpha f$
 $\frac{\partial f}{\partial x^a}$ form components of a dual vector, which we call the gradient of a scalar field. We can always associate a vector to the gradient by $g^{ab}\partial_bf$. The covariant derivative is simply the gradient of the scalar field.
 \end{remarks}
 \begin{defi}[Covariant Derivative for Vector fields]
-$$\nabla  V:~T_p(\mathcal{M})\rightarrow\mathcal{T}_p(\mathcal{M}),\quad X\mapsto\nabla_XV$$
+$$\nabla  V:~\mathcal{T}_p(\mathcal{M})\rightarrow\mathcal{T}_p(\mathcal{M}),\quad X\mapsto\nabla_XV$$
 which satisfies ($f,g$ are functions and $X,Y,V,W$ are vector fields):
 \begin{itemize}
     \item $\nabla_{fX+gY}V=f\nabla_XV+g\nabla_YV$
@@ -919,7 +928,7 @@ $$\nabla_\nu e_\mu:=\nabla_{e_\nu}e_\mu=\Gamma_{\mu\nu}^\rho e_\rho$$
 \end{defi}
 \begin{remarks}\leavevmode
 \begin{enumerate}
-    \item In these notes, we only consider coordinate basis vectors $e_\mu = \partial_\mu$. This definition of the connection coefficients, however, is general and also holds for non-coordinate bases.
+    \item For now, we will only consider coordinate basis vectors $e_\mu = \partial_\mu$. This definition of the connection coefficients, however, is general and also holds for non-coordinate bases.
     \item $\Gamma_{\mu\nu}^\rho$ are the expansion coefficients of $\nabla_\nu e_\mu$ in the basis $\{e_\rho\}$.
     \item The word connection arises from the fact that we `connect' the tangent spaces at different points $p,q\in\mathcal{M}$. Specifically, the connection coefficients give us the rate of change of the basis vector $e_\mu$ in the direction of the basis vector $e_\nu$.
     \item Here we use the convention that the second downstairs index of the connection, i.e. $\nu$ in denotes the direction in which the derivative is taken. The first index denotes the basis vector we are considering. In general relativity, the connection turns out to be symmetric in its downstairs indices, so that this convention does not really matter.
@@ -948,7 +957,7 @@ where $\partial_\rho=\frac{\partial\tilde{x}^\sigma}{\partial x^\rho}\tilde{\par
 So, $\Gamma_{\mu\nu}^\sigma$ is not a tensor, but the difference of two connections is, i.e. Torsion tensor. Another example of what looks like a tensor, but actually isn't: $\partial_\nu W^\mu$. 
 \end{remarks}
 \begin{defi}[Torsion Tensor]
-$$\tensor*{T}{*^{}_{\mu\nu}^{\lambda}}:=:=\Gamma_{\mu\nu}^\lambda-\Gamma_{\nu\mu}^\lambda$$
+$$\tensor*{T}{*^{}_{\mu\nu}^{\lambda}}:=\Gamma_{\mu\nu}^\lambda-\Gamma_{\nu\mu}^\lambda$$
 \end{defi}
 \begin{defi}[Torsion Free]
 The connection $\Gamma$ is called torsion free iff $\tensor*{T}{*^{}_{\mu\nu}^{\lambda}}=0$.
@@ -1016,6 +1025,10 @@ From the definition of the Christoffel symbols,
     \nabla_\alpha g_{\beta\gamma}&=\partial_\alpha g_{\beta\gamma}-\Gamma_{\beta\alpha}^\rho g_{\rho\gamma}-\Gamma_{\gamma\alpha}^\rho g_{\beta\rho}\nonumber\\&=\partial_\alpha g_{\beta\gamma}-\frac{1}{2}g^{\rho\sigma}[(\partial_\beta g_{\alpha\sigma}+\partial_\alpha g_{\sigma\beta}-\partial_\sigma g_{\beta\alpha})g_{\rho\gamma}+(\partial_\gamma g_{\alpha\sigma}+\partial_\alpha g_{\sigma\gamma}-\partial_\sigma g_{\gamma\alpha})g_{\rho\beta}]\nonumber\\&=\partial_\alpha g_{\beta\gamma}-\frac{1}{2}[(\partial_\beta g_{\alpha\sigma}+\partial_\alpha g_{\sigma\beta}-\partial_\sigma g_{\beta\alpha})+(\partial_\gamma g_{\alpha\sigma}+\partial_\alpha g_{\sigma\gamma}-\partial_\sigma g_{\gamma\alpha})]\nonumber\\&=\partial_\alpha g_{\beta\gamma}-\frac{1}{2}(\partial_\alpha g_{\gamma\beta}+\partial_\alpha g_{\beta\gamma})=0\nonumber
 \end{align}
 \end{proof}
+\begin{prop}
+Let $(\mathcal{M},g)$ be a spacetime with Levi-Civita connection, then $\exists$ coordinates at $p$ with 
+$$\partial_\rho g_{\mu\nu}=0,\quad g_{\mu\nu}=\eta_{\mu\nu}=\diag(-1,+1,+1,+1)$$
+\end{prop}
 \begin{remarks}\leavevmode
 \begin{enumerate}
 \item In GR, we generally assume the connection $\Gamma_{\beta\gamma}^\alpha$ to be the Levi-Civita one.
@@ -1028,72 +1041,89 @@ $$\partial_cg_{ab}=\Gamma^d_{ca}g_{db}+\Gamma^d_{cb}g_{ad}\implies g^{ab}\partia
 This follows from $(\det M)^{-1}\partial_c\det M=\Tr(M^{-1}\partial_cM)$ for some invertible matrix $M$. We then have $\Gamma_{ac}^a=\frac{1}{\sqrt{|g|}}\partial_c\sqrt{|g|}$. 
 \item The covariant derivative constructed with the metric connection has the nice property that it reduces to partial differentiation in local Cartesian coordinate. This follows from the vanishing derivative of the metric at $p\in\mathcal{M}$, $\frac{\partial g_{ab}}{\partial x^c}|_p=0$. This is very important for enforcing the equivalence principle as it is straightforward to check that some law of physics, written as a tensor equation, reduces to its usual special-relativistic form in local Cartesian coordinates. Conversely, we can easy formulate physical theories in general spacetime by promoting derivatives in Euclidean space to covariant derivatives.
 \item Divergence, curl and Laplacian with Levi-Civita connection:
+$$\nabla_av^a=\partial_av^a+\Gamma_{ab}^av^b=|g|^{-1/2}\partial_a(|g|^{1/2}v^a)$$
+where $\Gamma_{ac}^a=\frac{1}{2}g^{-1}\partial_cg=|g|^{-1/2}\partial_c|g|^{-1/2}$.
+$$\nabla_aX_b-\nabla_bX_a=\partial_aX_b-\Gamma_{ab}^cX_c-\partial_bX_a+\Gamma_{ba}^cX_c=\partial_aX_b-\partial_bX_a$$
+The curl is independent of a symmetric connection.
+$$\nabla_{[a}\nabla_{b]}\phi=0$$
+i.e. the curl of a gradient vanishes by construction or a symmetric connection.
+$$\nabla^2\phi=\nabla_a(g^{ab}\nabla_b\phi)=|g|^{-1/2}\partial_a(|g|^{1/2}\partial_b\phi)$$
+where we used definition of inner product using the metric.
+\item We are used to thinking of the curl as a vector, obtained by contracting the curl of $X$ with the Levi-Civita symbol, but this does not generalize to beyond three dimensions.
 \end{enumerate}
 \end{remarks}
 \newpage
 \subsubsection{Parallel transport}
-A connection gives us the notion of a tensor that does not change along a curve.
-\begin{defi}[Integral Curve]
-An integral curve $\lambda$ of a vector field $V$ through $p\in\mathcal{M}$ is a curve through $p$ and whose tangent at every point $q$ along the curve is $V_q$. 
+\begin{defi}[Intrinsic derivative]
+The intrinsic derivative of $\mathbf{v}$ along the curve $x^a(u)$ is the vector obtained by contracting the tangent vector to the curve $dx^a/du$, with the covariant derivative of $\mathbf{v}$:
+$$\frac{Dv^a}{Du}=\frac{dx^b}{du}\nabla_bv^a=\frac{dx^b}{du}(\partial_bv^a+\Gamma_{bc}^av^c)=\frac{dv^a}{du}+\frac{dx^b}{du}\Gamma_{bc}^av^c$$
+which includes the connection term, and do form the components of a vector.
 \end{defi}
-In coordinates, 
-$$\frac{d}{dt}\bigg|_\lambda=V\implies\frac{d}{dt}x^\mu(\lambda(t))=V^\mu(x^\alpha)$$
-with $x^\mu(\lambda(t_0))=x^\mu(p)$ has a unique solution by ODE theory.
 \begin{defi}[Parallel Transport]
-Let $V$ be a vector field and $\mathcal{C}$ be an integral curve. A tensor $T$ is parallel transported along $\mathcal{C}$ if $\nabla_VT=0$ along $\mathcal{C}$.
+Let $V$ be a vector field and $\mathcal{C}$ be an integral curve. A tensor $T$ is parallel transported along $\mathcal{C}$ if $\tensor*{(\nabla_VT)}{*_{}^{\mu}_{\nu}}=V^\sigma\nabla_\sigma\tensor*{T}{*_{}^{\mu}_{\nu}}=0$ along $\mathcal{C}$. But note that $V$ is the tangent vector $V^\sigma=dx^\sigma/du$. Hence, the parallel transport is written as an intrinsic derivative, i.e. $DT/Du$.
 \end{defi}
-\begin{prop}
-The tangent of an affinely parametrized geodesic is parallel transported along itself.
-\end{prop}
-\begin{proof}
-$$U^\mu\nabla_\mu U^\alpha=U^\mu\partial_\mu U^\alpha+U^\mu\Gamma_{\nu\mu}^\alpha U^\nu=\frac{dx^\mu}{d\lambda}\frac{\partial}{\partial x^\mu}\frac{dx^\alpha}{d\lambda}+\frac{dx^\mu}{d\lambda}\Gamma_{\nu\mu}^\alpha\frac{dx^\nu}{d\lambda}=0$$
-This leads to $\frac{d^2x^\alpha}{d\lambda^2}+\Gamma_{\nu\mu}^\alpha\frac{dx^\nu}{d\lambda}\frac{dx^\mu}{d\lambda}=0$ with non-affine parameter $\nabla_UU=fU$.
-\end{proof}
+\begin{remarks}
+The vector obtained by parallel transporting from point A to another point B on the curve $x^a(u)$ is independent of the parameterisation used since, for an infinitesimal step, the change in the components are
+$$\delta v^a=\delta u\frac{dv^a}{du}=-\delta u\Gamma^a_{bc}\frac{dx^b}{du}v^c=-\Gamma^a_{bc}\delta x^bv^c$$
+\end{remarks}
 \begin{prop}
 $\nabla_VT=0$ determines $T$ uniquely along the curve of transport.
 \end{prop}
 \begin{proof}
 In coordinates $x^\mu$, the curve is $x^\mu(\lambda)$, then
-$$V^\sigma\nabla_\sigma \tensor*{\delta}{*_{}^{\mu}_{\nu}}=V^\sigma\partial_\sigma \tensor*{\delta}{*_{}^{\mu}_{\nu}}+\Gamma_{\rho\sigma}^\mu \tensor*{T}{*_{}^{\rho}_{\nu}}V^\sigma-\Gamma_{\nu\sigma}^\rho \tensor*{T}{*_{}^{\mu}_{\rho}}V^\sigma=\frac{d}{d\lambda}\tensor*{T}{*_{}^{\mu}_{\nu}}+\Gamma_{\rho\sigma}^\mu\tensor*{T}{*_{}^{\rho}_{\mu}}V^\sigma-\Gamma_{\nu\sigma}^\rho \tensor*{\delta}{*_{}^{\mu}_{\rho}}V^\sigma=0$$
-ODE theory thus guarantees a solution $\forall$ components of $T$.
+$$V^\sigma\nabla_\sigma \tensor*{T}{*_{}^{\mu}_{\nu}}=V^\sigma\partial_\sigma \tensor*{T}{*_{}^{\mu}_{\nu}}+\Gamma_{\rho\sigma}^\mu \tensor*{T}{*_{}^{\rho}_{\nu}}V^\sigma-\Gamma_{\nu\sigma}^\rho \tensor*{T}{*_{}^{\mu}_{\rho}}V^\sigma=\frac{d}{d\lambda}\tensor*{T}{*_{}^{\mu}_{\nu}}+\Gamma_{\rho\sigma}^\mu\tensor*{T}{*_{}^{\rho}_{\mu}}V^\sigma-\Gamma_{\nu\sigma}^\rho \tensor*{\delta}{*_{}^{\mu}_{\rho}}V^\sigma=0$$
+where $V^\sigma=\frac{dx^\sigma}{d\lambda}$. ODE theory thus guarantees a solution $\forall$ components of $T$, if initial conditions are provided for $T$ at some point on the curve.
 \end{proof}
 \begin{prop}
-Parallel transport $T$ along a curve from $p$ to $q$ provides an isomorphism between tensors at $p$ and $q$.
-\end{prop}
-Unlike Special Relativity, this is path dependent in General Relativity.
-\begin{prop}
-Parallel transport preserves the length of vectors.
+Parallel transport along $V$ preserves the length of vector $W$.
 \end{prop}
 \begin{proof}
 $$\frac{d}{d\lambda}(W_\alpha W^\alpha)=V^\mu\nabla_\mu(W_\alpha W^\alpha)=2W_\alpha V^\mu\nabla_\mu W^\alpha$$
 but $V^\mu\nabla W^\alpha=0$.
 \end{proof}
-As such, geodesics do not change their timelike, spacelike or null character.
-\begin{defi}[Acceleration Along Timelike Curve]
-We define the acceleration $a^\mu$ along a time-like curve by $a^\mu:=U^\rho\nabla_\rho U^\alpha$.
-\end{defi}
-\begin{prop}
-This curve is a geodesic if $a^\mu=0$ or $a^\mu=fU^\mu$ such that $f$ is a function.
-\end{prop}
-We can also define $\frac{D}{D\lambda}:=\frac{d x^\rho}{d\lambda}\nabla_\rho$ such that the parallel transport of a tensor is $\frac{DT}{D\lambda}=0$.
+\begin{remarks}
+Alternatively, we can show this via
+$$\frac{d|\mathbf{v}|^2}{du}=\frac{D}{Du}(g_{ab}v^av^b)=2g_{ab}v^a\frac{Dv^b}{Du}=0$$
+since the intrinsic derivative inherits the properties of the covariant derivative, such as commutativity with contraction and the Leibnitz property.
+\end{remarks}
+\begin{cor}
+The angle between two space-like vectors and their scalar product remain unchanged under parallel transport.
+\end{cor}
+\begin{remarks}
+In Minkowski spacetime with Cartesian coordinates $\Gamma_{\mu\nu}^\rho=0$, we have $\frac{d}{d\lambda}T=0$, i.e. parallel transport in Cartesian coordinates leaves tensor components unchanged and this result is independent of the curve.\\[5pt]
+But this is path dependent in General Relativity. While we can connect vectors at neighbouring points separated by coordinate increments $\delta x^a$ in local Cartesian coordinates, we generally cannot find a global system of such coordinates. This path dependence is a measure of the intrinsic curvature of the manifold. We will see this later.
+\end{remarks}
 \newpage
 \subsubsection{Geodesics}
+On a manifold with Lorentzian metric, we can distinguish between timelike, null and spacelike vectors according to the above definition. This property is directly transferred to curves.
 \begin{defi}[Timelike, Spacelike, Nulllike Curve]
 A curve $\mathcal{C}$ is time-like (null,spacelike) at a point $p\in\mathcal{M}$ iff its tangent vector at that point is time-like (null, spacelike).
 \end{defi}
-This property can change along the curve parametrized by $\lambda(t)$.
+This property can change along the curve (regardless of its character) parametrized by $\lambda(t)$. For curves or segments of curves that are timelike or spacelike throughout, we can define the following measures.
 \begin{defi}[Proper Length, Time]
-The proper length along a space-like curve is $\lambda_{space}(t)$
-$$s:=\int_{t_0}^{t_1}\sqrt{g(V,V)|_{\lambda_{space}(t)}}dt=\int_{t_0}^{t_1}\sqrt{g_{\alpha\beta}\frac{dx^\alpha}{dt}\frac{dx^\beta}{dt}}dt$$
-The proper time along a time-like curve is $\lambda_{time}(t)$
-$$\tau(t_1):=\int_{t_0}^{t_1}\sqrt{-g(V,V)|_{\lambda_{space}(t)}}dt=\int_{t_0}^{t_1}\sqrt{-g_{\alpha\beta}\frac{dx^\alpha}{dt}\frac{dx^\beta}{dt}}dt$$
+The proper length along a space-like curve is $\lambda_{\text{space}}(t)$
+$$s:=\int_{t_0}^{t_1}\sqrt{g(V,V)|_{\lambda_{\text{space}}(t)}}dt=\int_{t_0}^{t_1}\sqrt{g_{\alpha\beta}\frac{dx^\alpha}{dt}\frac{dx^\beta}{dt}}dt$$
+The proper time along a time-like curve is $\lambda_{\text{time}}(t)$
+$$\tau(t_1):=\int_{t_0}^{t_1}\sqrt{-g(V,V)|_{\lambda_{\text{space}}(t)}}dt=\int_{t_0}^{t_1}\sqrt{-g_{\alpha\beta}\frac{dx^\alpha}{dt}\frac{dx^\beta}{dt}}dt$$
 \end{defi}
 \begin{defi}[Four-Velocity]
-The four-velocity along time-like curves $u^\mu:=\frac{dx^\mu}{dt}|_{\lambda(\tau)}$.
+The four-velocity along time-like curves is a tangent vector to that curve parametrized by proper time $\tau$:
+$$u^\mu:=\frac{dx^\mu}{dt}|_{\lambda(\tau)}$$
 \end{defi}
 \begin{prop}
-$g_{\mu\nu}u^\mu u^\nu=-1$
+$$g_{\mu\nu}u^\mu u^\nu=-1$$
 \end{prop}
+\begin{proof}
+Differentiate the definition of proper time:
+$$\tau=\int_{\tau_0}^{\tau}\sqrt{-g_{\mu\nu}u^\mu u^\nu}d\tilde{\tau}\implies 1=\sqrt{-g_{\mu\nu}u^\mu u^\nu}$$
+Hence, $g_{\mu\nu}u^\mu u^\nu=-1$.
+\end{proof}
+\begin{defi}[Geodesic]
+A geodesic is a locally length-minimizing curve.
+\end{defi}
+\begin{eg}
+For a plane, the geodesics are straight lines. On a surface ,the geodesics are great circles.
+\end{eg}
 \begin{thm}[Noether's Theorem]
 The action $\mathcal{S}=\int\mathcal{L}(q_k,\dot{q}_k,\lambda)d\lambda$ is extremized by the curve satisfying the Euler-Lagrange equations
 $$\frac{d}{d\lambda}\bigg(\frac{\partial\mathcal{L}}{\partial\dot{q}_k}\bigg)=\frac{\partial\mathcal{L}}{\partial q_k}$$
@@ -1101,39 +1131,40 @@ $$\frac{d}{d\lambda}\bigg(\frac{\partial\mathcal{L}}{\partial\dot{q}_k}\bigg)=\f
 \begin{cor}
 Noether's theorem have a few simplifications:
 \begin{itemize}
-    \item If $\mathcal{L}$ not explicitly dependent on $q_k$ $\implies$ $p_k:=\frac{\partial\mathcal{L}}{\partial\dot{q}_k}$ is conserved along the curve that extremizes $\mathcal{S}$;
-    \item If $\mathcal{L}$ is not explicitly dependent on the parameter $\lambda$ $\implies$ $I:=\dot{q}_k\frac{\partial\mathcal{L}}{\partial\dot{q}_k}-\mathcal{L}$ is conserved along the curve. 
+    \item If $\mathcal{L}$ not explicitly dependent on $q_k$ $\implies$ $p_k:=\frac{\partial\mathcal{L}}{\partial\dot{q}_k}$ is a first integral of motion, i.e. conserved along the curve that extremizes $\mathcal{S}$;
+    \item If $\mathcal{L}$ is not explicitly dependent on the parameter $\lambda$ $\implies$ $I:=\dot{q}_k\frac{\partial\mathcal{L}}{\partial\dot{q}_k}-\mathcal{L}$ is also a first integral of motion.
 \end{itemize}
 \end{cor}
-\begin{proof}
-Review IB Variational Principles for the above Theorem and Corollary.
-\end{proof}
-\begin{defi}[Christoffel symbols]
-We define the Christoffel symbols to be short for
-$$\left \{ {\beta \atop
-\mu\ \nu}\right \}:=\frac{1}{2}g^{\beta\rho}(\partial_\mu g_{\nu\rho}+\partial_\nu g_{\rho\mu}-\partial_\rho g_{\mu\nu})$$
-\end{defi}
+Timelike geodesics in special relativity are curves that extremize the action, i.e. the proper time along the curve. We shall now do the same for curves in generic Lorentzian manifolds.
+\subsubsection*{Stationary property of non-null geodesics}
 \begin{prop}[Geodesic Equation - Version 1]
-Consider time-like curves from  A $(\lambda=0)$ and B $(\lambda=1)$. The action is $\mathcal{S}=\int_0^1\mathcal{L}d\lambda$ with $\mathcal{L}=\sqrt{-g_{\mu\nu}\dot{x}^\mu\dot{x}^\nu}$, then after extremizing the action, we will obtain one possible version of the Geodesic Equation:
+Consider time-like curves from  A $(\lambda=0)$ and B $(\lambda=1)$. The action is $\mathcal{S}=\int_0^1\mathcal{L}d\lambda$ with $\mathcal{L}=\sqrt{-g_{\mu\nu}\dot{x}^\mu\dot{x}^\nu}$, then after extremizing the action, we will obtain one possible version of the geodesic equation:
 \begin{equation}
     \frac{d^2x^\beta}{d\tau^2}+\left \{ {\beta \atop \mu\ \nu}\right \}\frac{dx^\mu}{d\tau}\frac{dx^\nu}{d\tau}=0\tag{\dag}
 \end{equation}
 \end{prop}
+\begin{remarks}
 Here, $\mathcal{S}$ is invariant under the reparametrization $\kappa(\lambda)$, where $\frac{d\kappa}{d\lambda}>0$, i.e. 
 $$\mathcal{S}=\int_0^1\sqrt{-g_{\mu\nu}\frac{dx^\mu}{d\lambda}\frac{dx^\nu}{d\lambda}d\lambda}=\int_{\kappa(0)}^{\kappa(1)}\sqrt{-g_{\mu\nu}\frac{dx^\mu}{d\kappa}\frac{dx^\nu}{d\kappa}d\kappa}$$
+\end{remarks}
 \begin{proof}
+The individual terms in Euler-Lagrange equations are evaluated to be:
+$$\frac{\partial\mathcal{L}}{\partial\dot{x}^\alpha}=\frac{1}{2\mathcal{L}}(-g_{\mu\nu}\tensor*{\delta}{*_{}^{\mu}_{\alpha}}\dot{x}^\nu-g_{\mu\nu}\dot{x}^\mu\tensor*{\delta}{*_{}^{\nu}_{\alpha}})=\frac{1}{2\mathcal{L}}(-g_{\alpha\nu}\dot{x}^\nu-g_{\mu\alpha}\dot{x}^\mu)=-\frac{g_{\mu\alpha}\dot{x}^\mu}{\mathcal{L}},\quad\frac{\partial\mathcal{L}}{\partial x^\alpha}=\frac{1}{2\mathcal{L}}(-\dot{x}^\mu\dot{x}^\nu\partial_\alpha g_{\mu\nu})$$
 The corresponding Euler-Lagrange equations for $\mathcal{S}$ will be 
-$$\frac{d}{d\lambda}\bigg(\frac{1}{2\mathcal{L}}(-g_{\mu\nu}\delta^\mu_{\text{ }\alpha}\dot{x}^\nu-g_{\mu\nu}\dot{x}^\mu\delta^\nu_{\text{  }\alpha}\bigg)-\frac{1}{2\mathcal{L}}(-\dot{x}^\mu\dot{x}^\nu\partial_\alpha g_{\mu\nu})=\frac{d}{d\lambda}\bigg(-\frac{g_{\mu\alpha}\dot{x}^\mu}{\mathcal{L}}\bigg)+\frac{\dot{x}^\mu\dot{x}^\nu\partial_\alpha g_{\mu\nu}}{2\mathcal{L}}=0$$
+$$\frac{d}{d\lambda}\bigg(-\frac{g_{\mu\alpha}\dot{x}^\mu}{\mathcal{L}}\bigg)-\frac{1}{2\mathcal{L}}(-\dot{x}^\mu\dot{x}^\nu\partial_\alpha g_{\mu\nu})=0$$
 We change the parameter from $\lambda$ to $\tau(\lambda)=\int_0^\lambda\sqrt{-g_{\mu\nu}\frac{dx^\mu}{d\tilde{\lambda}}\frac{dx^\nu}{d\tilde{\lambda}}}d\tilde{\lambda}$ (proper-time) where $\frac{d\tau}{d\lambda}=\mathcal{L}$, then
 $$-\mathcal{L}\frac{d}{d\tau}\bigg(g_{\mu\alpha}\frac{dx^\mu}{d\tau}\bigg)+\frac{\mathcal{L}}{2}\frac{dx^\mu}{d\tau}\frac{dx^\mu}{d\tau}\partial_\alpha g_{\mu\nu}=0$$
 Take dot product with $g^{\beta\alpha}$ gives
 $$\frac{d^2x^\mu}{d\tau^2}g_{\mu\alpha}+\partial_\nu g_{\mu\alpha}\frac{dx^\nu}{d\tau}\frac{dx^\mu}{d\tau}-\frac{1}{2}\partial_\alpha g_{\mu\nu}\frac{dx^\mu}{d\tau}\frac{dx^\nu}{d\tau}=0$$
-which gives us the desired Geodesic Equation. 
+but $\partial_\nu g_{\mu\alpha}\dot{x}^\nu\dot{x}^\mu$ are symmetric in the indices $\nu$ and $\mu$. Hence, we recover the desired geodesic equation. 
 \end{proof}
-
-For space-like geodesics, we take $\tilde{\mathcal{L}}=\sqrt{g_{\mu\nu}\dot{x}^\mu\dot{x}^\nu}$ such that $\frac{ds}{d\lambda}=\tilde{\mathcal{L}}$. In that case, the Geodesic Equation will have $s$ as the parameter instead.
+\begin{remarks}
+For space-like geodesics, we take $\tilde{\mathcal{L}}=\sqrt{g_{\mu\nu}\dot{x}^\mu\dot{x}^\nu}$ such that $\frac{ds}{d\lambda}=\tilde{\mathcal{L}}$. In that case, the geodesic equation will have $s$ as the parameter instead.
+\end{remarks}
+\subsubsection*{Alternative Lagrangian approach}
+The previous approach generated non-null geodesics in general parametrization. This alternative Lagrangian approach generates equations for affinely-parametrized geodesics.
 \begin{prop}[Geodesic Equation - Version 2]
-Consider a different variation, where we do not restrict ourselves to time-like geodesics. The action is now $\hat{\mathcal{S}}=\int_A^B\hat{\mathcal{L}}d\lambda$ with the new Lagrangian $\hat{\mathcal{L}}=g_{\alpha\beta}\frac{dx^\alpha}{d\lambda}\frac{dx^\beta}{d\lambda}$. Then after extremizing the action, we will obtain another version of the Geodesic Equation:
+Consider a different variation, where we do not restrict ourselves to time-like geodesics (the character now does not matter). The action is now $\hat{\mathcal{S}}=\int_A^B\hat{\mathcal{L}}d\lambda$ with the new Lagrangian $\hat{\mathcal{L}}=g_{\alpha\beta}\frac{dx^\alpha}{d\lambda}\frac{dx^\beta}{d\lambda}$. Then after extremizing the action, we will obtain another version of the geodesic equation:
 \begin{equation}
     \ddot{x}^\alpha+ \left \{ {\alpha \atop
 \nu\ \beta}\right\} \dot{x}^\nu\dot{x}^\beta=0\tag{*}
@@ -1142,21 +1173,41 @@ where $\dot{ }$ represents $\frac{d}{d\lambda}$ such that $\lambda$ parametrizes
 \end{prop}
 While it is great that we do not need to restrict ourselves to time-like curves, it is however not invariant under reparametrization. 
 \begin{proof}
-Working with the Euler-Lagrange equations gives us our desired Geodesic Equation. 
+The individual terms in Euler-Lagrange equations are evaluated to be:
+$$\frac{\partial\tilde{\mathcal{L}}}{\partial\dot{x}^\mu}=g_{\alpha\beta}\tensor*{\delta}{*_{}^{\alpha}_{\mu}}\dot{x}^\beta-g_{\alpha\beta}\dot{x}^\alpha\tensor*{\delta}{*_{}^{\beta}_{\mu}})=2g_{\mu\beta}\dot{x}^\beta,\quad\frac{\partial\tilde{\mathcal{L}}}{\partial x^\mu}=\dot{x}^\alpha\dot{x}^\beta\partial_\mu g_{\alpha\beta})$$
+The corresponding Euler-Lagrange equations for $\hat{\mathcal{S}}$ will be 
+$$0=\frac{d}{d\lambda}\bigg(2g_{\mu\beta}\dot{x}^\beta\bigg)-\dot{x}^\alpha\dot{x}^\beta\partial_\mu g_{\alpha\beta}\implies 0=g_{\mu\beta}\ddot{x}^\beta+\frac{1}{2}\dot{x}^\nu\dot{x}^\beta(\partial_\nu g_{\mu\beta}+\partial_\beta g_{\mu\nu}-\partial_\mu g_{\nu\beta})$$
+Dot with $g^{\alpha\mu}$ to obtain the geodesic equation.
 \end{proof}
-
-So far so good. But now take (\dag) and let $\tau=\tau(\lambda)$ such that $\frac{d\tau}{d\lambda}>0$. We have $\frac{d}{d\tau}=\frac{d\lambda}{d\tau}\frac{d}{d\lambda}$ and so $\frac{d^2}{d\tau^2}=\frac{d^2\lambda}{d\tau^2}\frac{d}{d\lambda}+(\frac{d\lambda}{d\tau})^2\frac{d^2}{d\lambda^2}$. We thus obtained
+\begin{remarks}
+The new action $\hat{S}$ is not invariant under a change of the parameter $\lambda$. We recover the same geodesic equation for time-like curves if $\lambda=\tau$, but for $\lambda=e^\tau$, we have
+$$\frac{d}{d\tau}=\lambda\frac{d}{d\lambda},\quad\frac{d^2}{d\tau^2}=\lambda\frac{d}{d\lambda}+\lambda^2\frac{d^2}{d\lambda^2}$$
+which gives the geodesic equation to be 
+$$\ddot{x}^\alpha+\left \{ {\alpha \atop
+\nu\ \beta}\right\}\dot{x}^\nu\dot{x}^\beta =-\frac{1}{\lambda}\frac{dx^\alpha}{d\lambda}$$
+\end{remarks}
+\begin{defi}[Affine Parameter]
+The parameter $\lambda$ along a timelike (spacelike) curve is affine iff it is linearly related to the proper time $\tau$ (proper distance $s$). For a non-affine parameter, the corresponding geodesic equation is (**)
+\end{defi}
+\begin{prop}
+The two geodesic equations (*) and (\dag) are equal for affine parameters $\lambda$.
+\end{prop}
+\begin{proof}
+Let $\lambda$ and $\tau$ be monotonically increasing and thus, invertible functions of each other, i.e. $\frac{d\tau}{d\lambda}>0$. We have
+$$\frac{d}{d\tau}=\frac{d\lambda}{d\tau}\frac{d}{d\lambda},\quad\frac{d^2}{d\tau^2}=\frac{d^2\lambda}{d\tau^2}\frac{d}{d\lambda}+\bigg(\frac{d\lambda}{d\tau}\bigg)^2\frac{d^2}{d\lambda^2}$$
+The geodesic equation (\dag) thus becomes
 \begin{equation}
 \frac{d^2x^\alpha}{d\lambda^2}+\left \{ {\alpha \atop
 \nu\ \beta}\right\}\frac{dx^\nu}{d\lambda}\frac{dx^\beta}{d\lambda}=-\bigg(\frac{d\lambda}{d\tau}\bigg)^{-2}\frac{d^2\lambda}{d\tau^2}\frac{dx^\alpha}{d\lambda}\tag{**}
 \end{equation}
-The form of the geodesic equation is no longer the same. We thus demonstrate that $\hat{\mathcal{S}}$ is not invariant under a change of parametrization. Different variation gives different curves! Both equations (*) and (\dag) only agree if $\frac{d^2\lambda}{d\tau^2}=0$. Equivalently, $\lambda$ is linear in $\tau$. 
-\begin{defi}[Affine Parameter]
-The parameter $\lambda$ along a timelike (spacelike) curve is affine iff it is linearly related to the proper time $\tau$ (proper distance $s$). For a non-affine parameter, the corresponding Geodesic Equation is (**)
-\end{defi}
-In summary,
+But if $\lambda$ is affine, i.e. $\lambda=c_1\tau+c_2$, then $\frac{d^2\lambda}{d\tau^2}=0$, and we recover the geodesic equation (*).
+\end{proof}
+\begin{remarks}
+Null geodesics do not have a natural affine parameter analogous to proper time or proper distance. We can, however, still define an affine parameter.
+\end{remarks}
+In summary, regardless of the character of the curve, we have
 \begin{prop}
-If a curve $\mathcal{C}:I\subset\mathbb{R}\rightarrow\mathcal{M},\text{  }\lambda\mapsto x^\alpha(\lambda)$, then if it
+If a curve $\mathcal{C}:I\subset\mathbb{R}\rightarrow\mathcal{M},~\lambda\mapsto x^\alpha(\lambda)$, then if it
 \begin{itemize}
     \item satisfies (*) $\implies$ $\mathcal{C}$ is a geodesic and $\lambda$ is affine;
     \item satisfies (**) with non-zero right hand side $\implies$ $\mathcal{C}$ is a geodesic but $\lambda$ is not affine;
@@ -1171,17 +1222,406 @@ $\hat{\mathcal{L}}$ gives an easy way to calculate the Christoffel symbols.
 \begin{eg}[Christoffel Symbols for Schwarzschild Metric]
 The Schwarzschild metric (as we will see later) in Schwarzschild coordinates is
 $$ds^2=-fdt^2+f^{-1}dr^2+r^2d\theta^2+r^2\sin^2\theta d\phi^2$$
-with $f=1-\frac{2M}{r}$ where $M$ is a constant. We have
+with $f=1-\frac{2M}{r}$ where $M$ is a constant. From $ds^2$, we can read off 
 $$\hat{\mathcal{L}}=f\dot{t}^2-f^{-1}\dot{r}^2-r^2\dot{\theta}^2-r^2\sin^2\theta\dot{\phi}^2$$
 The Euler-Lagrange for $t(\tau)$ is $\frac{d}{d\tau}(2f\dot{t})=0\implies\frac{d^2\tau}{d\tau^2}+f^{-1}\frac{df}{dr}\dot{t}\dot{r}=0$ and so 
 $$\left \{ {t \atop t\ r}\right\}=\left \{ {t \atop r\ t}\right\}=\frac{df/dr}{2f}=\frac{1}{1-(2M/r)}\frac{M}{r^2}$$
 and $\left \{ {t \atop \nu\ \mu}\right\}=0$ otherwise for $\mu,\nu=\theta,\phi$.
 \end{eg}
 \newpage
-\section{More on Special Relativity}
-\subsection{Minkowski Spacetime and Particle Dynamics}
+\subsubsection*{Parallel transport again}
+\begin{remarks}
+The geodesic equation can be casted as
+$$0=\frac{dt^a}{d\lambda}-\Gamma_{ba}^ct^bt^c=\frac{Dt^a}{D\lambda}$$
+where $t^a=dx^a/d\lambda$ is the tangent vector. Equivalently, we can write
+$$0=\frac{Dt_a}{Du}=\frac{dt_a}{d\lambda}-\frac{1}{2}g^{cd}(\partial_bg_{ad}+\partial_ag_{bd}-\partial_dg_{ab})t^bt_c=\frac{dt_a}{d\lambda}-\frac{1}{2}\partial_ag_{bc}t^bt^c$$
+This motivates the idea of parallel transport on geodesic.
+\end{remarks}
+\begin{prop}
+The tangent of an affinely parametrized geodesic is parallel transported along itself.
+\end{prop}
+\begin{proof}
+The tangent vector of an affinely parametrized curve is $U^\mu=\frac{dx^\alpha}{d\lambda}$, so
+$$U^\mu\nabla_\mu U^\alpha=U^\mu\partial_\mu U^\alpha+U^\mu\Gamma_{\nu\mu}^\alpha U^\nu=\frac{dx^\mu}{d\lambda}\frac{\partial}{\partial x^\mu}\frac{dx^\alpha}{d\lambda}+\frac{dx^\mu}{d\lambda}\Gamma_{\nu\mu}^\alpha\frac{dx^\nu}{d\lambda}=0$$
+This leads to $\frac{d^2x^\alpha}{d\lambda^2}+\Gamma_{\nu\mu}^\alpha\frac{dx^\nu}{d\lambda}\frac{dx^\mu}{d\lambda}=0$.
+\end{proof}
+\begin{remarks}\leavevmode
+\begin{enumerate}
+    \item For null curves, we cannot use the stationary property to define geodesics since the path length vanishes. Instead, we define null geodesics as curves with null tangent vector. In all cases, if we pick a vector at some starting point, and then solve $\frac{Dt^a}{D\lambda}=0$ and $t^a=dx^a/d\lambda$, we generate a unique geodesic curve in an affine parameterisation that is everywhere timelike, spacelike or null according to the character of the initial vector. This follows since parallel transport preserves $g_{ab}t^at^b$.
+    \item For an affinely-parameterised geodesic, the tangent vector is parallel transported, so the norm is constant. For a non-null geodesic, without loss of generality, the norm is 1 where we take $\lambda$ to be the path length along the curve. For a null geodesic, the norm is zero.
+\end{enumerate}
+\end{remarks}
+\begin{cor}
+Under parallel transport, geodesics do not change their timelike, spacelike or null character.
+\end{cor}
+\begin{defi}[Acceleration Along Timelike Curve]
+We define the acceleration $a^\mu$ along a time-like curve by $a^\mu:=\frac{Du^\mu}{D\lambda}=U^\rho\nabla_\rho U^\alpha$.
+\end{defi}
+\begin{prop}
+This curve is a geodesic if $a^\mu=0$. 
+\end{prop}
+\begin{remarks}\leavevmode
+\begin{enumerate}
+    \item Geodesics are the analogs of the paths of freely moving particles in Newtonian dynamics.
+    \item A non-affinely parametrized geodesic satisfies $a^\mu=fU^\mu$ such that $f$ is a function.
+    \item In Minkowski spacetime with Cartesian coordinates $\Gamma_{\mu\nu}^\rho=0$, we have $\frac{d}{d\lambda}T=0$, i.e. parallel transport in Cartesian coordinates leaves tensor components unchanged and this result is independent of the curve. But this is path dependent in General Relativity.
+    \item When the manifold has special symmetries, $g_{ab}$ is independent of $x^c$, i.e. $\partial_cg_{ab}=0$, we have $t_c$ to be constant. In another words, if the metric does not dpeend on a coordinate $x^c$, then the $c$th component of the tangent vector is conserved along an affinely-parameterized geodesic. This follows directly from the conservation of the conjugate momentum $\pi_c=\frac{\partial\tilde{\mathcal{L}}}{\partial\dot{x}^c}$.
+\end{enumerate}
+\end{remarks}
+
 \newpage
+\section{Special Relativity revisited}
+Having established the formalism of tensor algebra and calculus, we revisit special relativity and discuss it in a more formal manner.
+\subsection{Minkowski Spacetime}
+\begin{defi}[Spacetime]
+Minkowski spacetime in special relativity is a 4-dimensional pseudo-Euclidean manifold, over which we can globally define Cartesian coordinates. Such coordinates correspond to the coordinates of inertial frames. The line element everywhere is
+$$ds^2=\eta_{\mu\nu}dx^\mu dx^\nu,\quad\eta_{\mu\nu}=\diag(+1,-1,-1,-1)$$
+where $\eta_{\mu\nu}$ is the Minkowski metric. Its inverse metric is also $\eta^{\mu\nu}=\diag(+1,-1,-1,-1)$. As the components of the metric are constant, the metric connection vanishes in Cartesian coordinates $\Gamma^\mu_{\nu\sigma}=0$.
+\end{defi}
+\begin{prop}
+The Minkowski metric is invariant under Lorentz transformation.
+$$\eta_{\mu\nu}=\frac{\partial x'^\rho}{\partial x^\mu}\frac{\partial x'^\sigma}{\partial x^\nu}\eta_{\rho\sigma},\quad x^\mu\rightarrow x'^\mu$$
+\end{prop}
+\begin{remarks}
+Physically, Lorentz transformations relate Cartesian coordinates assigned to events (spacetime points) in different inertial frames. Mathematically, they correspond to the residual freedom in our choice of global Cartesian coordinates in Minkowski spacetime, i.e., to coordinate transformations $x^\mu\rightarrow x'^\mu$ that leave the Minkowski metric unchanged.
+\end{remarks}
+By differentiating the condition that the Minkowski metric is invariant under Lorentz transformation, then the Lorentz transformation must be linear.
+\begin{defi}[Homogeneous Lorentz transformations]
+Most general Lorentz transformation (inhomogeneous, or Poincare transformation) is
+$$x'^\mu=\tensor*{\Lambda}{*_{}^{\mu}_{\nu}}x^\nu+a^\mu$$
+where $\eta_{\mu\nu}=\tensor*{\Lambda}{*_{}^{\rho}_{\mu}}\tensor*{\Lambda}{*_{}^{\sigma}_{\nu}}\eta_{\rho\sigma}$. $a^\mu$ just corresponds to changing the spacetime origin. Dropping this term gives the homogeneous Lorentz transformation. The defining condition of Lorentz transformation (keep Minkowski metric invariant) gives
+$$[\det(\tensor*{\Lambda}{*_{}^{\mu}_{\nu}})]^2=1$$
+\end{defi}
+\begin{defi}[Proper Lorentz transformations]
+Proper Lorentz transformations form a subgroup of the full Lorentz transformations that only include transformations between inertial frames with the same spatial handedness and exclude time reversal. This additional condition is
+$$(\tensor*{\Lambda}{*_{}^{0}_{0}})^2=1+\sum_{i=1}^3\tensor*{\Lambda}{*_{}^{i}_{0}})^2\geq1\implies\tensor*{\Lambda}{*_{}^{0}_{0}}\geq1$$
+These transformations are continuously connected to the identity.
+\end{defi}
+\begin{defi}[Basis vectors]
+On a general manifold, a coordinate system $x^a$ provides a set of basis vectors $\partial/\partial x^a$ that span the tangent space at any point. We often represent $\partial/\partial x^a$ as an arrow tangent to the associated coordinate curves.
+\end{defi}
+\begin{defi}[Inner product]
+If we take $\mathbf{u}$ and $\mathbf{v}$ to be the basis vectors $\partial/\partial x^a$ and $\partial/\partial x^b$ of some coordinate system, then their scalar product is just the appropriate component of the metric in those coordinates $g_{ab}$, where $g(\mathbf{u},\mathbf{v})=g_{ab}u^av^b$.
+\end{defi}
+\begin{remarks}
+In Minkowski space, the global Cartesian coordinates $x^\mu$ associated with some inertial frame define a set of basis vectors $\mathbf{e_\mu}:=\partial/\partial x^\mu$, which are orthonormal
+$$g(\mathbf{e_\mu},\mathbf{e_\nu})=\eta_{\mu\nu}$$
+\end{remarks}
+\begin{defi}[4-vector]
+Vectors in 4D spacetime are referred to as 4-vectors. A vector at a point P can be decomposed into components relative to a basis there, $\mathbf{v}=v^\mu\mathbf{e_\mu}$, where $v^\mu$ are the components of the vector. Under a Lorentz transformation, the coordinate components of a vector transform as
+$$v'^\mu=\tensor*{\Lambda}{*_{}^{\mu}_{\nu}}v^\mu$$
+\end{defi}
+\begin{defi}[Character of vector]
+A vector $\mathbf{v}$ is time-like, space-like or null-like if $g(\mathbf{v},\mathbf{v})=\eta_{\mu\nu}v^\mu v^\nu$ is $>0$, $<0$ and $=0$ respectively. For the basis vectors in an inertial frame, $\mathbf{e_0}$ is timelike, while $\mathbf{e_i}$ are spacelike. A timelike or null vector is future pointing if $v^0>0$ and past pointing if $v^0<0$.
+\end{defi}
+\begin{remarks}
+At any point P, the set of all null vectors there define the lightcone and this separates timelike and spacelike vectors.
+\end{remarks}
+\begin{defi}[Dual vector]
+To every vector we can associate a dual vector by mapping with the metric. In Cartesian coordinates, the components of the dual vector associated with the vector $v_\mu$ are
+$$v_\mu=\eta_{\mu\nu}v^\nu$$
+which leaves the 0-component unchanged but reverses the spatial components. Under a Lorentz transformation, the components of a dual vector transform with the inverse Lorentz matrix.
+$$X'_\mu=\tensor*{\Lambda}{*^{}_{\mu}_{\nu}}X_\nu$$
+\end{defi}
+\subsection{Particle dynamics}
+\begin{defi}[Worldline]
+A massive particle follows a trajectory through spacetime that is usually called a wordline.
+\end{defi}
+\begin{defi}[Proper time]
+The proper time $\tau$ is an affine parameter for the worldline. The proper time is the time measured by an ideal clock carried by the particle, and is related to the invariant path length by $ds^2=c^2d\tau^2$.
+\end{defi}
+\begin{defi}[4-velocity]
+The tangent vector to the worldline is the 4-velocity of the particle, and has components
+$$u^\mu=\frac{dx^\mu}{d\tau}$$
+For a massive particle, the 4-velocity is future-pointing and timelike.
+\end{defi}
+\begin{prop}
+$$g(\mathbf{u},\mathbf{u})=c^2,\quad u^\mu=\gamma_u(c,\vec{u})$$
+\end{prop}
+\begin{proof}
+Since proper time is an affine parameter, the length of the 4-velocity is constant
+$$\eta_{\mu\nu}u^\mu u^\nu=\bigg(\frac{ds}{d\tau}\bigg)^2=c^2$$
+LHS is $(dt/d\tau)^2(c^2-|\vec{u}|^2)$, which gives us $dt/d\tau=\gamma_u$.
+\end{proof}
+\begin{prop}
+Under a Lorentz boost with speed $v$ in the 1-direction, wehave
+$$\frac{\gamma_u}{\gamma_{u'}}=\frac{1}{\gamma_v}\frac{1}{1-\vec{u}^1v/c^2}$$
+\end{prop}
+\begin{proof}
+Follows from Lorentz transformation.
+\end{proof}
+\begin{defi}[4-acceleration]
+$$a^\mu=\frac{Du^\mu}{D\tau}$$
+which in Cartesian coordinates, reduce to $a^\mu=du^\mu/d\tau$.
+\end{defi}
+\begin{remarks}
+In an inertial frame, a free particle has $d^2x^i/dt^2=0$. The components of the 4-velocity are also constant in Cartesian coordinates so $du^\mu/d\tau=0$. In global Cartesian coordinates, the metric connection vanishes and we may replace the derivative with the intrinsic derivative along the particle's worldline:
+$$\frac{Du^\mu}{D\tau}=0$$
+\end{remarks}
+\begin{prop}
+Free massive particles move on timelike geodesics in Minkowski space.
+\end{prop}
+\begin{proof}
+$u^\mu$ is the tangent vector to the worldline in an affine parameterization.
+\end{proof}
+\begin{prop}
+The acceleration 4-vector is always orthogonal to the 4-velocity in Cartesian inertial coordinates.
+\end{prop}
+\begin{proof}
+$$g(\mathbf{a},\mathbf{u})=\eta_{\mu\nu}a^\mu u^\nu=\eta_{\mu\nu}\frac{du^\mu}{d\tau}u^\nu=\frac{1}{2}\frac{d}{d\tau}(\eta_{\mu\nu}u^\mu u^\nu)=0$$
+\end{proof}
+\begin{prop}
+$$a^\mu=\gamma_u^2\bigg(\frac{\gamma_u^2}{c}\vec{u}\cdot\vec{a},\vec{a}+\frac{\gamma_u^2}{c^2}(\vec{u}\cdot\vec{a})\vec{u}\bigg)$$
+\end{prop}
+\begin{proof}
+The derivative of the Lorentz factor is
+$$\frac{d\gamma_u}{dt}=\frac{d}{dt}\bigg(1-\frac{\vec{u}\cdot\vec{u}}{c^2}\bigg)^{-1/2}=\frac{\gamma_u^3}{c^2}\vec{u}\cdot\vec{a}$$
+Then, the 4-acceleration is
+$$a^\mu=\frac{du^\mu}{d\tau}=\gamma_u\frac{d}{dt}(\gamma_uc,\gamma_u\vec{u})$$
+\end{proof}
+\begin{cor}
+In the instantaneous rest frame of the particle, $a^\mu=(0,\vec{a}_{\text{IRF}})$, where $\vec{a}_{\text{IRF}}$ is the 3-acceleration in the instantaneous rest frame.
+\end{cor}
+\begin{proof}
+Follows from setting $\vec{u}=\boldsymbol{0}$.
+\end{proof}
+\begin{remarks}
+The magnitude of $\vec{a}_{\text{IRF}}$ determines the invariant magnitude of the 4-acceleration, $-|\vec{a}_{\text{IRF}}|^2$, which shows that the 4-acceleration is a space-like vector.
+\end{remarks}
+\begin{defi}[4-momentum]
+$$p^\mu=(\gamma_umc,\gamma_um\vec{u})$$
+The time component of the 4-momentum is $E/c=\gamma_umc^2/c=\gamma_umc$.
+\end{defi}
+\begin{prop}[Energy-momentum invariant]
+$$E^2-|\vec{p}|^2c^2=m^2c^4$$
+\end{prop}
+\begin{proof}
+$$p^\mu p_\mu=E^2/c^2-|\vec{p}|^2=\gamma_u^2m^2-\gamma_u^2m^2|\vec{u}|^2=m^2c^2$$
+\end{proof}
+\begin{remarks}
+For a free particle, $dp^\mu/d\tau=0$ in the coordinates of an inertial frame, or generally,
+$$\frac{Dp^\mu}{D\tau}=0$$
+\end{remarks}
+\begin{prop}
+For an isolated system of particles undergoing collisional interactions, the total 4-momentum is the sum of the individual 4-momenta squared and is constant.
+\end{prop}
+\begin{proof}
+This combines both conservation of 3-momentum and energy into a Lorentz invariant (i.e., 4-vector) law.
+\end{proof}
+\begin{defi}[Force 4-vector]
+The force 4-vector is
+$$\frac{Dp^\mu}{D\tau}=f^\mu$$
+\end{defi}
+\begin{prop}
+4-force is orthogonal to the 4-velocity.
+\end{prop}
+\begin{proof}
+The norm of the 4-momentum is constant,so $p^\mu$ is orthogonal to $Dp^\mu/D\tau$ and hence $g(\mathbf{f},\mathbf{u})=0$.
+\end{proof}
+\begin{remarks}
+In some inertial frame,
+$$f^\mu=\gamma_u\frac{d}{dt}(E/c,\vec{p})=\gamma_u(\vec{f}\cdot\vec{u}/c,\vec{f})$$
+where $\frac{dE}{dt}=\vec{f}\cdot\vec{u}$. It is now clear that $\eta_{\mu\nu}f^\mu u^\nu=0$.
+\end{remarks}
+\begin{prop}
+For a photon, the 4-momentum is a null vector.
+\end{prop}
+\begin{proof}
+For zero rest mass, $E=|\vec{p}|c$, then we have $g(\mathbf{p},\mathbf{p})=0$.
+\end{proof}
+\begin{remarks}
+If we write the photon worldline as $x^\mu(\lambda)$, then $\frac{Dp^\mu}{D\lambda}=0$. The photon path is null since photons travel at the speed of light, so $d\tau=0$. $x^\mu(\lambda)$ is still an affinely-parameterised null geodesics.
+\end{remarks}
+\begin{prop}
+Free massless particles move on null geodesics in Minkowski space, with $p^\mu=dx^\mu/d\lambda$ for some affine parameterisation.
+\end{prop}
+\begin{proof}
+We have the 4-momentum of photon to be
+$$p^\mu=\frac{E}{c}\bigg(1,\frac{\vec{p}}{|\vec{p}|}=\frac{E}{c^2}\bigg(c\frac{dt}{dt},\frac{dx}{dt},\frac{dy}{dt},\frac{dz}{dt}\bigg)=\frac{E}{c^2}\frac{dx^\mu}{dt}$$
+Hence, $p^\mu$ is always parallel to the tangent vector $dx^\mu/d\lambda$ for any choice of parameterisation $\lambda$. We can then make $p^\mu=dx^\mu/d\lambda$ for some choice of $\lambda$.
+\end{proof}
+\begin{defi}[4-wavevector]
+$$k^\mu=(2\pi/\lambda,\vec{k})$$
+\end{defi}
+\begin{eg}
+Consider an observer at rest in inertial frame $S$ observing light with wavelength $\lambda$ propagating at an angle $\theta$ to the $x$-axis; the components of the 4-wavevector in $S$ are
+$$k^\mu=\frac{2\pi}{\lambda}(1,\cos\theta,\sin\theta,0)$$
+Suppose the light is emitted by a source that is moving at speed $\beta c$ along the $x$-axis. In the rest frame of the source $S'$, the 4-wavevector $k'^\mu=\tensor*{J}{*_{}^{\mu}_{\nu}}k^\nu$. The emitted wavelength in the rest frame, $\lambda'$ follows from $k'^0$ is
+$$k'^0=\frac{2\pi}{\lambda'}=\frac{2\pi}{\lambda}\gamma(1-\beta\cos\theta)\implies\frac{\lambda}{\lambda'}=\gamma(1-\beta\cos\theta)$$
+For the case $\theta=0$, we have $\lambda/\lambda'=\sqrt{(1-\beta)/(1+\beta)}$.
+\end{eg}
+\begin{eg}[Compton scattering]
+Compton scattering describes scattering of a photon from a charged particle. This can be considered as a collision between a photon with initial 4-momentum $p$ and an electron, say, with initial 4-momentum $q$. In the final state, the photon has 4-momentum $\tilde{p}$ and the electron has 4-momentum $\tilde{q}$. We shall consider the collision in the inertial frame in which the electron is initially at rest, and the photon is propagating along the positive $x$-direction and has frequency $\nu$. Suppose the photon scatters through an angle $\theta$, and its final frequency is $\tilde{\nu}$, and in the process the electron recoils. 
+$$p^\mu=h\nu/c(1,1,0,0),\quad q^\mu=(m_ec,0,0,0),\quad\tilde{p}^\mu=h\tilde{\nu}/c(1,\cos\theta,\sin\theta,0)$$
+We have
+$$0=\eta_{\mu\nu}p^\mu q^\nu-\eta_{\mu\nu}\tilde{p}^\mu q^\nu-\eta_{\mu\nu}p^\mu\tilde{p}^\nu=h\nu m_e-h\tilde{\nu}m_e-\frac{h\nu}{c}\frac{h\tilde{\nu}}{c}(1-\cos\theta)$$
+This gives us $\tilde{\nu}=\frac{\nu}{1+(h\nu/m_ec^2)(1-\cos\theta)}$. 
+\end{eg}
+\subsection{Local reference frame}
+\begin{defi}[Instantaneous rest frame]
+At any event on the wordline, we can define the instantaneous rest-frame of the particle as the inertial frame in which the particle is instantaneously at rest.
+\end{defi}
+\begin{remarks}
+At proper time $\tau$ , the coordinate basis vectors of the instantaneous rest-frame at the observer’s position constitute an orthonormal set of basis vectors $\mathbf{e_\mu}(\tau)$. By construction, the timelike basis vector $\mathbf{e_0}(\tau)$ is equal (up to a factor of c) to the instantaneous 4-velocity $\mathbf{u}(\tau)$. The three spacelike vectors $\mathbf{e_i}(\tau)$, $i = 1, 2, 3$, are therefore orthogonal to the observer’s 4-velocity. At some later time $\tau'$, the basis vector $\mathbf{e_0}(\tau')$ is uniquely determined by the 4-velocity $\mathbf{u}(\tau')$, but the remaining three spacelike vectors $\mathbf{e_i}(\tau')$ are only determined up to a spatial rotation.
+\end{remarks}
+\begin{defi}[Orthonormal tetrad]
+The observer (possibly accelerating) carries along four orthonormal vectors $\mathbf{e_\mu}(\tau)$ that satisfy
+$$g(\mathbf{e_\mu},\mathbf{e_\nu})=\eta_{\mu\nu},\quad c\mathbf{e_0}(\tau)=\mathbf{u}(\tau)$$
+Such a frame of vectors is called an orthonormal tetrad. The results of any local measurement made by the observer at proper time $\tau$ can be represented as the components of tensor-valued quantities in this tetrad.
+\end{defi}
 \subsection{Electromagnetism}
+In IB Physics B, you learnt that the source terms of electromagnetic fields are charge $\rho(\mathbf{x},t)$ and current densities $\mathbf{J}(\mathbf{x},t)$ where $\mathbf{x}\in\mathbb{R}^3$. These sources satisfy the continuity equation.
+$$\frac{\partial\rho}{\partial t}+\boldsymbol{\nabla}\cdot\mathbf{J}=0$$
+These sources couple with the fields $\mathbf{E}(\mathbf{x},t)$, $\mathbf{B}(\mathbf{x},t)$, which themselves satisfy the Maxwell equations.
+$$\boldsymbol{\nabla}\cdot\mathbf{E}=\rho/\varepsilon_0,\quad\boldsymbol{\nabla}\cdot\mathbf{B}=0,\quad\boldsymbol{\nabla}\times\mathbf{E}=-\frac{\partial\mathbf{B}}{\partial t},\quad\boldsymbol{\nabla}\times\mathbf{B}=\mu_0\mathbf{J}+\mu_0\varepsilon_0\frac{\partial\mathbf{E}}{\partial t}$$
+where $\varepsilon_0=8.85\times10^{-12}$ m$^{-3}$ kg$^{-1}$ s$^2$ C$^2$ and $\mu_0=1.25\times10^{-6}$ m kg C$^{-2}$ are fundamental constants. The Maxwell equations in vacuum (no sources) predict electromagnetic waves that propagate with speed $c=1/\sqrt{\mu_0\varepsilon_0}$. For physical fields $\mathbf{E}$ and $\mathbf{B}$, one may associate a pair of non-unique potentials $\phi(\mathbf{x},t)$ (scalar electric) and $\mathbf{A}(\mathbf{x},t)$ (vector magnetic). 
+$$\mathbf{E}=-\frac{\partial\mathbf{A}}{\partial t}-\boldsymbol{\nabla}\phi,\quad\mathbf{B}=\boldsymbol{\nabla}\times\mathbf{A}$$
+The potentials are unique up to a gauge transform, i.e.  $(\phi',\mathbf{A'})$ and $(\phi,\mathbf{A})$ correspond to the same fields
+$$\phi'=\phi-\frac{\partial\chi}{\partial t},\quad\mathbf{A'}=\mathbf{A}+\boldsymbol{\nabla}\chi$$
+for an arbitrary gauge $\chi=\chi(\mathbf{x},t)$. The motion of sources is governed by the Lorentz force law:
+$$\mathbf{F}=q(\mathbf{E}+\mathbf{v}\times\mathbf{B})\implies\mathbf{f}=\rho\mathbf{E}+\mathbf{J}\times\mathbf{B}$$
+Special Relativity demands us to write all physical laws covariantly in terms of Lorentz scalars, vectors, and tensors. We apply this to electromagnetism.
+\begin{defi}[4-Current]
+The 4-current is defined to be
+$$J^\mu:=(c\rho,\mathbf{J})^T$$
+\end{defi}
+\begin{prop}[Co-variant Form of Equation of Continuity]
+The equation of continuity in co-variant form is
+$$\partial_\mu J^\mu=0$$
+\end{prop}
+\begin{proof}
+$$\frac{\partial}{\partial(ct)}(c\rho)+\boldsymbol{\nabla}\cdot\mathbf{J}=0$$
+\end{proof}
+\begin{eg}
+Consider a situation with charge, $\rho\neq0$ and no current, $\mathbf{J}=0$, then under Lorentz Transform
+$$J'^\mu=\Lambda_\nu^\mu J^\nu=(\gamma c\rho,-\gamma\rho\mathbf{v})^T$$
+Thus, currents are just moving charges. Also, the same charges occupy a larger volume in the rest frame of the charge $S$ (length contraction in $S'$) but the amount of charge is the same, hence the charge density is larger in $S'$ by a factor of $\gamma$.
+\end{eg}
+\begin{defi}[Lorenz Gauge]
+The Lorenz Gauge is defined to be
+$$\boldsymbol{\nabla}\cdot\mathbf{A}:=-\frac{1}{c^2}\frac{\partial\phi}{\partial t}$$
+\end{defi}
+\begin{thm}
+Under Lorenz Gauge, the Maxwell's Equations become
+$$-\nabla^2\phi+\frac{1}{c^2}\frac{\partial^2\phi}{\partial t^2}=\frac{\rho}{\varepsilon_0},\quad-\nabla^2\mathbf{A}+\frac{1}{c^2}\frac{\partial^2\mathbf{A}}{\partial t^2}=\mu_0\mathbf{J}$$
+\end{thm}
+\begin{proof}
+In general, the electric field is written in terms of a scalar potential $\phi$ and a vector potential $\mathbf{A}$ such that
+$$\mathbf{E}=-\boldsymbol{\nabla}\phi-\frac{\partial\mathbf{A}}{\partial t}\implies-\mu_0\varepsilon_0\frac{\partial\mathbf{E}}{\partial t}=\frac{1}{c^2}\boldsymbol{\nabla}\frac{\partial\phi}{\partial t}+\frac{1}{c^2}\frac{\partial^2\mathbf{A}}{\partial t^2}$$
+Recall Ampere-Maxwell's Law and the identity $\boldsymbol{\nabla}\times\mathbf{B}=\boldsymbol{\nabla}\times(\boldsymbol{\nabla}\times\mathbf{A})=\boldsymbol{\nabla}(\boldsymbol{\nabla}\cdot\mathbf{A})-\nabla^2\mathbf{A}$, then we have
+$$\mu_0\mathbf{J}=\boldsymbol{\nabla}\times\mathbf{B}-\mu_0\epsilon_0\frac{\partial\mathbf{E}}{\partial t}=-\nabla^2\mathbf{A}+\frac{1}{c^2}\frac{\partial^2\mathbf{A}}{\partial t^2}+\boldsymbol{\nabla}\bigg(\boldsymbol{\nabla}\cdot\mathbf{A}+\frac{1}{c^2}\frac{\partial\phi}{\partial t}\bigg)$$
+Under Lorenz gauge, i.e. $\boldsymbol{\nabla}\cdot\mathbf{A}=-\frac{1}{c^2}\frac{\partial\phi}{\partial t}$, the equivalent form of Ampere-Maxwell's law is
+$$-\nabla^2\mathbf{A}+\frac{1}{c^2}\frac{\partial^2\mathbf{A}}{\partial t^2}=\mu_0\mathbf{J}$$
+To recover the other equation, we look at Gauss' Law again
+$$\frac{\rho}{\varepsilon_0}=\boldsymbol{\nabla}\cdot\mathbf{E}=-\nabla^2\phi-\frac{\partial}{\partial t}(\boldsymbol{\nabla}\cdot\mathbf{A})=-\nabla^2\phi+\frac{1}{c^2}\frac{\partial^2\phi}{\partial t^2}$$
+where we invoked the Lorenz gauge again.
+\end{proof}
+\begin{defi}[4-Potential]
+The 4-potential is defined to be
+$$A^\mu:=(\phi/c,\mathbf{A})^T$$
+\end{defi}
+\begin{prop}[Field Strength Tensor]
+We propose that we can store the 6 components of $\mathbf{E}$ and $\mathbf{B}$ with a rank 2 antisymmetric tensor, $F_{\mu\nu}$ (known as the Field Strength Tensor) such that two of the Maxwell's Equations are succinctly expressed as
+$$\partial_\mu F^{\mu\nu}=\mu_0J^\nu$$
+where $\mu$ is the spatial index and $\nu$ is the line index. Note that raising the spatial index changes the sign but raising the line index does not change the sign, i.e. $F^{10}=-F_{10}$. This tensor's definition:
+$$F_{\mu\nu}:=\partial_\mu A_\nu-\partial_\nu A_\mu=-F_{\nu\mu}$$
+such that the tensor has the explicit form (line index counts the row while spatial index counts the column)
+$$F_{\mu\nu}=\begin{pmatrix}0&E_x/c&E_y/c&E_z/c\\-E_x/c&0&-B_z&B_y\\-E_y/c&B_z&0&-B_x\\-E_z/c&-B_y&B_x&0\\\end{pmatrix},\quad F^{\mu\nu}=\eta^{\mu\rho}\eta^{\nu\sigma}F_{\rho\sigma}=\begin{pmatrix}0&-E_x/c&-E_y/c&-E_z/c\\E_x/c&0&-B_z&B_y\\E_y/c&B_z&0&-B_x\\E_z/c&-B_y&B_x&0\\\end{pmatrix}$$
+\end{prop}
+\begin{proof}
+For $A_\mu=(\phi/c,-\mathbf{A})^T$, we have for example
+$$F_{12}=\partial_x(-A_y)-\partial_y(-A_x)=-B_z,\quad F_{23}=\partial_y(-A_z)-\partial_z(-A_y)=-B_x$$
+$$F_{01}=\partial_{ct}(-A_x)-\partial_x(\phi/c)=E_x/c,\quad
+F_{02}=\partial_{ct}(-A_y)-\partial_y(\phi/c)=E_y/c,\quad F_{03}=\partial_{ct}(-A_z)-\partial_z(\phi/c)=E_z/c$$
+where we identify $B_k=\varepsilon_{ijk}\partial_iA_j$. 
+Thus, obtaining the desired form of $F_{\mu\nu}$. We can obtain $F^{\mu\nu}$ using the Minkowski metric. Next, we show $\partial_\mu F^{\mu\nu}=\mu_0J^\nu$ does give the Maxwell's equations. For index $\nu=0$, we recover the Gauss' Law, i.e. $\boldsymbol{\nabla}\cdot\mathbf{E}=\rho/\epsilon_0$:
+$$\partial_\mu F^{\mu0}=\partial_0F^{00}+\partial_1F^{10}+\partial_2F^{20}+\partial_3F^{30}=\frac{1}{c}\boldsymbol{\nabla}\cdot\mathbf{E}=\frac{1}{c}\frac{\rho}{\epsilon_0}=\mu_0c\rho=\mu_0J^0$$
+We have used $F^{i0}=-F_{i0}$ and  $F_{i0}=-\frac{E_i}{c}$. For the spatial indices $\nu=i=1,2,3$, we expect to recover the Ampere-Maxwell's Law, i.e. $\boldsymbol{\nabla}\times\mathbf{B}=\mu_0\mathbf{J}+\mu_0\varepsilon_0\frac{\partial\mathbf{E}}{\partial t}$.
+$$\partial_\mu F^{\mu i}=\partial_0F^{0i}+\partial_1F^{1i}+\partial_2F^{2i}+\partial_3F^{3i}=-\frac{1}{c^2}\frac{\partial}{\partial t}E_i+\varepsilon_{jki}\partial_jB_k=\mu_0J^i$$
+where by enumeration, $\partial_0F^{0i}=\partial_0F_{i0}=-\frac{\partial}{\partial(ct)}\frac{E_i}{c}$, $\partial_1F^{1i}=\partial_1F_{i1}=\partial_xB_z-\partial_xB_y$, and so on. We thus identify the total summation $\partial_jF^{ji}$ to simply by $\boldsymbol{\nabla}\times\mathbf{B}$.
+\end{proof}
+\begin{prop}[Dual Tensor]
+We propose that we can store the 6 components of $\mathbf{E}$ and $\mathbf{B}$ with another rank 2 antisymmetric tensor, $G_{\mu\nu}$ (known as the Dual Tensor) such that the remaining two Maxwell's Equations are succinctly expressed as
+$$\partial_\mu G^{\mu\nu}=0$$
+where $\mu$ is the spatial index and $\nu$ is the line index. Note that raising the spatial index changes the sign but raising the line index does not change the sign, i.e. $G^{10}=-G_{10}$. This tensor is defined from the Field Strength Tensor
+$$G^{\mu\nu}:=\frac{1}{2}\varepsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}$$
+where $\varepsilon^{\mu\nu\rho\sigma}$ is the rank-4 alternating tensor, which gives $1$ or $-1$ for even and odd permutations of 0123 respectively. The dual tensor has the explicit form
+$$G^{\mu\nu}=\begin{pmatrix}0&-B_x&-B_y&-B_z\\B_x&0&E_z/c&-E_y/c\\B_y&-E_z/c&0&E_x/c\\B_z&E_y/c&-E_x/c&0\\\end{pmatrix}$$
+Observe that $G$ is obtained from $F$ by mapping $\mathbf{E}\mapsto c\mathbf{B}$ and $\mathbf{B}\mapsto -\mathbf{E}/c$
+\end{prop}
+\begin{proof}
+Having establish $F_{\mu\nu}$, we get
+$$G^{01}=\frac{1}{2}\varepsilon^{01jk}F_{jk}=\frac{1}{2}\varepsilon^{0123}F_{23}+\frac{1}{2}\varepsilon^{0132}F_{32}=\varepsilon^{0123}F_{23}=-B_x$$
+where $\varepsilon^{0123}=-\varepsilon^{0132}$ and $F_{23}=-F_{32}$. Similarly, $G^{02}=-B_y$ and $G^{03}=-B_z$. Also,
+$$G^{12}=\frac{1}{2}\varepsilon^{12jk}F_{jk}=\frac{1}{2}\varepsilon^{1203}F_{03}+\frac{1}{2}\varepsilon^{1230}F_{30}=-\varepsilon^{1203}F_{03}=-E_y/c$$
+Similarly, $G^{11}=E_z/c$. Thus, obtaining the desired form of $G_{\mu\nu}$. By using a similar procedure as before, we proceed to show that $\partial_\mu G^{\mu\nu}=0$ do gives the remaining two Maxwell's equations:
+$$\partial_\mu G^{\mu0}=\partial_0G^{00}+\partial_1G^{10}+\partial_2G^{20}+\partial_3G^{30}=\boldsymbol{\nabla}\cdot\mathbf{B}=0$$
+which is the Gauss' Law for magnetism. For $i=1,2,3$, we recover the Faraday's Law
+$$\partial_\mu G^{\mu i}=\partial_0G^{0i}+\partial_1G^{1i}+\partial_2G^{2i}+\partial_3G^{3i}=-\frac{1}{c}\frac{\partial}{\partial t}B_i-\frac{\partial E_k/c}{\partial j}+\frac{\partial E_j/c}{\partial k}=-\frac{1}{c}\frac{\partial}{\partial t}\mathbf{B}-(\boldsymbol{\nabla}\times\mathbf{E})=0$$
+as expected. Essentially, this means there is no magnetic analogue of charge and current.
+\end{proof}
+\begin{cor}
+Interestingly, when $\varepsilon^{\mu\nu\rho\sigma}$ is subjected to a Lorentz transformation, we recover $\det(
+\Lambda)$ and hence invariant under proper Lorentz Transformations where by definition $\det(\Lambda)=1$.
+\end{cor}
+\begin{proof}
+By definition of the determinant of a 4 by 4 matrix, i.e. $\epsilon'^{\mu\nu\rho\sigma}=\Lambda_a^\mu\Lambda^\nu_b\Lambda_c^\rho\Lambda_d^\sigma\varepsilon^{abcd}=\det(\Lambda)$. 
+\end{proof}
+\begin{cor}
+We can show that under Lorenz gauge, i.e. $\partial_\mu A^\mu=0$
+$$\frac{1}{c^2}\frac{\partial^2}{\partial t^2}A^\nu-\nabla^2A^\nu=-\mu_0J^\nu$$
+\end{cor}
+\begin{proof}
+Recall $\partial_\mu F^{\mu\nu}=\mu_0J^\nu$:
+$$\mu_0J^\nu=\partial_\mu F^{\mu\nu}\partial_\mu(\partial^\mu A^\nu-\partial^\nu A^\mu)=\eta^{\mu\nu}\partial_\mu\partial_\nu A^\nu-\partial^\nu\partial_\mu A^\nu=-\Box A^\nu-\partial^\nu\partial_\mu A^\mu$$
+where $\Box:=-\frac{1}{c^2}\frac{\partial^2}{\partial t^2}+\nabla^2=-\eta^{\mu\nu}\partial_\mu\partial_\nu A^\nu$ and $\partial^\nu\partial_\mu A^\mu=\boldsymbol{\nabla}(\boldsymbol{\nabla}\cdot\mathbf{A})=\nabla^2\mathbf{A}$.
+\end{proof}
+\begin{thm}[Lorentz Transform of Field Tensor]
+Under Lorentz Transform,
+$$F^{\mu\nu}=\Lambda^\mu_\rho\Lambda^\nu_\sigma F^\rho_\sigma$$
+We can thus obtain the Lorentz Transformation equations for electric and magnetic fields. In the direction parallel to the Lorentz transformation,
+$$E_\parallel=E_\parallel', \quad B_\parallel=B_\parallel'$$
+In the direction orthogonal to Lorentz transformation,
+$$E_\perp'=\gamma(E_\perp+v\times B_\perp),\quad B_\perp'=\gamma(B_\perp-v\times E_\perp)$$
+\end{thm}
+\begin{proof}
+Consider standard Lorentz boost in $x$ directions, then we recover the desired equations where $\perp$ directions are $y$ and $z$ and $\parallel$ direction is $x$.
+$$-\frac{E_x'}{c}=F'^{01}=\Lambda_\rho^0\Lambda_\sigma^1F^{\rho\sigma}=\Lambda_0^0\Lambda_1^1F^{01}+\Lambda_1^0\Lambda_0^1F^{10}=-\frac{E_x}{c}$$
+$$-B_z'=F'^{12}=\Lambda_\rho^1\Lambda_\sigma^2F^{\rho\sigma}=\Lambda_0^1\Lambda_2^2F^{02}+\Lambda_1^1\Lambda_2^2F^{12}=-\gamma(B_z-(v/c^2)E_y)$$
+$$-\frac{E_y'}{c}=F'^{02}=\Lambda_\rho^0\Lambda_\sigma^1F^{\rho\sigma}=\Lambda_0^0\Lambda_2^2F^{02}+\Lambda_1^0\Lambda_2^2F^{12}=-\frac{\gamma}{c}(E_y-vB_x)$$
+are some examples, with the remaining obtained by permutations.
+\end{proof}
+\begin{remarks}
+$\partial_\mu G^{\mu\nu}=0$ is equivalent to the Bianchi identity
+$$0=\partial_\mu F_{\nu\rho}+\partial_\nu F_{\rho\mu}+\partial_\rho F_{\mu\nu}=\partial_{[\mu}F_{\nu\rho]}=0$$
+where we did a symmetrization operation.
+\end{remarks}
+\begin{prop}[Lorentz Scalars]
+The following two quantities are said to be Lorentz scalars:
+$$\frac{1}{2}F_{\mu\nu}F^{\mu\nu}=-\frac{E^2}{c^2}+B^2,\quad\frac{1}{4}G^{\mu\nu}F_{\mu\nu}=-\frac{1}{c}\mathbf{E}\cdot\mathbf{B}$$
+These quantities are the same in all inertial frames of references.
+\end{prop}
+\begin{proof}
+We have $F_{ii}F^{ii}=0$ $\forall i=0,1,2,3$ and $F_{0i}F^{0i}=-|\mathbf{E}|^2/c^2$ and $F_{12}F^{12}=F_{13}F^{13}=F_{23}F^{23}=|\mathbf{B}|^2$. Hence,
+$$F_{\mu\nu}F^{\mu\nu}=0+2(-|\mathbf{E}|^2/c^2+|\mathbf{B}|^2)$$
+Similarly, $G^{ii}G_{ii}=0$ $\forall i=0,1,2,3$ and $G^{01}F_{01}=-B_xE_x/c=G^{10}F_{10}=G^{23}F_{23}=G^{32}F_{32}$ and similar for the rest of the indices. Hence, $G^{\mu\nu}F_{\mu\nu}=-4\mathbf{E}\cdot\mathbf{B}/c$.
+\end{proof}
+Finally, we aim to write our relativistic Lorentz force law in a covariant way. 
+\begin{prop}
+For a point particle of mass $m$ and charge $q$,
+$$\frac{dP^\mu}{d\tau}=qF^{\mu\nu}u_\nu$$
+\end{prop}
+\begin{proof}
+The spatial component $\mu=i=1,2,3$ would be
+$$\gamma(v)\frac{dp^i}{dt}=-q\gamma(v)(F^{i0}c-F^{ij}v_j),\quad F^{i0}=-E^i/c,~F^{ij}=\epsilon^{ijk}B^k\implies\frac{d\mathbf{p}}{dt}=q(\mathbf{E}+\mathbf{v}\times\mathbf{B})$$
+Lastly, the zeroth component yields
+$$\frac{\gamma(v)}{c}\frac{d\varepsilon}{dt}=q\gamma(v)F^{0j}v_j\implies\frac{d\varepsilon}{dt}=q\mathbf{E}\cdot\mathbf{v}$$
+i.e. the rate of change of energy is the work done by the electric field only, since magnetic fields do no work.
+\end{proof}
+\begin{remarks}
+The above were done in Cartesian inertial coordinates. The partial derivatives can be promoted to covariant derivatives in an arbitrary manifold, i.e.
+$$\nabla_\mu F^{\mu\nu}=\mu_0 J^\nu,\quad \nabla_\mu G^{\mu\nu}=0,\quad\frac{Du^\mu}{D\tau}=\frac{q}{m}\tensor*{F}{*_{}^{\mu}_{\nu}}u^\nu$$
+\end{remarks}
 \newpage
 \section{Spacetime Curvature}
 \newpage
